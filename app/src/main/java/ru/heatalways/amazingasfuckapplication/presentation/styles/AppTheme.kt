@@ -2,6 +2,7 @@ package ru.heatalways.amazingasfuckapplication.presentation.styles
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
@@ -13,6 +14,7 @@ fun AppTheme(
         MaterialTheme(
             colorScheme = appColors.materialColors,
             shapes = appShapes,
+            typography = appTypography,
             content = content
         )
     }
