@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Пиздатое приложение</string>
+    
+    <string name="menu_item_mirror">Пиздатое зеркало</string>
+    <string name="menu_item_cats">Пиздатые котики</string>
+    <string name="menu_item_facts">Пиздатые факты</string>
+    <string name="menu_item_insults">Пиздатые оскорбления</string>
+    <string name="menu_item_pidors_list">Топ пидорасов</string>
+</resources>
