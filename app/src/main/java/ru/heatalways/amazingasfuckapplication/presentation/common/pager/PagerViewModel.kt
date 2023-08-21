@@ -6,10 +6,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 
-abstract class PagerViewModel<T> : MviViewModel<ViewState<T>, Intent>(
+abstract class PagerViewModel<T>(
+    protected val router: Router
+) : MviViewModel<ViewState<T>, Intent>(
     initialState = ViewState.Loading()
 ) {
     private val loadingLock = Mutex()
@@ -22,7 +25,7 @@ abstract class PagerViewModel<T> : MviViewModel<ViewState<T>, Intent>(
 
     override fun onNewIntent(intent: Intent) {
         when (intent) {
-            Intent.GoBack -> Unit
+            Intent.GoBack -> onGoBackClick()
             Intent.LoadMore -> onLoadMore()
             Intent.ShowNext -> Unit
         }
@@ -49,6 +52,12 @@ abstract class PagerViewModel<T> : MviViewModel<ViewState<T>, Intent>(
                     }
                 }
             }
+        }
+    }
+
+    private fun onGoBackClick() {
+        viewModelScope.launch {
+            router.navigateBack()
         }
     }
 

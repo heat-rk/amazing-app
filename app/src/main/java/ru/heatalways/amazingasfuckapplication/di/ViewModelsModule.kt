@@ -7,10 +7,10 @@ import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuView
 
 val viewModelsModule = module {
     viewModel {
-        MenuViewModel(get())
+        MenuViewModel(router = get())
     }
 
     viewModel {
-        FactsViewModel()
+        FactsViewModel(router = get())
     }
 }

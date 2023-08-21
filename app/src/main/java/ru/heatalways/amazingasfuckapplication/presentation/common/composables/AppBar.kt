@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -62,13 +63,17 @@ fun AppBar(
         },
         navigationIcon = {
              if (onGoBackClick != null) {
-                 Image(
-                     painter = painterResource(R.drawable.icon_arrow_left),
-                     contentDescription = stringResource(R.string.go_back_icon_content_description),
-                     colorFilter = ColorFilter.tint(AppTheme.colors.primary),
-                     modifier = Modifier
-                         .width(Sizes.AppBarIcon)
-                 )
+                 IconButton(
+                     onClick = { onGoBackClick?.invoke() }
+                 ) {
+                     Image(
+                         painter = painterResource(R.drawable.icon_arrow_left),
+                         contentDescription = stringResource(R.string.go_back_icon_content_description),
+                         colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                         modifier = Modifier
+                             .width(Sizes.AppBarIcon)
+                     )
+                 }
              }
         },
         colors = TopAppBarDefaults.topAppBarColors(
