@@ -12,13 +12,12 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,13 +25,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppOutlinedCard
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Elevations
 import ru.heatalways.amazingasfuckapplication.utils.extract
 
 object MenuScreenRoute : ScreenRoute()
@@ -60,23 +59,24 @@ private fun MenuScreen(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        items(
+        itemsIndexed(
             items = state.items,
             span = null,
-            key = { item -> item.id },
-        ) { item ->
+            key = { _, item -> item.id },
+        ) { index, item ->
+            val color = if (index % 4 == 0 || (index + 1) % 4 == 0) {
+                AppTheme.colors.primary
+            } else {
+                AppTheme.colors.secondary
+            }
+
             AppOutlinedCard(
                 onClick = { onIntent(Intent.OnMenuItemClick(item)) },
+                color = color,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(Sizes.MenuItemHeight)
-                    .shadow(
-                        elevation = Elevations.MenuItemShadow,
-                        ambientColor = AppTheme.colors.primary,
-                        spotColor = AppTheme.colors.primary,
-                        shape = CircleShape,
-                        clip = false,
-                    )
+                    .radialBackgroundLighting(color)
             ) {
                 Column(
                     verticalArrangement = Arrangement.SpaceEvenly,
@@ -87,7 +87,7 @@ private fun MenuScreen(
                 ) {
                     Image(
                         painter = item.icon.extract(),
-                        colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                        colorFilter = ColorFilter.tint(color),
                         contentDescription = null,
                         modifier = Modifier
                             .height(Sizes.MenuIconHeight)

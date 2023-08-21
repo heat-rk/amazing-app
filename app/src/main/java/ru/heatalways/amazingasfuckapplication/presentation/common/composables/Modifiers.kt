@@ -1,5 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.common.composables
 
+import android.graphics.BlurMaskFilter
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
@@ -12,11 +13,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 
 private const val SHIMMER_ANIM_LABEL = "shimmer"
@@ -52,5 +61,31 @@ fun Modifier.shimmerEffect(
         )
     ).onGloballyPositioned {
         size = it.size
+    }
+}
+
+fun Modifier.radialBackgroundLighting(
+    color: Color
+) = background(
+    brush = Brush.radialGradient(
+        0f to color.copy(alpha = 0.3f),
+        1f to Color.Transparent
+    )
+)
+
+fun Modifier.drawBackgroundLighting(
+    lightingColor: Color,
+    blurRadius: Float = 30f,
+    block: DrawScope.(Canvas, Paint) -> Unit
+): Modifier {
+    val paint = Paint()
+    val frameworkPaint = paint.asFrameworkPaint()
+    frameworkPaint.maskFilter = BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL)
+    frameworkPaint.color = lightingColor.toArgb()
+
+    return drawBehind {
+        drawIntoCanvas { canvas ->
+            block(canvas, paint)
+        }
     }
 }

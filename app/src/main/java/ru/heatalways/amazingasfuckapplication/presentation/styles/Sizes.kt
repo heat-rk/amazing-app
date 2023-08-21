@@ -1,6 +1,7 @@
 package ru.heatalways.amazingasfuckapplication.presentation.styles
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 object Sizes {
     val MenuItemHeight = 192.dp
@@ -8,4 +9,5 @@ object Sizes {
     val MenuItemBorderWidth = 4.dp
     val AppBarIcon = 32.dp
     val WantMoreIcon = 64.dp
+    val PawsNextButton = 140.sp
 }
