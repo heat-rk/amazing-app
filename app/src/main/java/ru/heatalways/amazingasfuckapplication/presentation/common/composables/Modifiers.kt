@@ -23,13 +23,15 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 
 private const val SHIMMER_ANIM_LABEL = "shimmer"
-private const val SHIMMER_REPEAT_DELAY = 1000
+private const val SHIMMER_REPEAT_DELAY = 2000
 
 @Composable
 fun Modifier.shimmerEffect(
@@ -37,13 +39,21 @@ fun Modifier.shimmerEffect(
     shimmerForegroundColor: Color = AppTheme.colors.primary,
 ): Modifier = composed {
     var size by remember { mutableStateOf(IntSize.Zero) }
-
+    var position by remember { mutableStateOf(Offset.Zero) }
     val transition = rememberInfiniteTransition(label = SHIMMER_ANIM_LABEL)
+
+    val configuration = LocalConfiguration.current
+
+    val windowWidth: Float
+
+    with(LocalDensity.current) {
+        windowWidth = configuration.screenWidthDp.dp.toPx()
+    }
 
     val startOffsetX by transition.animateFloat(
         label = SHIMMER_ANIM_LABEL,
-        initialValue = -2 * size.width.toFloat(),
-        targetValue = 2 * size.width.toFloat(),
+        initialValue = -position.x - windowWidth,
+        targetValue = windowWidth * 2 - position.x,
         animationSpec = infiniteRepeatable(
             animation = tween(SHIMMER_REPEAT_DELAY)
         ),
@@ -52,15 +62,16 @@ fun Modifier.shimmerEffect(
     background(
         brush = Brush.linearGradient(
             colors = listOf(
-                Color(0xFFB8B5B5),
-                Color(0xFF8F8B8B),
-                Color(0xFFB8B5B5),
+                shimmerBackgroundColor,
+                shimmerForegroundColor,
+                shimmerBackgroundColor,
             ),
             start = Offset(startOffsetX, 0f),
             end = Offset(startOffsetX + size.width.toFloat(), size.height.toFloat())
         )
     ).onGloballyPositioned {
         size = it.size
+        position = it.positionInWindow()
     }
 }
 

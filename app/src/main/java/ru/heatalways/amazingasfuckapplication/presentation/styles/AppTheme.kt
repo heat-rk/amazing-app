@@ -28,4 +28,8 @@ object AppTheme {
     val shapes: Shapes
         @Composable
         get() = MaterialTheme.shapes
+
+    val typography: Typography
+        @Composable
+        get() = MaterialTheme.typography
 }

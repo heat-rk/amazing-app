@@ -34,12 +34,14 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.persistentListOf
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.drawBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
@@ -97,7 +99,6 @@ private fun <T> PagerScreen(
             is ViewState.Loading -> {
                 PagerScreenLoadingState(
                     state = state,
-                    onIntent = onIntent,
                     contentShimmer = contentShimmer,
                     contentPadding = contentPadding,
                 )
@@ -195,10 +196,16 @@ fun <T> PagerScreenOkState(
 fun <T> PagerScreenLoadingState(
     contentPadding: PaddingValues,
     state: ViewState.Loading<T>,
-    onIntent: (Intent) -> Unit,
     contentShimmer: @Composable () -> Unit,
 ) {
-
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(contentPadding)
+    ) {
+        contentShimmer()
+    }
 }
 
 @Composable
@@ -213,14 +220,18 @@ fun <T> PagerScreenErrorState(
 @Composable
 @Preview
 private fun PagerScreenPreview() {
+    val okState = ViewState.Ok(
+        items = persistentListOf(
+            "Какой-то факт #1",
+            "Какой-то факт #2"
+        )
+    )
+
+    val loadingState = ViewState.Loading<String>()
+
     AppTheme {
         PagerScreen(
-            state = ViewState.Ok(
-                items = persistentListOf(
-                    "Какой-то факт #1",
-                    "Какой-то факт #2"
-                )
-            ),
+            state = loadingState,
             onIntent = {},
             title = "Крутые факты",
             icon = painterResource(R.drawable.icon_cat),
@@ -228,7 +239,30 @@ private fun PagerScreenPreview() {
                 Text(text = it)
             },
             contentShimmer = {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth(0.8f)
+                            .height(32.dp)
+                            .clip(AppTheme.shapes.medium)
+                            .shimmerEffect()
+                    )
 
+                    Spacer(modifier = Modifier.height(Insets.Default))
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth(0.3f)
+                            .height(32.dp)
+                            .clip(AppTheme.shapes.medium)
+                            .shimmerEffect()
+                    )
+                }
             }
         )
     }
