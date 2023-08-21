@@ -1,45 +1,34 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.menu
 
-import androidx.lifecycle.ViewModel
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.utils.painterRes
-import ru.heatalways.amazingasfuckapplication.utils.strRes
+import androidx.lifecycle.viewModelScope
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.launch
+import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
 
-class MenuViewModel : ViewModel() {
-    private val _state = MutableStateFlow(
-        MenuViewState(
-            items = persistentListOf(
-                MenuItem(
-                    id = "mirror",
-                    title = strRes(R.string.menu_item_mirror),
-                    icon = painterRes(R.drawable.icon_mirror)
-                ),
-                MenuItem(
-                    id = "cats",
-                    title = strRes(R.string.menu_item_cats),
-                    icon = painterRes(R.drawable.icon_cat)
-                ),
-                MenuItem(
-                    id = "facts",
-                    title = strRes(R.string.menu_item_facts),
-                    icon = painterRes(R.drawable.icon_boobs)
-                ),
-                MenuItem(
-                    id = "insults",
-                    title = strRes(R.string.menu_item_insults),
-                    icon = painterRes(R.drawable.icon_insult)
-                ),
-                MenuItem(
-                    id = "pidors_list",
-                    title = strRes(R.string.menu_item_pidors_list),
-                    icon = painterRes(R.drawable.icon_leaderboard)
-                ),
-            )
-        )
+class MenuViewModel(
+    private val router: Router
+) : MviViewModel<ViewState, Intent>(
+    initialState = ViewState(
+        items = MenuItem.values().toList().toImmutableList()
     )
+) {
+    override fun onNewIntent(intent: Intent) {
+        when (intent) {
+            is Intent.OnMenuItemClick -> onMenuItemClick(intent.item)
+        }
+    }
 
-    val state = _state.asStateFlow()
+    private fun onMenuItemClick(item: MenuItem) = viewModelScope.launch {
+        when (item) {
+            MenuItem.MIRROR -> Unit
+            MenuItem.CATS -> Unit
+            MenuItem.FACTS -> router.navigate(FactsScreenRoute)
+            MenuItem.INSULTS -> Unit
+            MenuItem.PIDORS_LIST -> Unit
+        }
+    }
 }

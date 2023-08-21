@@ -1,7 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.menu
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,31 +12,46 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.Surface
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
-import ru.heatalways.amazingasfuckapplication.presentation.common.AppOutlinedCard
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppOutlinedCard
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
+import ru.heatalways.amazingasfuckapplication.presentation.styles.Elevations
 import ru.heatalways.amazingasfuckapplication.utils.extract
 
-const val MenuScreenRoute = "menu"
+object MenuScreenRoute : ScreenRoute()
 
 @Composable
 fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    MenuScreen(
+        state = state,
+        onIntent = viewModel::intent
+    )
+}
+
+@Composable
+private fun MenuScreen(
+    state: ViewState,
+    onIntent: (Intent) -> Unit,
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(Insets.Default),
@@ -52,12 +66,17 @@ fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
             key = { item -> item.id },
         ) { item ->
             AppOutlinedCard(
-                onClick = {
-
-                },
+                onClick = { onIntent(Intent.OnMenuItemClick(item)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(Sizes.MenuItemHeight)
+                    .shadow(
+                        elevation = Elevations.MenuItemShadow,
+                        ambientColor = AppTheme.colors.primary,
+                        spotColor = AppTheme.colors.primary,
+                        shape = CircleShape,
+                        clip = false,
+                    )
             ) {
                 Column(
                     verticalArrangement = Arrangement.SpaceEvenly,
@@ -82,5 +101,18 @@ fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
                 }
             }
         }
+    }
+}
+
+@Composable
+@Preview
+private fun MenuScreenPreview() {
+    AppTheme {
+        MenuScreen(
+            state = ViewState(
+                items = MenuItem.values().toList().toImmutableList()
+            ),
+            onIntent = {}
+        )
     }
 }

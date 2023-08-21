@@ -1,29 +1,22 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package ru.heatalways.amazingasfuckapplication.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreen
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import org.koin.compose.koinInject
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeRouter
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.buildGraph
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 
@@ -47,13 +40,22 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
+                val router = (koinInject<Router>() as? ComposeRouter)
+
+                if (router != null) {
+                    LaunchedEffect(Unit) {
+                        router.routing
+                            .onEach { event -> event(navController) }
+                            .launchIn(this)
+                    }
+                }
+
                 NavHost(
                     navController = navController,
-                    startDestination = MenuScreenRoute,
-                    modifier = Modifier.background(backgroundColor)
-                ) {
-                    composable(MenuScreenRoute) { MenuScreen() }
-                }
+                    startDestination = MenuScreenRoute.route,
+                    modifier = Modifier.background(backgroundColor),
+                    builder = NavGraphBuilder::buildGraph
+                )
             }
         }
     }

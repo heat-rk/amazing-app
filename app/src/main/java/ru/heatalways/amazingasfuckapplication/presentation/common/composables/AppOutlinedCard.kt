@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package ru.heatalways.amazingasfuckapplication.presentation.common
+package ru.heatalways.amazingasfuckapplication.presentation.common.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.ColumnScope

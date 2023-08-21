@@ -2,6 +2,12 @@ package ru.heatalways.amazingasfuckapplication.presentation.screens.menu
 
 import kotlinx.collections.immutable.ImmutableList
 
-data class MenuViewState(
-    val items: ImmutableList<MenuItem>
-)
+object MenuContract {
+    data class ViewState(
+        val items: ImmutableList<MenuItem>
+    )
+
+    sealed interface Intent {
+        data class OnMenuItemClick(val item: MenuItem) : Intent
+    }
+}
