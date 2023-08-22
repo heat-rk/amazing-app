@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Scaffold
@@ -30,23 +31,26 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.persistentListOf
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.drawBackgroundLighting
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.TitleSubtitle
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.rectangularBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
+import ru.heatalways.amazingasfuckapplication.utils.extract
+import ru.heatalways.amazingasfuckapplication.utils.strRes
 
 @Composable
 fun <T> PagerScreen(
@@ -82,7 +86,7 @@ private fun <T> PagerScreen(
             AppBar(
                 title = title,
                 icon = icon,
-                onGoBackClick = { onIntent(Intent.GoBack) },
+                onGoBackClick = { onIntent(Intent.OnNavigationButtonClick) },
                 modifier = Modifier
                     .fillMaxWidth()
             )
@@ -116,14 +120,12 @@ private fun <T> PagerScreen(
 }
 
 @Composable
-fun <T> PagerScreenOkState(
+private fun <T> PagerScreenOkState(
     contentPadding: PaddingValues,
     state: ViewState.Ok<T>,
     onIntent: (Intent) -> Unit,
     content: @Composable (T) -> Unit,
 ) {
-    val pawsColor = AppTheme.colors.primary
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -144,56 +146,19 @@ fun <T> PagerScreenOkState(
                 )
                 .padding(Insets.Large)
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+            PagerScreenPaws(
+                onClick = { onIntent(Intent.OnShowNextButtonClick) },
+                text = stringResource(R.string.want_more),
                 modifier = Modifier
-                    .size(with(LocalDensity.current) { Sizes.PawsNextButton.toDp() })
                     .align(Alignment.BottomCenter)
-                    .clip(CircleShape)
-                    .clickable(
-                        indication = rememberRipple(
-                            color = pawsColor
-                        ),
-                        interactionSource = remember { MutableInteractionSource() },
-                        onClick = { onIntent(Intent.ShowNext) }
-                    )
-                    .radialBackgroundLighting(pawsColor)
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.icon_paws),
-                    colorFilter = ColorFilter.tint(pawsColor),
-                    contentDescription = stringResource(R.string.go_next_icon_content_description),
-                    modifier = Modifier
-                        .width(Sizes.WantMoreIcon)
-                )
-
-                Spacer(modifier = Modifier.height(Insets.Small))
-
-                Text(
-                    text = stringResource(R.string.want_more),
-                    color = pawsColor,
-                    modifier = Modifier
-                        .drawBackgroundLighting(pawsColor) { canvas, paint ->
-                            val horizontalOffset = 10f
-                            val verticalOffset = 3f
-
-                            canvas.drawRect(
-                                -horizontalOffset,
-                                size.height / 2 - verticalOffset,
-                                size.width + horizontalOffset,
-                                size.height / 2 + verticalOffset,
-                                paint
-                            )
-                        }
-                )
-            }
+                    .padding(bottom = Insets.ExtraLarge)
+            )
         }
     }
 }
 
 @Composable
-fun <T> PagerScreenLoadingState(
+private fun <T> PagerScreenLoadingState(
     contentPadding: PaddingValues,
     state: ViewState.Loading<T>,
     contentShimmer: @Composable () -> Unit,
@@ -209,12 +174,79 @@ fun <T> PagerScreenLoadingState(
 }
 
 @Composable
-fun <T> PagerScreenErrorState(
+private fun <T> PagerScreenErrorState(
     contentPadding: PaddingValues,
     state: ViewState.Error<T>,
     onIntent: (Intent) -> Unit,
 ) {
+    Box(
+        modifier = Modifier
+            .padding(contentPadding)
+            .fillMaxSize()
+    ) {
+        TitleSubtitle(
+            title = stringResource(R.string.error_title),
+            subtitle = state.message.extract() ?: "",
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.Center)
+        )
 
+        PagerScreenPaws(
+            onClick = { onIntent(Intent.OnReloadButtonClick) },
+            text = stringResource(R.string.error_try_again),
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.BottomCenter)
+                .padding(bottom = Insets.ExtraLarge)
+        )
+    }
+}
+
+@Composable
+private fun PagerScreenPaws(
+    onClick: () -> Unit,
+    text: String,
+    pawsColor: Color = AppTheme.colors.primary,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ) {
+        Box(
+            modifier = Modifier
+                .size(Sizes.WantMoreIcon)
+                .clip(CircleShape)
+                .radialBackgroundLighting(pawsColor)
+                .clickable(
+                    indication = rememberRipple(
+                        color = pawsColor
+                    ),
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = onClick
+                )
+        ) {
+            Image(
+                painter = painterResource(R.drawable.icon_paws),
+                colorFilter = ColorFilter.tint(pawsColor),
+                contentDescription = stringResource(R.string.go_next_icon_content_description),
+                modifier = Modifier
+                    .padding(Insets.Default)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(Insets.Small))
+
+        Text(
+            text = text,
+            color = pawsColor,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .rectangularBackgroundLighting(pawsColor)
+        )
+    }
 }
 
 @Composable
@@ -229,9 +261,13 @@ private fun PagerScreenPreview() {
 
     val loadingState = ViewState.Loading<String>()
 
+    val errorState = ViewState.Error<String>(
+        strRes("Что-то пошло не так :(")
+    )
+
     AppTheme {
         PagerScreen(
-            state = loadingState,
+            state = errorState,
             onIntent = {},
             title = "Крутые факты",
             icon = painterResource(R.drawable.icon_cat),

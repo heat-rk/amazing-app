@@ -2,8 +2,10 @@ package ru.heatalways.amazingasfuckapplication.utils
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.res.stringResource
 
+@Immutable
 sealed interface StringResource {
     data class ByString(val text: String?): StringResource
 

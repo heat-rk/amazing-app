@@ -11,8 +11,9 @@ object PagerContract {
     }
 
     sealed interface Intent {
-        object LoadMore : Intent
-        object GoBack : Intent
-        object ShowNext : Intent
+        object OnScrollToEnd : Intent
+        object OnNavigationButtonClick : Intent
+        object OnShowNextButtonClick : Intent
+        object OnReloadButtonClick : Intent
     }
 }

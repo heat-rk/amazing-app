@@ -84,6 +84,20 @@ fun Modifier.radialBackgroundLighting(
     )
 )
 
+fun Modifier.rectangularBackgroundLighting(
+    color: Color,
+    horizontalOffset: Float = 10f,
+    verticalOffset: Float = 3f,
+) = drawBackgroundLighting(color) { canvas, paint ->
+    canvas.drawRect(
+        -horizontalOffset,
+        size.height / 2 - verticalOffset,
+        size.width + horizontalOffset,
+        size.height / 2 + verticalOffset,
+        paint
+    )
+}
+
 fun Modifier.drawBackgroundLighting(
     lightingColor: Color,
     blurRadius: Float = 30f,

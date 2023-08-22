@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +22,8 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
+import ru.heatalways.amazingasfuckapplication.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.utils.extract
 
 object FactsScreenRoute : ScreenRoute()
 @Composable
@@ -29,12 +33,26 @@ fun FactsScreen(viewModel: FactsViewModel = koinViewModel()) {
         title = stringResource(R.string.menu_item_facts),
         icon = painterResource(R.drawable.icon_boobs),
         content = {
-
+            FactsScreenContent(fact = it)
         },
         contentShimmer = {
             FactsScreenContentShimmer()
         }
     )
+}
+
+@Composable
+private fun FactsScreenContent(fact: StringResource) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(Insets.Default)
+    ) {
+        Text(
+            text = fact.extract() ?: "-"
+        )
+    }
 }
 
 @Composable
@@ -58,6 +76,16 @@ private fun FactsScreenContentShimmer() {
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.3f)
+                .height(32.dp)
+                .clip(AppTheme.shapes.medium)
+                .shimmerEffect()
+        )
+
+        Spacer(modifier = Modifier.height(Insets.Default))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
                 .height(32.dp)
                 .clip(AppTheme.shapes.medium)
                 .shimmerEffect()

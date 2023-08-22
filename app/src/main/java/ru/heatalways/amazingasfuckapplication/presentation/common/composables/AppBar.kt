@@ -35,6 +35,8 @@ fun AppBar(
     onGoBackClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
+    val color = AppTheme.colors.primary
+
     TopAppBar(
         title = {
             Row(
@@ -49,6 +51,7 @@ fun AppBar(
                 Text(
                     text = title,
                     modifier = Modifier
+                        .rectangularBackgroundLighting(color)
                 )
 
                 Spacer(modifier = Modifier.width(Insets.Small))
@@ -56,20 +59,24 @@ fun AppBar(
                 Image(
                     painter = icon,
                     contentDescription = null,
-                    colorFilter = ColorFilter.tint(AppTheme.colors.primary),
-                    modifier = Modifier.width(Sizes.AppBarIcon)
+                    colorFilter = ColorFilter.tint(color),
+                    modifier = Modifier
+                        .width(Sizes.AppBarIcon)
+                        .radialBackgroundLighting(color)
                 )
             }
         },
         navigationIcon = {
              if (onGoBackClick != null) {
                  IconButton(
-                     onClick = { onGoBackClick?.invoke() }
+                     onClick = { onGoBackClick.invoke() },
+                     modifier = Modifier
+                         .radialBackgroundLighting(color)
                  ) {
                      Image(
                          painter = painterResource(R.drawable.icon_arrow_left),
                          contentDescription = stringResource(R.string.go_back_icon_content_description),
-                         colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                         colorFilter = ColorFilter.tint(color),
                          modifier = Modifier
                              .width(Sizes.AppBarIcon)
                      )

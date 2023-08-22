@@ -8,6 +8,6 @@ object Sizes {
     val MenuIconHeight = 96.dp
     val MenuItemBorderWidth = 4.dp
     val AppBarIcon = 32.dp
-    val WantMoreIcon = 64.dp
-    val PawsNextButton = 140.sp
+    val WantMoreIcon = 128.dp
+    val PawsNextButton = 160.sp
 }
