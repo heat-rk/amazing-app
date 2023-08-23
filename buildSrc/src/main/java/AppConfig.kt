@@ -4,6 +4,15 @@ object AppConfig {
     const val jvmTarget = "17"
     const val composeKotlinCompilerExtensionVersion = "1.4.8"
 
+    val buildConfigFields = arrayOf(
+        BuildConfigField(
+            type = "String",
+            name = "FACTS_API_BASE_URL",
+            debugValue = "https://api.api-ninjas.com/v1",
+            releaseValue = "https://api.api-ninjas.com/v1"
+        )
+    )
+
     object Sdk {
         const val compile = 34
         const val min = 23

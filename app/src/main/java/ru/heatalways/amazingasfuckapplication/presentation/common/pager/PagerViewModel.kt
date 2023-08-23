@@ -20,8 +20,8 @@ abstract class PagerViewModel<T>(
 ) {
     private val loadingLock = Mutex()
 
-    init {
-        load()
+    protected fun initLoading() {
+        load(initialLoading = true)
     }
 
     abstract suspend fun load(offset: Int, limit: Int): List<T>
@@ -29,17 +29,20 @@ abstract class PagerViewModel<T>(
     override fun onNewIntent(intent: Intent) {
         when (intent) {
             Intent.OnNavigationButtonClick -> navigateBack()
-            Intent.OnScrollToEnd -> load()
-            Intent.OnShowNextButtonClick -> Unit
-            Intent.OnReloadButtonClick -> Unit
+            Intent.OnReloadButtonClick -> load(initialLoading = true)
+            is Intent.OnPageSelected -> onPageSelected(intent.page)
         }
     }
 
-    private fun load() {
+    private fun load(initialLoading: Boolean = false) {
         viewModelScope.launchSafe(
             block = {
                 loadingLock.withLock {
-                    val currentState = state.value
+                    val currentState = if (initialLoading) {
+                        ViewState.Loading<T>().also { reduce { it } }
+                    } else {
+                        state.value
+                    }
 
                     val offset = if (currentState is ViewState.Ok) {
                         currentState.items.size
@@ -50,8 +53,8 @@ abstract class PagerViewModel<T>(
                     val newItems = load(offset, PAGER_LIMIT)
 
                     reduce {
-                        if (this is ViewState.Ok) {
-                            copy(items = (items + newItems).toImmutableList())
+                        if (currentState is ViewState.Ok) {
+                            currentState.copy(items = (currentState.items + newItems).toImmutableList())
                         } else {
                             ViewState.Ok(newItems.toImmutableList())
                         }
@@ -72,7 +75,16 @@ abstract class PagerViewModel<T>(
         }
     }
 
+    private fun onPageSelected(page: Int) {
+        val currentState = state.value
+
+        if (currentState is ViewState.Ok && page >= currentState.items.size - PAGE_LOAD_OFFSET) {
+            load()
+        }
+    }
+
     companion object {
         private const val PAGER_LIMIT = 10
+        private const val PAGE_LOAD_OFFSET = 3
     }
 }

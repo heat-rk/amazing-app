@@ -3,6 +3,8 @@ plugins {
     id(AppPlugins.androidKotlin)
     id(AppPlugins.kotlinKapt)
     id(AppPlugins.detekt) version AppPlugins.Versions.detekt
+
+    kotlin(AppPlugins.serialization) version AppPlugins.Versions.serialization
 }
 
 android {
@@ -23,6 +25,16 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
+            AppConfig.buildConfigFields.forEach { field ->
+                buildConfigField(field.type, field.name, "\"${field.releaseValue}\"")
+            }
+        }
+
+        debug {
+            AppConfig.buildConfigFields.forEach { field ->
+                buildConfigField(field.type, field.name, "\"${field.debugValue}\"")
+            }
         }
     }
 
@@ -52,6 +64,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {
@@ -68,6 +81,7 @@ dependencies {
     implementation(AppDependencies.Coroutines.allImplementations)
     implementation(AppDependencies.Koin.allImplementations)
     implementation(AppDependencies.Accompanist.allImplementations)
+    implementation(AppDependencies.Ktor.allImplementations)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)
 }

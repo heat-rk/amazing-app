@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package ru.heatalways.amazingasfuckapplication.presentation.common.pager
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,17 +17,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -38,6 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.launch
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.TitleSubtitle
@@ -81,6 +90,8 @@ private fun <T> PagerScreen(
     content: @Composable (T) -> Unit,
     contentShimmer: @Composable () -> Unit,
 ) {
+    val contentVerticalAlignmentBias = -0.5f
+
     Scaffold(
         topBar = {
             AppBar(
@@ -98,6 +109,7 @@ private fun <T> PagerScreen(
                     state = state,
                     onIntent = onIntent,
                     contentPadding = contentPadding,
+                    contentVerticalAlignmentBias = contentVerticalAlignmentBias,
                 )
             }
             is ViewState.Loading -> {
@@ -105,6 +117,7 @@ private fun <T> PagerScreen(
                     state = state,
                     contentShimmer = contentShimmer,
                     contentPadding = contentPadding,
+                    contentVerticalAlignmentBias = contentVerticalAlignmentBias,
                 )
             }
             is ViewState.Ok -> {
@@ -113,6 +126,7 @@ private fun <T> PagerScreen(
                     onIntent = onIntent,
                     content = content,
                     contentPadding = contentPadding,
+                    contentVerticalAlignmentBias = contentVerticalAlignmentBias,
                 )
             }
         }
@@ -122,6 +136,7 @@ private fun <T> PagerScreen(
 @Composable
 private fun <T> PagerScreenOkState(
     contentPadding: PaddingValues,
+    contentVerticalAlignmentBias: Float,
     state: ViewState.Ok<T>,
     onIntent: (Intent) -> Unit,
     content: @Composable (T) -> Unit,
@@ -131,6 +146,23 @@ private fun <T> PagerScreenOkState(
             .fillMaxSize()
             .padding(contentPadding)
     ) {
+        val pagerState = rememberPagerState { state.items.size }
+
+        LaunchedEffect(pagerState) {
+            snapshotFlow { pagerState.currentPage }.collect { page ->
+                onIntent(Intent.OnPageSelected(page))
+            }
+        }
+
+        HorizontalPager(
+            state = pagerState,
+            verticalAlignment = BiasAlignment.Vertical(contentVerticalAlignmentBias),
+            modifier = Modifier
+                .fillMaxSize()
+        ) { index ->
+            content(state.items[index])
+        }
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -144,10 +176,15 @@ private fun <T> PagerScreenOkState(
                         )
                     )
                 )
-                .padding(Insets.Large)
         ) {
+            val coroutineScope = rememberCoroutineScope()
+
             PagerScreenPaws(
-                onClick = { onIntent(Intent.OnShowNextButtonClick) },
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
+                },
                 text = stringResource(R.string.want_more),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
@@ -160,11 +197,15 @@ private fun <T> PagerScreenOkState(
 @Composable
 private fun <T> PagerScreenLoadingState(
     contentPadding: PaddingValues,
+    contentVerticalAlignmentBias: Float,
     state: ViewState.Loading<T>,
     contentShimmer: @Composable () -> Unit,
 ) {
     Box(
-        contentAlignment = Alignment.Center,
+        contentAlignment = BiasAlignment(
+            horizontalBias = 0f,
+            verticalBias = contentVerticalAlignmentBias
+        ),
         modifier = Modifier
             .fillMaxSize()
             .padding(contentPadding)
@@ -176,6 +217,7 @@ private fun <T> PagerScreenLoadingState(
 @Composable
 private fun <T> PagerScreenErrorState(
     contentPadding: PaddingValues,
+    contentVerticalAlignmentBias: Float,
     state: ViewState.Error<T>,
     onIntent: (Intent) -> Unit,
 ) {
@@ -189,7 +231,10 @@ private fun <T> PagerScreenErrorState(
             subtitle = state.message.extract() ?: "",
             modifier = Modifier
                 .wrapContentSize()
-                .align(Alignment.Center)
+                .align(BiasAlignment(
+                    horizontalBias = 0f,
+                    verticalBias = contentVerticalAlignmentBias
+                ))
         )
 
         PagerScreenPaws(
@@ -267,12 +312,16 @@ private fun PagerScreenPreview() {
 
     AppTheme {
         PagerScreen(
-            state = errorState,
+            state = okState,
             onIntent = {},
             title = "Крутые факты",
             icon = painterResource(R.drawable.icon_cat),
             content = {
-                Text(text = it)
+                Text(
+                    text = it,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
             },
             contentShimmer = {
                 Column(

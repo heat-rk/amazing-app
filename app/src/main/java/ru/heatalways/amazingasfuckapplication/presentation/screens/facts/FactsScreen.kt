@@ -7,14 +7,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
@@ -26,6 +29,7 @@ import ru.heatalways.amazingasfuckapplication.utils.StringResource
 import ru.heatalways.amazingasfuckapplication.utils.extract
 
 object FactsScreenRoute : ScreenRoute()
+
 @Composable
 fun FactsScreen(viewModel: FactsViewModel = koinViewModel()) {
     PagerScreen(
@@ -43,16 +47,15 @@ fun FactsScreen(viewModel: FactsViewModel = koinViewModel()) {
 
 @Composable
 private fun FactsScreenContent(fact: StringResource) {
-    Box(
+    Text(
+        text = fact.extract() ?: "-",
+        textAlign = TextAlign.Center,
+        color = AppTheme.colors.primary,
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(Insets.Default)
-    ) {
-        Text(
-            text = fact.extract() ?: "-"
-        )
-    }
+    )
 }
 
 @Composable
@@ -63,30 +66,38 @@ private fun FactsScreenContentShimmer() {
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
+        val textLineHeight: Dp
+        val lineSpacing: Dp
+
+        with(LocalDensity.current) {
+            textLineHeight = LocalTextStyle.current.fontSize.toDp()
+            lineSpacing = LocalTextStyle.current.lineHeight.toDp() - textLineHeight
+        }
+
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.8f)
-                .height(32.dp)
+                .height(textLineHeight)
                 .clip(AppTheme.shapes.medium)
                 .shimmerEffect()
         )
 
-        Spacer(modifier = Modifier.height(Insets.Default))
+        Spacer(modifier = Modifier.height(lineSpacing))
 
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.3f)
-                .height(32.dp)
+                .height(textLineHeight)
                 .clip(AppTheme.shapes.medium)
                 .shimmerEffect()
         )
 
-        Spacer(modifier = Modifier.height(Insets.Default))
+        Spacer(modifier = Modifier.height(lineSpacing))
 
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.8f)
-                .height(32.dp)
+                .height(textLineHeight)
                 .clip(AppTheme.shapes.medium)
                 .shimmerEffect()
         )

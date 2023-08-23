@@ -11,9 +11,8 @@ object PagerContract {
     }
 
     sealed interface Intent {
-        object OnScrollToEnd : Intent
+        class OnPageSelected(val page: Int) : Intent
         object OnNavigationButtonClick : Intent
-        object OnShowNextButtonClick : Intent
         object OnReloadButtonClick : Intent
     }
 }
