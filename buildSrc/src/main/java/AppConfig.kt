@@ -10,7 +10,13 @@ object AppConfig {
             name = "FACTS_API_BASE_URL",
             debugValue = "https://api.api-ninjas.com/v1",
             releaseValue = "https://api.api-ninjas.com/v1"
-        )
+        ),
+        BuildConfigField(
+            type = "String",
+            name = "INSULTS_API_BASE_URL",
+            debugValue = "https://evilinsult.com/generate_insult.php",
+            releaseValue = "https://evilinsult.com/generate_insult.php"
+        ),
     )
 
     object Sdk {

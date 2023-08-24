@@ -6,6 +6,7 @@ import kotlinx.coroutines.launch
 import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
 
@@ -27,7 +28,7 @@ class MenuViewModel(
             MenuItem.MIRROR -> Unit
             MenuItem.CATS -> Unit
             MenuItem.FACTS -> router.navigate(FactsScreenRoute)
-            MenuItem.INSULTS -> Unit
+            MenuItem.INSULTS -> router.navigate(InsultsScreenRoute)
             MenuItem.PIDORS_LIST -> Unit
         }
     }

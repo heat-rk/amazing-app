@@ -7,6 +7,7 @@ import org.koin.core.context.startKoin
 import ru.heatalways.amazingasfuckapplication.di.dispatchersModule
 import ru.heatalways.amazingasfuckapplication.di.factsModule
 import ru.heatalways.amazingasfuckapplication.di.httpClientModule
+import ru.heatalways.amazingasfuckapplication.di.insultsModule
 import ru.heatalways.amazingasfuckapplication.di.navigationModule
 import ru.heatalways.amazingasfuckapplication.di.translatorModule
 import ru.heatalways.amazingasfuckapplication.di.viewModelsModule
@@ -26,6 +27,7 @@ class AmazingAsFuckApplication : Application() {
                 dispatchersModule,
                 translatorModule,
                 factsModule,
+                insultsModule,
             )
         }
     }
