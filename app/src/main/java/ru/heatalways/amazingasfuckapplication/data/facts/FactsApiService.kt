@@ -20,6 +20,17 @@ class FactsApiService(
             }
         }.body()
 
+    suspend fun getRandomFact(): FactDTO =
+        httpClient.get("${BuildConfig.FACTS_API_BASE_URL}/facts") {
+            url {
+                parameters.append("limit", "1")
+            }
+
+            headers {
+                append(HEADER_X_API_KEY, API_KEY)
+            }
+        }.body<List<FactDTO>>().first()
+
     companion object {
         private const val API_KEY = "Z7aFcqM0fnfHs7WpFAgk6Q==dDhqZu14oCEAaJ5w"
         private const val HEADER_X_API_KEY = "X-Api-Key"

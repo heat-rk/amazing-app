@@ -9,12 +9,15 @@ import ru.heatalways.amazingasfuckapplication.utils.strRes
 class FactsViewModel(
     router: Router,
     private val factsRepository: FactsRepository
-) : PagerViewModel<StringResource>(router) {
+) : PagerViewModel<StringResource>(
+    router = router,
+    pageLoadOffset = 1
+) {
     init {
         initLoading()
     }
 
     override suspend fun load(offset: Int, limit: Int): List<StringResource> {
-        return factsRepository.getRandomFacts(limit).map { strRes(it) }
+        return listOf(strRes(factsRepository.getRandomFact()))
     }
 }

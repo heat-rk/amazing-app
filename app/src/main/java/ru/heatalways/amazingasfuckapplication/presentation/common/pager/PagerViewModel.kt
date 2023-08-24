@@ -14,7 +14,8 @@ import ru.heatalways.amazingasfuckapplication.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.utils.strRes
 
 abstract class PagerViewModel<T>(
-    protected val router: Router
+    protected val router: Router,
+    private val pageLoadOffset: Int,
 ) : MviViewModel<ViewState<T>, Intent>(
     initialState = ViewState.Loading()
 ) {
@@ -78,13 +79,12 @@ abstract class PagerViewModel<T>(
     private fun onPageSelected(page: Int) {
         val currentState = state.value
 
-        if (currentState is ViewState.Ok && page >= currentState.items.size - PAGE_LOAD_OFFSET) {
+        if (currentState is ViewState.Ok && page >= currentState.items.size - pageLoadOffset) {
             load()
         }
     }
 
     companion object {
         private const val PAGER_LIMIT = 10
-        private const val PAGE_LOAD_OFFSET = 3
     }
 }

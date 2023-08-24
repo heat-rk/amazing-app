@@ -1,5 +1,6 @@
 object AppDependencies {
     const val immutableCollections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.immutableCollections}"
+    const val htmlUnit = "net.sourceforge.htmlunit:htmlunit-android:${Versions.htmlUnit}"
 
     object Ktor {
         const val core = "io.ktor:ktor-client-core:${Versions.ktor}"
@@ -49,6 +50,10 @@ object AppDependencies {
         val allImplementations = arrayOf(core)
     }
 
+    object Mlkit {
+        const val translate = "com.google.mlkit:translate:${Versions.mlkitTranslate}"
+    }
+
     object Versions {
         const val koin = "3.4.6"
         const val coreKtx = "1.10.1"
@@ -63,5 +68,7 @@ object AppDependencies {
         const val lifecycle = "2.6.1"
         const val systemUiController = "0.30.1"
         const val ktor = "2.3.3"
+        const val mlkitTranslate = "17.0.1"
+        const val htmlUnit = "2.67.0"
     }
 }

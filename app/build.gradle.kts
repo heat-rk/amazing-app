@@ -82,6 +82,8 @@ dependencies {
     implementation(AppDependencies.Koin.allImplementations)
     implementation(AppDependencies.Accompanist.allImplementations)
     implementation(AppDependencies.Ktor.allImplementations)
+    implementation(AppDependencies.Mlkit.translate)
+    implementation(AppDependencies.htmlUnit)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)
 }
