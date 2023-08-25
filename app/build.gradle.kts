@@ -85,6 +85,7 @@ dependencies {
     implementation(AppDependencies.Mlkit.translate)
     implementation(AppDependencies.htmlUnit)
     implementation(AppDependencies.Coil.allImplementations)
+    implementation(AppDependencies.Camera.allImplementations)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)
 }

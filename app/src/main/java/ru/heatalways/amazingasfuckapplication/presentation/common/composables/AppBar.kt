@@ -18,6 +18,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
@@ -32,6 +33,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 fun AppBar(
     title: String,
     icon: Painter,
+    containerColor: Color = AppTheme.colors.background,
     onGoBackClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
@@ -84,7 +86,7 @@ fun AppBar(
              }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = AppTheme.colors.background,
+            containerColor = containerColor,
             navigationIconContentColor = AppTheme.colors.primary,
             titleContentColor = AppTheme.colors.primary,
             actionIconContentColor = AppTheme.colors.primary,

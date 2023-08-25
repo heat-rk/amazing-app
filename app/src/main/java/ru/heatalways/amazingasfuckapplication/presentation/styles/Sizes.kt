@@ -11,4 +11,5 @@ object Sizes {
     val WantMoreIcon = 100.dp
     val PawsNextButton = 160.sp
     val CatLoaderHeight = 96.dp
+    val HeartStrokeWidth = 6.dp
 }

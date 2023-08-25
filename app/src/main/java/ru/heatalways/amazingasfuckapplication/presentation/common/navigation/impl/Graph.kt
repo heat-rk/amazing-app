@@ -10,10 +10,13 @@ import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.Insul
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorScreen
+import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorScreenRoute
 
 fun NavGraphBuilder.buildGraph() {
     composable(MenuScreenRoute.route) { MenuScreen() }
     composable(FactsScreenRoute.route) { FactsScreen() }
     composable(InsultsScreenRoute.route) { InsultsScreen() }
     composable(CatsScreenRoute.route) { CatsScreen() }
+    composable(MirrorScreenRoute.route) { MirrorScreen() }
 }

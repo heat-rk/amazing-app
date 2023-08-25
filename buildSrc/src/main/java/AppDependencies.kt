@@ -19,7 +19,8 @@ object AppDependencies {
 
     object Accompanist {
         const val systemUiController = "com.google.accompanist:accompanist-systemuicontroller:${Versions.systemUiController}"
-        val allImplementations = arrayOf(systemUiController)
+        const val permissions = "com.google.accompanist:accompanist-permissions:${Versions.permission}"
+        val allImplementations = arrayOf(systemUiController, permissions)
     }
 
     object Compose {
@@ -60,6 +61,13 @@ object AppDependencies {
         val allImplementations = arrayOf(compose, gif)
     }
 
+    object Camera {
+        const val lifecycle = "androidx.camera:camera-lifecycle:${Versions.camera}"
+        const val view = "androidx.camera:camera-view:${Versions.camera}"
+        const val extensions = "androidx.camera:camera-extensions:${Versions.camera}"
+        val allImplementations = arrayOf(view, lifecycle, extensions)
+    }
+
     object Versions {
         const val koin = "3.4.6"
         const val coreKtx = "1.10.1"
@@ -77,5 +85,7 @@ object AppDependencies {
         const val mlkitTranslate = "17.0.1"
         const val htmlUnit = "2.67.0"
         const val coil = "2.4.0"
+        const val camera = "1.2.3"
+        const val permission = "0.32.0"
     }
 }

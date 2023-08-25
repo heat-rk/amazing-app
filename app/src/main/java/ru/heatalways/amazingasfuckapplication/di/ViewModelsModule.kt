@@ -6,10 +6,12 @@ import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsVi
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.CatsViewModel
+import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorViewModel
 
 val viewModelsModule = module {
     viewModelOf(::MenuViewModel)
     viewModelOf(::FactsViewModel)
     viewModelOf(::InsultsViewModel)
     viewModelOf(::CatsViewModel)
+    viewModelOf(::MirrorViewModel)
 }

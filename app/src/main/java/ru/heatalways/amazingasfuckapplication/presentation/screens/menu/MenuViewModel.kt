@@ -10,6 +10,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsSc
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
+import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorScreenRoute
 
 class MenuViewModel(
     private val router: Router
@@ -26,7 +27,7 @@ class MenuViewModel(
 
     private fun onMenuItemClick(item: MenuItem) = viewModelScope.launch {
         when (item) {
-            MenuItem.MIRROR -> Unit
+            MenuItem.MIRROR -> router.navigate(MirrorScreenRoute)
             MenuItem.CATS -> router.navigate(CatsScreenRoute)
             MenuItem.FACTS -> router.navigate(FactsScreenRoute)
             MenuItem.INSULTS -> router.navigate(InsultsScreenRoute)
