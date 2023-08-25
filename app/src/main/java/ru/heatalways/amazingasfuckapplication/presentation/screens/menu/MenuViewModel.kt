@@ -5,6 +5,7 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.CatsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
@@ -26,7 +27,7 @@ class MenuViewModel(
     private fun onMenuItemClick(item: MenuItem) = viewModelScope.launch {
         when (item) {
             MenuItem.MIRROR -> Unit
-            MenuItem.CATS -> Unit
+            MenuItem.CATS -> router.navigate(CatsScreenRoute)
             MenuItem.FACTS -> router.navigate(FactsScreenRoute)
             MenuItem.INSULTS -> router.navigate(InsultsScreenRoute)
             MenuItem.PIDORS_LIST -> Unit

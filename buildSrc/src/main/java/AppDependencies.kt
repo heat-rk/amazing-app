@@ -54,6 +54,12 @@ object AppDependencies {
         const val translate = "com.google.mlkit:translate:${Versions.mlkitTranslate}"
     }
 
+    object Coil {
+        const val compose = "io.coil-kt:coil-compose:${Versions.coil}"
+        const val gif = "io.coil-kt:coil-gif:${Versions.coil}"
+        val allImplementations = arrayOf(compose, gif)
+    }
+
     object Versions {
         const val koin = "3.4.6"
         const val coreKtx = "1.10.1"
@@ -70,5 +76,6 @@ object AppDependencies {
         const val ktor = "2.3.3"
         const val mlkitTranslate = "17.0.1"
         const val htmlUnit = "2.67.0"
+        const val coil = "2.4.0"
     }
 }

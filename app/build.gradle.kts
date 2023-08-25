@@ -84,6 +84,7 @@ dependencies {
     implementation(AppDependencies.Ktor.allImplementations)
     implementation(AppDependencies.Mlkit.translate)
     implementation(AppDependencies.htmlUnit)
+    implementation(AppDependencies.Coil.allImplementations)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)
 }

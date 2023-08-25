@@ -17,6 +17,12 @@ object AppConfig {
             debugValue = "https://evilinsult.com/generate_insult.php",
             releaseValue = "https://evilinsult.com/generate_insult.php"
         ),
+        BuildConfigField(
+            type = "String",
+            name = "CATS_API_BASE_URL",
+            debugValue = "https://cataas.com",
+            releaseValue = "https://cataas.com"
+        ),
     )
 
     object Sdk {

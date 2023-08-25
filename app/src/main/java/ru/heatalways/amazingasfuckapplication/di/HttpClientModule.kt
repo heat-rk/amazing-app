@@ -31,6 +31,7 @@ val httpClientModule = module {
                     Json {
                         encodeDefaults = true
                         coerceInputValues = true
+                        ignoreUnknownKeys = true
                     }
                 )
             }

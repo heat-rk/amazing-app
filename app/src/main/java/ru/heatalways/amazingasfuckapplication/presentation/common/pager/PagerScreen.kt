@@ -173,7 +173,9 @@ private fun <T> PagerScreenOkState(
                         colors = listOf(
                             Color.Transparent,
                             AppTheme.colors.background,
-                        )
+                            AppTheme.colors.background,
+                            AppTheme.colors.background,
+                        ),
                     )
                 )
         ) {

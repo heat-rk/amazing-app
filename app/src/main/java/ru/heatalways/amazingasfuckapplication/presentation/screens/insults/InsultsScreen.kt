@@ -37,7 +37,7 @@ fun InsultsScreen(viewModel: InsultsViewModel = koinViewModel()) {
         title = stringResource(R.string.menu_item_insults),
         icon = painterResource(R.drawable.icon_insult),
         content = {
-            InsultsScreenContent(fact = it)
+            InsultsScreenContent(insult = it)
         },
         contentShimmer = {
             InsultsScreenContentShimmer()
@@ -46,9 +46,9 @@ fun InsultsScreen(viewModel: InsultsViewModel = koinViewModel()) {
 }
 
 @Composable
-private fun InsultsScreenContent(fact: StringResource) {
+private fun InsultsScreenContent(insult: StringResource) {
     Text(
-        text = fact.extract() ?: "-",
+        text = insult.extract() ?: "-",
         textAlign = TextAlign.Center,
         color = AppTheme.colors.primary,
         modifier = Modifier
