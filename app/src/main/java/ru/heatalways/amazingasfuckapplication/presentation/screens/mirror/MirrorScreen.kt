@@ -43,8 +43,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
@@ -59,7 +61,7 @@ import kotlin.math.roundToInt
 
 object MirrorScreenRoute : ScreenRoute()
 
-private const val HEARTS_COUNT = 20
+private const val HEARTS_COUNT = 5
 private const val HEART_MIN_SIZE_DP = 30
 private const val HEART_MAX_SIZE_DP = 100
 private const val HEART_MIN_ROTATION = -45
@@ -69,49 +71,57 @@ private const val HEART_ANIMATION_DURATION = 5000
 @Composable
 fun MirrorScreen(viewModel: MirrorViewModel = koinViewModel()) {
     val context = LocalContext.current
-    val lifecycleOwner = LocalLifecycleOwner.current
 
     val cameraPermissionState = rememberPermissionState(
         permission = Manifest.permission.CAMERA
     )
 
-    val preview = androidx.camera.core.Preview.Builder().build()
+    when (cameraPermissionState.status) {
+        PermissionStatus.Granted -> {
+            val lifecycleOwner = LocalLifecycleOwner.current
 
-    val cameraSelector: MutableState<CameraSelector> = remember {
-        mutableStateOf(CameraSelector.DEFAULT_FRONT_CAMERA)
-    }
+            val preview = androidx.camera.core.Preview.Builder().build()
 
-    LaunchedEffect(Unit) {
-        val cameraProvider = suspendCoroutine { continuation ->
-            ProcessCameraProvider.getInstance(context).also { future ->
-                future.addListener(
-                    { continuation.resume(future.get()) },
-                    ContextCompat.getMainExecutor(context)
+            val cameraSelector: MutableState<CameraSelector> = remember {
+                mutableStateOf(CameraSelector.DEFAULT_FRONT_CAMERA)
+            }
+
+            LaunchedEffect(Unit) {
+                val cameraProvider = suspendCoroutine { continuation ->
+                    ProcessCameraProvider.getInstance(context).also { future ->
+                        future.addListener(
+                            { continuation.resume(future.get()) },
+                            ContextCompat.getMainExecutor(context)
+                        )
+                    }
+                }
+
+                cameraProvider.unbindAll()
+
+                cameraProvider.bindToLifecycle(
+                    lifecycleOwner,
+                    cameraSelector.value,
+                    preview,
                 )
             }
+
+            MirrorPreview(
+                previewFactory = {
+                    val previewView = PreviewView(context)
+                    preview.setSurfaceProvider(previewView.surfaceProvider)
+                    previewView
+                },
+                onIntent = viewModel::intent,
+            )
         }
-
-        cameraProvider.unbindAll()
-
-        cameraProvider.bindToLifecycle(
-            lifecycleOwner,
-            cameraSelector.value,
-            preview,
-        )
-    }
-
-    if (cameraPermissionState.status.isGranted) {
-        MirrorPreview(
-            previewFactory = {
-                val previewView = PreviewView(context)
-                preview.setSurfaceProvider(previewView.surfaceProvider)
-                previewView
-            },
-            onIntent = viewModel::intent,
-        )
-    } else {
-        LaunchedEffect(Unit) {
-            cameraPermissionState.launchPermissionRequest()
+        is PermissionStatus.Denied -> {
+            LaunchedEffect(cameraPermissionState.status) {
+                if (cameraPermissionState.status.shouldShowRationale) {
+                    viewModel.intent(Intent.OnNavigationButtonClick)
+                } else {
+                    cameraPermissionState.launchPermissionRequest()
+                }
+            }
         }
     }
 }
