@@ -3,6 +3,7 @@ plugins {
     id(AppPlugins.androidKotlin)
     id(AppPlugins.kotlinKapt)
     id(AppPlugins.detekt) version AppPlugins.Versions.detekt
+    id(AppPlugins.parcelize)
 
     kotlin(AppPlugins.serialization) version AppPlugins.Versions.serialization
 }
@@ -25,6 +26,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("debug")
 
             AppConfig.buildConfigFields.forEach { field ->
                 buildConfigField(field.type, field.name, "\"${field.releaseValue}\"")
@@ -86,6 +88,9 @@ dependencies {
     implementation(AppDependencies.htmlUnit)
     implementation(AppDependencies.Coil.allImplementations)
     implementation(AppDependencies.Camera.allImplementations)
+    implementation(AppDependencies.Room.allImplementations)
+
+    kapt(AppDependencies.Room.compiler)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)
 }

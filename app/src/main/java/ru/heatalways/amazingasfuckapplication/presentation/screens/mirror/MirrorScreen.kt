@@ -44,22 +44,20 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
-import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Heart
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
 
-object MirrorScreenRoute : ScreenRoute()
+object MirrorScreenRouteDefinition : ScreenRouteDefinition()
 
 private const val HEARTS_COUNT = 5
 private const val HEART_MIN_SIZE_DP = 30

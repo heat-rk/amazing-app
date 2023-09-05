@@ -5,6 +5,7 @@ object AppPlugins {
     const val kotlinKapt = "kotlin-kapt"
     const val detekt = "io.gitlab.arturbosch.detekt"
     const val serialization = "plugin.serialization"
+    const val parcelize = "kotlin-parcelize"
 
     object Versions {
         const val androidApplication = "8.1.0"

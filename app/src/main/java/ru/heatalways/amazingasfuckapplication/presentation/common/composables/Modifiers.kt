@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 
 private const val SHIMMER_ANIM_LABEL = "shimmer"
-private const val SHIMMER_REPEAT_DELAY = 2000
+private const val SHIMMER_REPEAT_DELAY = 1200
 
 @Composable
 fun Modifier.shimmerEffect(
@@ -101,12 +101,16 @@ fun Modifier.rectangularBackgroundLighting(
 fun Modifier.drawBackgroundLighting(
     lightingColor: Color,
     blurRadius: Float = 30f,
+    style: android.graphics.Paint.Style = android.graphics.Paint.Style.FILL,
+    strokeWidth: Float = 0f,
     block: DrawScope.(Canvas, Paint) -> Unit
 ): Modifier {
     val paint = Paint()
     val frameworkPaint = paint.asFrameworkPaint()
     frameworkPaint.maskFilter = BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL)
+    frameworkPaint.style = style
     frameworkPaint.color = lightingColor.toArgb()
+    frameworkPaint.strokeWidth = strokeWidth
 
     return drawBehind {
         drawIntoCanvas { canvas ->

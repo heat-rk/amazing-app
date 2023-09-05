@@ -8,7 +8,10 @@ import androidx.compose.ui.graphics.Color
 
 @Immutable
 data class AppColors(
-    val materialColors: ColorScheme
+    val materialColors: ColorScheme,
+    val gold: Color = Color(0xFFFFC800),
+    val silver: Color = Color(0xFFD8D8D8),
+    val bronze: Color = Color(0xFF703D00),
 ) {
     val primary = materialColors.primary
     val onPrimary = materialColors.onPrimary
@@ -32,7 +35,7 @@ val appColors = AppColors(
     materialColors = darkColorScheme(
         primary = Color(0xFFF600FF),
         onPrimary = Color(0xFF330435),
-        primaryContainer = Color(0xFFBD5CBD),
+        primaryContainer = Color(0x4DBD5CBD),
         onPrimaryContainer = Color(0xFF000000),
         secondary = Color(0xFF56FF30),
         onSecondary = Color(0xFF072900),

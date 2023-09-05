@@ -12,6 +12,15 @@
     <string name="go_back_icon_content_description">Вернуться назад</string>
     <string name="go_next_icon_content_description">Загрузить следующее</string>
 
+    <string name="pidors_empty_list_hint">Ого! Пидорасов еще нет! Надо срочно добавить!</string>
+    <string name="add_pidor">Добавить пидораса!!</string>
+
+    <string name="pidor_addition_title">Добавление пидораса</string>
+    <string name="pidor_addition_name_placeholder">Леонид</string>
+    <string name="pidor_addition_name_label">Имя</string>
+    <string name="pidor_addition_save">Сохранить пидораса!</string>
+    <string name="pidor_addition_select_photo">Выбрать фотку</string>
+
     <string name="error_title">Ошибка!</string>
     <string name="error_something_went_wrong">Что-то к хуям сломалось :(</string>
     <string name="error_try_again">Вольяжно перезагрузить</string>

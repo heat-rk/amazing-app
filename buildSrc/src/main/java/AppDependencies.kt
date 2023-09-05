@@ -28,6 +28,7 @@ object AppDependencies {
         const val material = "androidx.compose.material3:material3"
         const val preview = "androidx.compose.ui:ui-tooling-preview"
         const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycle}"
+        const val activityCore = "androidx.activity:activity:${Versions.composeActivity}"
         const val activity = "androidx.activity:activity-compose:${Versions.composeActivity}"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModel}"
         const val navigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
@@ -35,7 +36,7 @@ object AppDependencies {
         const val debugPreview = "androidx.compose.ui:ui-tooling"
 
         val platformImplementations = arrayOf(bom)
-        val allImplementations = arrayOf(material, preview, activity, viewModel, navigation, lifeCycleRuntime)
+        val allImplementations = arrayOf(material, preview, activityCore, activity, viewModel, navigation, lifeCycleRuntime)
         val debugImplementations = arrayOf(debugPreview)
     }
 
@@ -68,6 +69,13 @@ object AppDependencies {
         val allImplementations = arrayOf(view, lifecycle, extensions)
     }
 
+    object Room {
+        const val runtime = "androidx.room:room-runtime:${Versions.room}"
+        const val compiler = "androidx.room:room-compiler:${Versions.room}"
+        const val ktx = "androidx.room:room-ktx:${Versions.room}"
+        val allImplementations = arrayOf(runtime, ktx)
+    }
+
     object Versions {
         const val koin = "3.4.6"
         const val coreKtx = "1.10.1"
@@ -87,5 +95,6 @@ object AppDependencies {
         const val coil = "2.4.0"
         const val camera = "1.2.3"
         const val permission = "0.32.0"
+        const val room = "2.5.2"
     }
 }

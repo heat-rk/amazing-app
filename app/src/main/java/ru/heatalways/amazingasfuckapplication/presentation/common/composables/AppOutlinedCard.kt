@@ -1,8 +1,11 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 
 package ru.heatalways.amazingasfuckapplication.presentation.common.composables
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
@@ -21,7 +24,9 @@ import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 @Composable
 fun AppOutlinedCard(
     onClick: () -> Unit,
+    onLongClick: (() -> Unit)? = null,
     color: Color = AppTheme.colors.primary,
+    containerColor: Color = Color.Transparent,
     modifier: Modifier = Modifier,
     content: @Composable() (ColumnScope.() -> Unit),
 ) {
@@ -29,7 +34,7 @@ fun AppOutlinedCard(
     
     OutlinedCard(
         colors = CardDefaults.outlinedCardColors(
-            containerColor = Color.Transparent,
+            containerColor = containerColor,
             contentColor = color,
         ),
         border = BorderStroke(
@@ -37,6 +42,10 @@ fun AppOutlinedCard(
             color = color,
         ),
         modifier = modifier
+            .combinedClickable(
+                onLongClick = onLongClick,
+                onClick = {}
+            )
             .drawBackgroundLighting(color) { canvas, paint ->
                 val borderWidthPx = borderWidth.toPx()
 

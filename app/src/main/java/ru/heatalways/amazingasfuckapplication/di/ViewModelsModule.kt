@@ -7,6 +7,8 @@ import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuView
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.CatsViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorViewModel
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsViewModel
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditViewModel
 
 val viewModelsModule = module {
     viewModelOf(::MenuViewModel)
@@ -14,4 +16,6 @@ val viewModelsModule = module {
     viewModelOf(::InsultsViewModel)
     viewModelOf(::CatsViewModel)
     viewModelOf(::MirrorViewModel)
+    viewModelOf(::PidorsViewModel)
+    viewModelOf(::PidorEditViewModel)
 }

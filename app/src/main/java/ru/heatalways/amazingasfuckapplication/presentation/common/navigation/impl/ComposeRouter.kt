@@ -5,6 +5,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
 
 class ComposeRouter : Router {
     private val _routing = Channel<NavController.() -> Unit>(Channel.BUFFERED)

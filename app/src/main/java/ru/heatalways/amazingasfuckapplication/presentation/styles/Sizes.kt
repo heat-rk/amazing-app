@@ -9,7 +9,7 @@ object Sizes {
     val MenuItemBorderWidth = 4.dp
     val AppBarIcon = 32.dp
     val WantMoreIcon = 100.dp
-    val PawsNextButton = 160.sp
     val CatLoaderHeight = 96.dp
     val HeartStrokeWidth = 6.dp
+    val PidorAvatarHeight = 300.dp
 }

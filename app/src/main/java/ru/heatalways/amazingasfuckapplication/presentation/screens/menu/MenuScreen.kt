@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +25,7 @@ import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppOutlinedCard
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
@@ -34,7 +33,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.utils.extract
 
-object MenuScreenRoute : ScreenRoute()
+object MenuScreenRouteDefinition : ScreenRouteDefinition()
 
 @Composable
 fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {

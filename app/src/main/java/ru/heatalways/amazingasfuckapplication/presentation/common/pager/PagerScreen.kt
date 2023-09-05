@@ -49,6 +49,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.TitleSubtitle
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.rectangularBackgroundLighting
@@ -246,52 +247,6 @@ private fun <T> PagerScreenErrorState(
                 .wrapContentSize()
                 .align(Alignment.BottomCenter)
                 .padding(bottom = Insets.ExtraLarge)
-        )
-    }
-}
-
-@Composable
-private fun PagerScreenPaws(
-    onClick: () -> Unit,
-    text: String,
-    pawsColor: Color = AppTheme.colors.primary,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-    ) {
-        Box(
-            modifier = Modifier
-                .size(Sizes.WantMoreIcon)
-                .clip(CircleShape)
-                .radialBackgroundLighting(pawsColor)
-                .clickable(
-                    indication = rememberRipple(
-                        color = pawsColor
-                    ),
-                    interactionSource = remember { MutableInteractionSource() },
-                    onClick = onClick
-                )
-        ) {
-            Image(
-                painter = painterResource(R.drawable.icon_paws),
-                colorFilter = ColorFilter.tint(pawsColor),
-                contentDescription = stringResource(R.string.go_next_icon_content_description),
-                modifier = Modifier
-                    .padding(Insets.Default)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(Insets.Small))
-
-        Text(
-            text = text,
-            color = pawsColor,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .rectangularBackgroundLighting(pawsColor)
         )
     }
 }

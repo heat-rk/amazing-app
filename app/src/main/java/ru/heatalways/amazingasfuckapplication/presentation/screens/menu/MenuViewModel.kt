@@ -5,12 +5,14 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.CatsScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.CatsScreenRouteDefinition
+import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsScreenRouteDefinition
+import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsScreenRouteDefinition
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
-import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorScreenRouteDefinition
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsScreenRouteDefinition
 
 class MenuViewModel(
     private val router: Router
@@ -27,11 +29,11 @@ class MenuViewModel(
 
     private fun onMenuItemClick(item: MenuItem) = viewModelScope.launch {
         when (item) {
-            MenuItem.MIRROR -> router.navigate(MirrorScreenRoute)
-            MenuItem.CATS -> router.navigate(CatsScreenRoute)
-            MenuItem.FACTS -> router.navigate(FactsScreenRoute)
-            MenuItem.INSULTS -> router.navigate(InsultsScreenRoute)
-            MenuItem.PIDORS_LIST -> Unit
+            MenuItem.MIRROR -> router.navigate(ScreenRoute(MirrorScreenRouteDefinition))
+            MenuItem.CATS -> router.navigate(ScreenRoute(CatsScreenRouteDefinition))
+            MenuItem.FACTS -> router.navigate(ScreenRoute(FactsScreenRouteDefinition))
+            MenuItem.INSULTS -> router.navigate(ScreenRoute(InsultsScreenRouteDefinition))
+            MenuItem.PIDORS_LIST -> router.navigate(ScreenRoute(PidorsScreenRouteDefinition))
         }
     }
 }

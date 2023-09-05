@@ -32,12 +32,12 @@ import coil.size.Size
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 
-object CatsScreenRoute : ScreenRoute()
+object CatsScreenRouteDefinition : ScreenRouteDefinition()
 
 @Composable
 fun CatsScreen(viewModel: CatsViewModel = koinViewModel()) {

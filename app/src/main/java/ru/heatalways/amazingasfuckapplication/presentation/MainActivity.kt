@@ -17,7 +17,7 @@ import org.koin.compose.koinInject
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeRouter
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.buildGraph
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreenRouteDefinition
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = MenuScreenRoute.route,
+                    startDestination = MenuScreenRouteDefinition.route,
                     modifier = Modifier.background(backgroundColor),
                     builder = NavGraphBuilder::buildGraph
                 )
