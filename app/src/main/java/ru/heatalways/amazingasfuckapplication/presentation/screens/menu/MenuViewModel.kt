@@ -13,6 +13,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuCont
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorScreenRouteDefinition
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsScreenRouteDefinition
+import ru.heatalways.amazingasfuckapplication.presentation.screens.remember.RememberScreen
 
 class MenuViewModel(
     private val router: Router
@@ -34,6 +35,7 @@ class MenuViewModel(
             MenuItem.FACTS -> router.navigate(ScreenRoute(FactsScreenRouteDefinition))
             MenuItem.INSULTS -> router.navigate(ScreenRoute(InsultsScreenRouteDefinition))
             MenuItem.PIDORS_LIST -> router.navigate(ScreenRoute(PidorsScreenRouteDefinition))
+            MenuItem.REMEMBER -> router.navigate(ScreenRoute(RememberScreen.Definition))
         }
     }
 }

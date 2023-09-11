@@ -15,6 +15,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.Mirror
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsScreenRouteDefinition
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditScreen
+import ru.heatalways.amazingasfuckapplication.presentation.screens.remember.RememberScreen
 
 fun NavGraphBuilder.buildGraph() {
     composable(MenuScreenRouteDefinition) { MenuScreen() }
@@ -23,6 +24,7 @@ fun NavGraphBuilder.buildGraph() {
     composable(CatsScreenRouteDefinition) { CatsScreen() }
     composable(MirrorScreenRouteDefinition) { MirrorScreen() }
     composable(PidorsScreenRouteDefinition) { PidorsScreen() }
+    composable(RememberScreen.Definition) { RememberScreen() }
 
     composable(PidorEditScreen.RouteDefinition) {
         PidorEditScreen(

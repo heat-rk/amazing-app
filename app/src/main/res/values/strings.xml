@@ -6,6 +6,7 @@
     <string name="menu_item_facts">Пиздатые факты</string>
     <string name="menu_item_insults">Пиздатые оскорбления</string>
     <string name="menu_item_pidors_list">Топ пидорасов</string>
+    <string name="menu_item_remember">Помни</string>
 
     <string name="want_more">Хочу еще!!!</string>
 
@@ -20,6 +21,9 @@
     <string name="pidor_addition_name_label">Имя</string>
     <string name="pidor_addition_save">Сохранить пидораса!</string>
     <string name="pidor_addition_select_photo">Выбрать фотку</string>
+
+    <string name="remember_text">Кароче, я очень надеюсь, что тебе понравился этот подарок.\nЯ очень старался сделать его милым, вроде бы получилось :) Но это приложение - вообще хуйня по сравнению с тем, что еще произошло в этот день. В этот день появилась на свет пиздатая, противная и ужасная женщина по имени Диана Шнайдер. Я хочу поздравить тебя с этим пиздатым (как и это приложение) днём, пожелать тебе процветания в пиздатости, пожелать ебейшего чаю, верных и пиздатых друзей рядом, а самое главное - здоровья тебе и твоим близким и мирного неба над головой! А теперь самое время бухнуть :)</string>
+    <string name="ok">Балдеееж!</string>
 
     <string name="error_title">Ошибка!</string>
     <string name="error_something_went_wrong">Что-то к хуям сломалось :(</string>

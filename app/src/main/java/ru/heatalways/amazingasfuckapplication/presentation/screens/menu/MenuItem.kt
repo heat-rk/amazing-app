@@ -35,5 +35,10 @@ enum class MenuItem(
         id = "pidors_list",
         title = strRes(R.string.menu_item_pidors_list),
         icon = painterRes(R.drawable.icon_leaderboard)
+    ),
+    REMEMBER(
+        id = "remember",
+        title = strRes(R.string.menu_item_remember),
+        icon = painterRes(R.drawable.icon_light)
     )
 }
