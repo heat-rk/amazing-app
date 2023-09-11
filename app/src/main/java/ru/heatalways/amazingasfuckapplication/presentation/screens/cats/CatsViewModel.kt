@@ -12,8 +12,9 @@ class CatsViewModel(
     pageLoadOffset = 3
 ) {
     init {
-        initLoading()
+        load(initialLoading = true)
     }
+
     override suspend fun load(offset: Int, limit: Int): List<String> {
         return listOf(catsRepository.getRandomCatGifUrl())
     }

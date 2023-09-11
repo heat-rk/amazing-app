@@ -76,6 +76,12 @@ object AppDependencies {
         val allImplementations = arrayOf(runtime, ktx)
     }
 
+    object Orbit {
+        const val viewModel = "org.orbit-mvi:orbit-viewmodel:${Versions.orbit}"
+        const val compose = "org.orbit-mvi:orbit-compose:${Versions.orbit}"
+        val allImplementations = arrayOf(viewModel, compose)
+    }
+
     object Versions {
         const val koin = "3.4.6"
         const val coreKtx = "1.10.1"
@@ -96,5 +102,6 @@ object AppDependencies {
         const val camera = "1.2.3"
         const val permission = "0.32.0"
         const val room = "2.5.2"
+        const val orbit = "6.0.0"
     }
 }

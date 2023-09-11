@@ -1,23 +1,18 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.mirror
 
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
-import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
+import androidx.lifecycle.ViewModel
+import org.orbitmvi.orbit.ContainerHost
+import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorContract.Intent
 
 class MirrorViewModel(
     private val router: Router
-) : MviViewModel<Unit, Intent>(Unit) {
-    override fun onNewIntent(intent: Intent) {
-        when (intent) {
-            Intent.OnNavigationButtonClick -> onNavigationButtonClick()
-        }
-    }
+) : ViewModel(), ContainerHost<Unit, Unit> {
 
-    private fun onNavigationButtonClick() {
-        viewModelScope.launch {
-            router.navigateBack()
-        }
+    override val container = container<Unit, Unit>(initialState = Unit)
+
+    fun onNavigationButtonClick() = intent {
+        router.navigateBack()
     }
 }

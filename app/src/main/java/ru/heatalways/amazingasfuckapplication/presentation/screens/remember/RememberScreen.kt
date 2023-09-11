@@ -1,8 +1,5 @@
-@file:OptIn(ExperimentalFoundationApi::class)
-
 package ru.heatalways.amazingasfuckapplication.presentation.screens.remember
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,13 +17,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
-import ru.heatalways.amazingasfuckapplication.presentation.screens.remember.RememberContract.Intent
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 
 object RememberScreen {
-    object Definition : ScreenRouteDefinition()
+    object Route : ScreenRoute()
 }
 
 @Composable
@@ -34,13 +30,13 @@ fun RememberScreen(
     viewModel: RememberViewModel = koinViewModel(),
 ) {
     RememberScreen(
-        onIntent = viewModel::intent,
+       onNavigationButtonClick = viewModel::onNavigationButtonClick
     )
 }
 
 @Composable
 private fun RememberScreen(
-    onIntent: (Intent) -> Unit,
+    onNavigationButtonClick: () -> Unit,
 ) {
     val contentVerticalAlignmentBias = -0.5f
 
@@ -49,7 +45,7 @@ private fun RememberScreen(
             AppBar(
                 title = stringResource(R.string.menu_item_remember),
                 icon = painterResource(R.drawable.icon_light),
-                onGoBackClick = { onIntent(Intent.OnNavigationButtonClick) },
+                onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()
             )
@@ -80,7 +76,7 @@ private fun RememberScreen(
 private fun PagerScreenPreview() {
     AppTheme {
         RememberScreen(
-            onIntent = {},
+            onNavigationButtonClick = {},
         )
     }
 }

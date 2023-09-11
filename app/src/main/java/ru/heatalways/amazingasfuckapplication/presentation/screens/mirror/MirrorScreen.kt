@@ -50,14 +50,13 @@ import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Heart
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
-import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.MirrorContract.Intent
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
 
-object MirrorScreenRouteDefinition : ScreenRouteDefinition()
+object MirrorScreenRoute : ScreenRoute()
 
 private const val HEARTS_COUNT = 5
 private const val HEART_MIN_SIZE_DP = 30
@@ -109,13 +108,13 @@ fun MirrorScreen(viewModel: MirrorViewModel = koinViewModel()) {
                     preview.setSurfaceProvider(previewView.surfaceProvider)
                     previewView
                 },
-                onIntent = viewModel::intent,
+                onNavigationButtonClick = viewModel::onNavigationButtonClick,
             )
         }
         is PermissionStatus.Denied -> {
             LaunchedEffect(cameraPermissionState.status) {
                 if (cameraPermissionState.status.shouldShowRationale) {
-                    viewModel.intent(Intent.OnNavigationButtonClick)
+                    viewModel.onNavigationButtonClick()
                 } else {
                     cameraPermissionState.launchPermissionRequest()
                 }
@@ -127,7 +126,7 @@ fun MirrorScreen(viewModel: MirrorViewModel = koinViewModel()) {
 @Composable
 private fun MirrorPreview(
     previewFactory: (Context) -> PreviewView,
-    onIntent: (Intent) -> Unit
+    onNavigationButtonClick: () -> Unit
 ) {
     var screenWidth by remember { mutableIntStateOf(0) }
     var screenHeight by remember { mutableIntStateOf(0) }
@@ -138,7 +137,7 @@ private fun MirrorPreview(
                 title = stringResource(R.string.menu_item_mirror),
                 icon = painterResource(R.drawable.icon_mirror),
                 containerColor = Color.Transparent,
-                onGoBackClick = { onIntent(Intent.OnNavigationButtonClick) },
+                onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier.fillMaxWidth()
             )
         },

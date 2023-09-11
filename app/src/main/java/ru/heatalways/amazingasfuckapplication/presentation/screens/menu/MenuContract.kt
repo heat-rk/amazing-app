@@ -6,8 +6,4 @@ object MenuContract {
     data class ViewState(
         val items: ImmutableList<MenuItem>
     )
-
-    sealed interface Intent {
-        data class OnMenuItemClick(val item: MenuItem) : Intent
-    }
 }

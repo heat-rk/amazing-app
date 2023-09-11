@@ -1,11 +1,12 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
 
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModel
+import org.orbitmvi.orbit.ContainerHost
+import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.reduce
+import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
-import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.utils.PainterResource
 
@@ -14,47 +15,37 @@ class PidorEditViewModel(
     photoPath: String = "",
     private val router: Router,
     private val pidorsRepository: PidorsRepository,
-) : MviViewModel<ViewState, Intent>(
-    initialState = ViewState(
-        name = name,
-        avatar = PainterResource.ByPath(photoPath)
+) : ViewModel(), ContainerHost<ViewState, Unit> {
+
+    override val container = container<ViewState, Unit>(
+        initialState = ViewState(
+            name = name,
+            avatar = PainterResource.ByPath(photoPath)
+        )
     )
-) {
-    override fun onNewIntent(intent: Intent) {
-        when (intent) {
-            is Intent.OnAvatarPathChanged -> onAvatarPathChanged(intent.value)
-            is Intent.OnNameChange -> onNameChange(intent.value)
-            Intent.OnSaveClick -> onSaveClick()
-            Intent.OnNavigationButtonClick -> onNavigationButtonClick()
+
+    fun onNameChange(value: String) = intent {
+        reduce { state.copy(name = value) }
+    }
+
+    fun onAvatarPathChanged(value: String) = intent {
+        reduce { state.copy(avatar = PainterResource.ByPath(value)) }
+    }
+
+    fun onNavigationButtonClick() = intent {
+        router.navigateBack()
+    }
+
+    fun onSaveClick() = intent {
+        val currentState = state
+
+        if (currentState.avatar !is PainterResource.ByPath) {
+            return@intent
         }
-    }
 
-    private fun onNameChange(value: String) {
-        reduce { copy(name = value) }
-    }
-
-    private fun onAvatarPathChanged(value: String) {
-        reduce { copy(avatar = PainterResource.ByPath(value)) }
-    }
-
-    private fun onNavigationButtonClick() {
-        viewModelScope.launch {
-            router.navigateBack()
-        }
-    }
-
-    private fun onSaveClick() {
-        viewModelScope.launch {
-            val currentState = state.value
-
-            if (currentState.avatar !is PainterResource.ByPath) {
-                return@launch
-            }
-
-            pidorsRepository.create(
-                name = currentState.name,
-                avatarPath = currentState.avatar.path
-            )
-        }
+        pidorsRepository.create(
+            name = currentState.name,
+            avatarPath = currentState.avatar.path
+        )
     }
 }

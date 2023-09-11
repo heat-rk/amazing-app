@@ -1,21 +1,24 @@
 package ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl
 
-import androidx.navigation.NavController
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.RoutingAction
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
 
 class ComposeRouter : Router {
-    private val _routing = Channel<NavController.() -> Unit>(Channel.BUFFERED)
-    val routing = _routing.receiveAsFlow()
+    private val _actions = Channel<RoutingAction>(Channel.BUFFERED)
+    override val actions = _actions.receiveAsFlow()
 
-    override suspend fun navigate(route: ScreenRoute) {
-        _routing.send { navigate(route.route) }
+    override suspend fun navigate(route: ScreenRoute, args: Map<String, String>) {
+        action(RoutingAction.NavigateTo(route, args))
     }
 
     override suspend fun navigateBack() {
-        _routing.send { popBackStack() }
+        action(RoutingAction.NavigateBack)
+    }
+
+    private suspend fun action(action: RoutingAction) {
+        _actions.send(action)
     }
 }

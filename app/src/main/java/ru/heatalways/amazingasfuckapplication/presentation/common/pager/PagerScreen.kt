@@ -3,11 +3,7 @@
 package ru.heatalways.amazingasfuckapplication.presentation.common.pager
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,19 +12,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -37,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -51,14 +42,10 @@ import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.TitleSubtitle
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.rectangularBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.utils.extract
 import ru.heatalways.amazingasfuckapplication.utils.strRes
 
@@ -70,13 +57,15 @@ fun <T> PagerScreen(
     content: @Composable (T) -> Unit,
     contentShimmer: @Composable () -> Unit,
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()
 
     PagerScreen(
         title = title,
         icon = icon,
         state = state,
-        onIntent = viewModel::intent,
+        onNavigationButtonClick = viewModel::onNavigateBack,
+        onPageSelected = viewModel::onPageSelected,
+        onReloadButtonClick = viewModel::onReloadButtonClick,
         content = content,
         contentShimmer = contentShimmer,
     )
@@ -87,7 +76,9 @@ private fun <T> PagerScreen(
     title: String,
     icon: Painter,
     state: ViewState<T>,
-    onIntent: (Intent) -> Unit,
+    onNavigationButtonClick: () -> Unit,
+    onPageSelected: (Int) -> Unit,
+    onReloadButtonClick: () -> Unit,
     content: @Composable (T) -> Unit,
     contentShimmer: @Composable () -> Unit,
 ) {
@@ -98,7 +89,7 @@ private fun <T> PagerScreen(
             AppBar(
                 title = title,
                 icon = icon,
-                onGoBackClick = { onIntent(Intent.OnNavigationButtonClick) },
+                onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()
             )
@@ -108,7 +99,7 @@ private fun <T> PagerScreen(
             is ViewState.Error -> {
                 PagerScreenErrorState(
                     state = state,
-                    onIntent = onIntent,
+                    onReloadButtonClick = onReloadButtonClick,
                     contentPadding = contentPadding,
                     contentVerticalAlignmentBias = contentVerticalAlignmentBias,
                 )
@@ -124,7 +115,7 @@ private fun <T> PagerScreen(
             is ViewState.Ok -> {
                 PagerScreenOkState(
                     state = state,
-                    onIntent = onIntent,
+                    onPageSelected = onPageSelected,
                     content = content,
                     contentPadding = contentPadding,
                     contentVerticalAlignmentBias = contentVerticalAlignmentBias,
@@ -139,7 +130,7 @@ private fun <T> PagerScreenOkState(
     contentPadding: PaddingValues,
     contentVerticalAlignmentBias: Float,
     state: ViewState.Ok<T>,
-    onIntent: (Intent) -> Unit,
+    onPageSelected: (Int) -> Unit,
     content: @Composable (T) -> Unit,
 ) {
     Box(
@@ -151,7 +142,7 @@ private fun <T> PagerScreenOkState(
 
         LaunchedEffect(pagerState) {
             snapshotFlow { pagerState.currentPage }.collect { page ->
-                onIntent(Intent.OnPageSelected(page))
+                onPageSelected(page)
             }
         }
 
@@ -222,7 +213,7 @@ private fun <T> PagerScreenErrorState(
     contentPadding: PaddingValues,
     contentVerticalAlignmentBias: Float,
     state: ViewState.Error<T>,
-    onIntent: (Intent) -> Unit,
+    onReloadButtonClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -241,7 +232,7 @@ private fun <T> PagerScreenErrorState(
         )
 
         PagerScreenPaws(
-            onClick = { onIntent(Intent.OnReloadButtonClick) },
+            onClick = onReloadButtonClick,
             text = stringResource(R.string.error_try_again),
             modifier = Modifier
                 .wrapContentSize()
@@ -270,7 +261,9 @@ private fun PagerScreenPreview() {
     AppTheme {
         PagerScreen(
             state = okState,
-            onIntent = {},
+            onPageSelected = {},
+            onNavigationButtonClick = {},
+            onReloadButtonClick = {},
             title = "Крутые факты",
             icon = painterResource(R.drawable.icon_cat),
             content = {

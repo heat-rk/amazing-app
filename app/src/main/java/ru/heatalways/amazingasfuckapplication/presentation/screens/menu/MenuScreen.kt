@@ -25,30 +25,29 @@ import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppOutlinedCard
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.Intent
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.utils.extract
 
-object MenuScreenRouteDefinition : ScreenRouteDefinition()
+object MenuScreenRoute : ScreenRoute()
 
 @Composable
 fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()
 
     MenuScreen(
         state = state,
-        onIntent = viewModel::intent
+        onMenuItemClick = viewModel::onMenuItemClick
     )
 }
 
 @Composable
 private fun MenuScreen(
     state: ViewState,
-    onIntent: (Intent) -> Unit,
+    onMenuItemClick: (MenuItem) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -70,7 +69,7 @@ private fun MenuScreen(
             }
 
             AppOutlinedCard(
-                onClick = { onIntent(Intent.OnMenuItemClick(item)) },
+                onClick = { onMenuItemClick(item) },
                 color = color,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -111,7 +110,7 @@ private fun MenuScreenPreview() {
             state = ViewState(
                 items = MenuItem.values().toList().toImmutableList()
             ),
-            onIntent = {}
+            onMenuItemClick = {}
         )
     }
 }

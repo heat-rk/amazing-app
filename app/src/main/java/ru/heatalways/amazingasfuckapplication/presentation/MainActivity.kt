@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
@@ -15,9 +17,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.compose.koinInject
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeRouter
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.RoutingAction
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.buildGraph
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreenRouteDefinition
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,23 +42,36 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                val router = (koinInject<Router>() as? ComposeRouter)
-
-                if (router != null) {
-                    LaunchedEffect(Unit) {
-                        router.routing
-                            .onEach { event -> event(navController) }
-                            .launchIn(this)
-                    }
-                }
+                LaunchedRouterEffect(navController = navController)
 
                 NavHost(
                     navController = navController,
-                    startDestination = MenuScreenRouteDefinition.route,
+                    startDestination = MenuScreenRoute.definition,
                     modifier = Modifier.background(backgroundColor),
                     builder = NavGraphBuilder::buildGraph
                 )
             }
+        }
+    }
+
+    @Composable
+    private fun LaunchedRouterEffect(
+        navController: NavController,
+        router: Router = koinInject(),
+    ) {
+        LaunchedEffect(navController, router) {
+            router.actions
+                .onEach { action ->
+                    when (action) {
+                        RoutingAction.NavigateBack -> {
+                            navController.popBackStack()
+                        }
+                        is RoutingAction.NavigateTo -> {
+                            navController.navigate(action.route.withArgs())
+                        }
+                    }
+                }
+                .launchIn(this)
         }
     }
 }

@@ -1,39 +1,33 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
+import org.orbitmvi.orbit.ContainerHost
+import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.reduce
+import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.mappers.toUIListItem
-import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditScreen
 
 class PidorsViewModel(
     private val router: Router,
     private val pidorsRepository: PidorsRepository,
-) : MviViewModel<ViewState, Intent>(
-    initialState = ViewState.Loading
-) {
+) : ViewModel(), ContainerHost<ViewState, Unit> {
+
+    override val container = container<ViewState, Unit>(
+        initialState = ViewState.Loading
+    )
+
     init {
         updateList(showLoading = true)
     }
 
-    override fun onNewIntent(intent: Intent) {
-        when (intent) {
-            Intent.OnNavigationButtonClick -> onNavigationButtonClick()
-            Intent.OnCreateClick -> onCreateClick()
-            Intent.OnDeleteClick -> TODO()
-            Intent.OnEditClick -> TODO()
-            is Intent.OnItemClick -> onItemClick(intent.item)
-            is Intent.OnItemLongClick -> onItemLongClick(intent.item)
-        }
-    }
-
-    private fun updateList(showLoading: Boolean = false) {
+    private fun updateList(showLoading: Boolean = false) = intent {
         if (showLoading) {
             reduce { ViewState.Loading }
         }
@@ -44,40 +38,36 @@ class PidorsViewModel(
         }
     }
 
-    private fun onCreateClick() {
-        viewModelScope.launch {
-            router.navigate(ScreenRoute(
-                definition = PidorEditScreen.RouteDefinition,
-                params = mapOf(
-                    PidorEditScreen.NAME_PARAM to "",
-                    PidorEditScreen.PHOTO_PATH to "",
-                )
-            ))
-        }
-    }
-
-    private fun onNavigationButtonClick() {
-        viewModelScope.launch {
-            router.navigateBack()
-        }
-    }
-
-    private fun onItemClick(item: PidorItem) {
-        viewModelScope.launch {
-            pidorsRepository.update(
-                id = item.id,
-                tapCount = item.tapCount + 1
+    fun onCreateClick() = intent {
+        router.navigate(
+            route = PidorEditScreen.Route,
+            args = mapOf(
+                PidorEditScreen.NAME_PARAM to "",
+                PidorEditScreen.PHOTO_PATH to "",
             )
-
-            updateList()
-        }
+        )
     }
 
-    private fun onItemLongClick(item: PidorItem) {
+    fun onNavigationButtonClick() = intent {
+        router.navigateBack()
+    }
+
+    fun onItemClick(item: PidorItem) = intent {
+        pidorsRepository.update(
+            id = item.id,
+            tapCount = item.tapCount + 1
+        )
+
+        updateList()
+    }
+
+    fun onItemLongClick(item: PidorItem) = intent {
         reduce {
-            if (this is ViewState.Ok) {
-                copy(
-                    items = items.map {
+            val currentState = state
+
+            if (currentState is ViewState.Ok) {
+                currentState.copy(
+                    items = currentState.items.map {
                         if (item.id == it.id) {
                             it.copy(isSelected = true)
                         } else {
@@ -86,7 +76,7 @@ class PidorsViewModel(
                     }.toImmutableList()
                 )
             } else {
-                this
+                currentState
             }
         }
     }

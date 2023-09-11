@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -28,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.heatalways.amazingasfuckapplication.R
@@ -36,12 +34,10 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Ap
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppButton
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppTextField
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.Intent
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
-import ru.heatalways.amazingasfuckapplication.utils.PainterResource
 import ru.heatalways.amazingasfuckapplication.utils.extract
 import ru.heatalways.amazingasfuckapplication.utils.painterRes
 
@@ -49,7 +45,7 @@ object PidorEditScreen {
     const val NAME_PARAM = "name"
     const val PHOTO_PATH = "photo_path"
 
-    object RouteDefinition : ScreenRouteDefinition(
+    object Route : ScreenRoute(
         params = listOf(
             navArgument(NAME_PARAM) {
                 type = NavType.StringType
@@ -72,25 +68,31 @@ fun PidorEditScreen(
         parameters = { parametersOf(name, photoPath) }
     ),
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()
 
     PidorEditScreen(
         state = state,
-        onIntent = viewModel::intent
+        onNavigationButtonClick = viewModel::onNavigationButtonClick,
+        onAvatarPathChanged = viewModel::onAvatarPathChanged,
+        onNameChanged = viewModel::onNameChange,
+        onSaveClick = viewModel::onSaveClick,
     )
 }
 
 @Composable
 private fun PidorEditScreen(
     state: ViewState,
-    onIntent: (Intent) -> Unit,
+    onNavigationButtonClick: () -> Unit,
+    onAvatarPathChanged: (String) -> Unit,
+    onNameChanged: (String) -> Unit,
+    onSaveClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             AppBar(
                 title = stringResource(R.string.pidor_addition_title),
                 icon = painterResource(R.drawable.icon_leaderboard),
-                onGoBackClick = { onIntent(Intent.OnNavigationButtonClick) },
+                onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()
             )
@@ -98,7 +100,9 @@ private fun PidorEditScreen(
     ) { contentPadding ->
         PidorEditScreenContent(
             state = state,
-            onIntent = onIntent,
+            onAvatarPathChanged = onAvatarPathChanged,
+            onNameChanged = onNameChanged,
+            onSaveClick = onSaveClick,
             modifier = Modifier.padding(contentPadding)
         )
     }
@@ -107,7 +111,9 @@ private fun PidorEditScreen(
 @Composable
 private fun PidorEditScreenContent(
     state: ViewState,
-    onIntent: (Intent) -> Unit,
+    onAvatarPathChanged: (String) -> Unit,
+    onNameChanged: (String) -> Unit,
+    onSaveClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val photoPicker = rememberLauncherForActivityResult(
@@ -116,7 +122,7 @@ private fun PidorEditScreenContent(
         val path = uri?.path
 
         if (path != null) {
-            onIntent(Intent.OnAvatarPathChanged(path))
+            onAvatarPathChanged(path)
         }
     }
 
@@ -139,7 +145,7 @@ private fun PidorEditScreenContent(
                 value = state.name,
                 placeholder = stringResource(R.string.pidor_addition_name_placeholder),
                 label = stringResource(R.string.pidor_addition_name_label),
-                onValueChange = { onIntent(Intent.OnNameChange(it)) },
+                onValueChange = onNameChanged,
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
@@ -192,7 +198,7 @@ private fun PidorEditScreenContent(
                 )
         ) {
             PagerScreenPaws(
-                onClick = { onIntent(Intent.OnSaveClick) },
+                onClick = onSaveClick,
                 text = stringResource(R.string.pidor_addition_save),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
@@ -213,7 +219,10 @@ private fun PidorsScreenPreview() {
     AppTheme {
         PidorEditScreen(
             state = state,
-            onIntent = { /* ... */ },
+            onNavigationButtonClick = {},
+            onSaveClick = {},
+            onNameChanged = {},
+            onAvatarPathChanged = {},
         )
     }
 }

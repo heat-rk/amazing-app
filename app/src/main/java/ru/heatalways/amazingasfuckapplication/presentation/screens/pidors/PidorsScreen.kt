@@ -36,8 +36,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Ap
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppOutlinedCard
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRouteDefinition
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.Intent
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
@@ -45,29 +44,35 @@ import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.utils.extract
 import ru.heatalways.amazingasfuckapplication.utils.painterRes
 
-object PidorsScreenRouteDefinition : ScreenRouteDefinition()
+object PidorsScreenRoute : ScreenRoute()
 
 @Composable
 fun PidorsScreen(viewModel: PidorsViewModel = koinViewModel()) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()
 
     PidorsScreen(
         state = state,
-        onIntent = viewModel::intent
+        onNavigationButtonClick = viewModel::onNavigationButtonClick,
+        onCreateClick = viewModel::onCreateClick,
+        onItemClick = viewModel::onItemClick,
+        onItemLongClick = viewModel::onItemLongClick,
     )
 }
 
 @Composable
 private fun PidorsScreen(
     state: ViewState,
-    onIntent: (Intent) -> Unit,
+    onCreateClick: () -> Unit,
+    onItemClick: (PidorItem) -> Unit,
+    onItemLongClick: (PidorItem) -> Unit,
+    onNavigationButtonClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             AppBar(
                 title = stringResource(R.string.menu_item_pidors_list),
                 icon = painterResource(R.drawable.icon_leaderboard),
-                onGoBackClick = { onIntent(Intent.OnNavigationButtonClick) },
+                onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()
             )
@@ -82,7 +87,9 @@ private fun PidorsScreen(
             is ViewState.Ok -> {
                 PidorsOkScreen(
                     state = state,
-                    onIntent = onIntent,
+                    onCreateClick = onCreateClick,
+                    onItemClick = onItemClick,
+                    onItemLongClick = onItemLongClick,
                     modifier = Modifier.padding(contentPadding),
                 )
             }
@@ -118,13 +125,16 @@ private fun PidorsLoadingScreen(
 @Composable
 private fun PidorsOkScreen(
     state: ViewState.Ok,
+    onCreateClick: () -> Unit,
+    onItemClick: (PidorItem) -> Unit,
+    onItemLongClick: (PidorItem) -> Unit,
     modifier: Modifier = Modifier,
-    onIntent: (Intent) -> Unit,
 ) {
     if (state.items.isNotEmpty()) {
         PidorItems(
             items = state.items,
-            onIntent = onIntent,
+            onItemClick = onItemClick,
+            onItemLongClick = onItemLongClick,
             modifier = modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -144,7 +154,7 @@ private fun PidorsOkScreen(
             )
 
             PagerScreenPaws(
-                onClick = { onIntent(Intent.OnCreateClick) },
+                onClick = onCreateClick,
                 text = stringResource(R.string.add_pidor),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
@@ -157,7 +167,8 @@ private fun PidorsOkScreen(
 @Composable
 private fun PidorItems(
     items: ImmutableList<PidorItem>,
-    onIntent: (Intent) -> Unit,
+    onItemClick: (PidorItem) -> Unit,
+    onItemLongClick: (PidorItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -173,8 +184,8 @@ private fun PidorItems(
             PidorItem(
                 position = index,
                 item = item,
-                onClick = { onIntent(Intent.OnItemClick(item)) },
-                onLongClick = { onIntent(Intent.OnItemLongClick(item)) },
+                onClick = { onItemClick(item) },
+                onLongClick = { onItemLongClick(item) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
@@ -296,7 +307,10 @@ private fun PidorsScreenPreview() {
     AppTheme {
         PidorsScreen(
             state = okState,
-            onIntent = { /* ... */ },
+            onNavigationButtonClick = {},
+            onCreateClick = {},
+            onItemClick = {},
+            onItemLongClick = {},
         )
     }
 }

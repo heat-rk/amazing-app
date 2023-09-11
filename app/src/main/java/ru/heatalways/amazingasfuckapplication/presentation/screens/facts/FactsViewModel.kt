@@ -14,7 +14,7 @@ class FactsViewModel(
     pageLoadOffset = 1
 ) {
     init {
-        initLoading()
+        load(initialLoading = true)
     }
 
     override suspend fun load(offset: Int, limit: Int): List<StringResource> {

@@ -1,14 +1,17 @@
 package ru.heatalways.amazingasfuckapplication.presentation.common.pager
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import org.orbitmvi.orbit.ContainerHost
+import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.reduce
+import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.mvi.MviViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.Intent
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.utils.strRes
@@ -16,33 +19,40 @@ import ru.heatalways.amazingasfuckapplication.utils.strRes
 abstract class PagerViewModel<T>(
     protected val router: Router,
     private val pageLoadOffset: Int,
-) : MviViewModel<ViewState<T>, Intent>(
-    initialState = ViewState.Loading()
-) {
+) : ViewModel(), ContainerHost<ViewState<T>, Unit> {
+
+    override val container = container<ViewState<T>, Unit>(
+        initialState = ViewState.Loading()
+    )
+
     private val loadingLock = Mutex()
 
-    protected fun initLoading() {
+    protected abstract suspend fun load(offset: Int, limit: Int): List<T>
+
+    fun onReloadButtonClick() = intent {
         load(initialLoading = true)
     }
 
-    abstract suspend fun load(offset: Int, limit: Int): List<T>
+    fun onNavigateBack() = intent {
+        router.navigateBack()
+    }
 
-    override fun onNewIntent(intent: Intent) {
-        when (intent) {
-            Intent.OnNavigationButtonClick -> navigateBack()
-            Intent.OnReloadButtonClick -> load(initialLoading = true)
-            is Intent.OnPageSelected -> onPageSelected(intent.page)
+    fun onPageSelected(page: Int) = intent {
+        val currentState = state
+
+        if (currentState is ViewState.Ok && page >= currentState.items.size - pageLoadOffset) {
+            load()
         }
     }
 
-    private fun load(initialLoading: Boolean = false) {
+    protected fun load(initialLoading: Boolean = false) = intent {
         viewModelScope.launchSafe(
             block = {
                 loadingLock.withLock {
                     val currentState = if (initialLoading) {
                         ViewState.Loading<T>().also { reduce { it } }
                     } else {
-                        state.value
+                        container.stateFlow.value
                     }
 
                     val offset = if (currentState is ViewState.Ok) {
@@ -68,20 +78,6 @@ abstract class PagerViewModel<T>(
                 }
             }
         )
-    }
-
-    private fun navigateBack() {
-        viewModelScope.launch {
-            router.navigateBack()
-        }
-    }
-
-    private fun onPageSelected(page: Int) {
-        val currentState = state.value
-
-        if (currentState is ViewState.Ok && page >= currentState.items.size - pageLoadOffset) {
-            load()
-        }
     }
 
     companion object {

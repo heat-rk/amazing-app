@@ -7,32 +7,28 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
-abstract class ScreenRouteDefinition(
+abstract class ScreenRoute(
     val params: List<NamedNavArgument> = emptyList(),
 ) {
-    val routeBase = this::class.java.simpleName
-    val route = "$routeBase?${params.toQueryParams()}"
+    private val definitionBase = this::class.java.simpleName
+    val definition = "$definitionBase?${params.toQueryParams()}"
+
+    fun withArgs(args: Map<String, String> = emptyMap()) =
+        "${definitionBase}?${args.toQueryArgs()}"
+
+    private fun Map<String, String>.toQueryArgs() =
+        entries.joinToString(separator = "&") { "${it.key}=${it.value}" }
 
     private fun List<NamedNavArgument>.toQueryParams() =
         joinToString(separator = "&") { "${it.name}={${it.name}}" }
 }
 
-class ScreenRoute(
-    definition: ScreenRouteDefinition,
-    params: Map<String, String> = emptyMap(),
-) {
-    val route = "${definition.routeBase}?${params.toQueryParams()}"
-
-    private fun Map<String, String>.toQueryParams() =
-        entries.joinToString(separator = "&") { "${it.key}=${it.value}" }
-}
-
 fun NavGraphBuilder.composable(
-    route: ScreenRouteDefinition,
+    route: ScreenRoute,
     content: @Composable (AnimatedContentScope.(NavBackStackEntry) -> Unit)
 ) {
     composable(
-        route = route.route,
+        route = route.definition,
         arguments = route.params,
         content = content,
     )

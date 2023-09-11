@@ -89,6 +89,7 @@ dependencies {
     implementation(AppDependencies.Coil.allImplementations)
     implementation(AppDependencies.Camera.allImplementations)
     implementation(AppDependencies.Room.allImplementations)
+    implementation(AppDependencies.Orbit.allImplementations)
 
     kapt(AppDependencies.Room.compiler)
 
