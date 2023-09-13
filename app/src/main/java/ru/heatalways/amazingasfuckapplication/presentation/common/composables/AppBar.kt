@@ -52,6 +52,7 @@ fun AppBar(
 
                 Text(
                     text = title,
+                    style = AppTheme.typography.titleMedium,
                     modifier = Modifier
                         .rectangularBackgroundLighting(color)
                 )
