@@ -1,6 +1,8 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
 
 import ru.heatalways.amazingasfuckapplication.utils.PainterResource
+import ru.heatalways.amazingasfuckapplication.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.utils.isNotEmpty
 
 object PidorEditContract {
 
@@ -10,6 +12,10 @@ object PidorEditContract {
     ) {
         val canBeSaved get() =
             name.isNotBlank() &&
-            avatar is PainterResource.ByPath && avatar.path.isNotBlank()
+            avatar.isNotEmpty()
+    }
+
+    sealed interface SideEffect {
+        data class Message(val message: StringResource) : SideEffect
     }
 }

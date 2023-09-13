@@ -76,7 +76,7 @@ fun Modifier.shimmerEffect(
 }
 
 fun Modifier.radialBackgroundLighting(
-    color: Color
+    color: Color,
 ) = background(
     brush = Brush.radialGradient(
         0f to color.copy(alpha = 0.3f),
@@ -116,5 +116,13 @@ fun Modifier.drawBackgroundLighting(
         drawIntoCanvas { canvas ->
             block(canvas, paint)
         }
+    }
+}
+
+fun Modifier.conditional(condition : Boolean, modifier : Modifier.() -> Modifier) : Modifier {
+    return if (condition) {
+        then(modifier(Modifier))
+    } else {
+        this
     }
 }

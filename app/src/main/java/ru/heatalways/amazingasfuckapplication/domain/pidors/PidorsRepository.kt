@@ -4,7 +4,7 @@ interface PidorsRepository {
     suspend fun getAllSorted(): List<Pidor>
 
     suspend fun create(
-        avatarPath: String,
+        avatarUri: String,
         name: String,
     )
 

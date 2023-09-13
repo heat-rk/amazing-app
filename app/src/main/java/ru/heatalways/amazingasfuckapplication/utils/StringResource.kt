@@ -1,5 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.utils
 
+import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -39,5 +40,10 @@ fun strRes(@StringRes text: Int, vararg formatArgs: Any) =
 @Composable
 fun StringResource.extract() = when (this) {
     is StringResource.ByRes -> stringResource(id = text, formatArgs = formatArgs)
+    is StringResource.ByString -> text
+}
+
+fun StringResource.extract(context: Context) = when (this) {
+    is StringResource.ByRes -> context.getString(text, formatArgs)
     is StringResource.ByString -> text
 }

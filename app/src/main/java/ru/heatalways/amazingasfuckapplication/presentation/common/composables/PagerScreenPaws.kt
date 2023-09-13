@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
@@ -32,9 +33,13 @@ import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 fun PagerScreenPaws(
     onClick: () -> Unit,
     text: String,
+    modifier: Modifier = Modifier,
     pawsColor: Color = AppTheme.colors.primary,
-    modifier: Modifier = Modifier
+    disabledPawsColor: Color = pawsColor.copy(alpha = 0.3f),
+    isEnabled: Boolean = true,
 ) {
+    val color = if (isEnabled) pawsColor else disabledPawsColor
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -44,10 +49,10 @@ fun PagerScreenPaws(
             modifier = Modifier
                 .size(Sizes.WantMoreIcon)
                 .clip(CircleShape)
-                .radialBackgroundLighting(pawsColor)
+                .conditional(isEnabled) { radialBackgroundLighting(color) }
                 .clickable(
                     indication = rememberRipple(
-                        color = pawsColor
+                        color = color
                     ),
                     interactionSource = remember { MutableInteractionSource() },
                     onClick = onClick
@@ -55,7 +60,7 @@ fun PagerScreenPaws(
         ) {
             Image(
                 painter = painterResource(R.drawable.icon_paws),
-                colorFilter = ColorFilter.tint(pawsColor),
+                colorFilter = ColorFilter.tint(color),
                 contentDescription = stringResource(R.string.go_next_icon_content_description),
                 modifier = Modifier
                     .padding(Insets.Default)
@@ -66,10 +71,22 @@ fun PagerScreenPaws(
 
         Text(
             text = text,
-            color = pawsColor,
+            color = color,
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .rectangularBackgroundLighting(pawsColor)
+                .rectangularBackgroundLighting(color)
         )
     }
+}
+
+@Composable
+@Preview
+private fun PagerScreenPawsPreview() {
+    PagerScreenPaws(
+        onClick = {},
+        isEnabled = false,
+        text = stringResource(R.string.pidor_addition_save),
+        modifier = Modifier
+            .padding(bottom = Insets.ExtraLarge)
+    )
 }

@@ -1,5 +1,7 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
 
+import android.content.Context
+import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,27 +16,36 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppButton
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppSnackbarHost
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppTextField
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
@@ -69,25 +80,37 @@ fun PidorEditScreen(
     ),
 ) {
     val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()
+    val sideEffects = viewModel.container.sideEffectFlow
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    PidorsScreenSideEffect(
+        sideEffects = sideEffects,
+        snackbarHostState = snackbarHostState,
+    )
 
     PidorEditScreen(
         state = state,
         onNavigationButtonClick = viewModel::onNavigationButtonClick,
-        onAvatarPathChanged = viewModel::onAvatarPathChanged,
+        onAvatarChanged = viewModel::onAvatarChanged,
         onNameChanged = viewModel::onNameChange,
         onSaveClick = viewModel::onSaveClick,
+        snackbarHostState = snackbarHostState,
     )
 }
 
 @Composable
 private fun PidorEditScreen(
     state: ViewState,
+    snackbarHostState: SnackbarHostState,
     onNavigationButtonClick: () -> Unit,
-    onAvatarPathChanged: (String) -> Unit,
+    onAvatarChanged: (Uri) -> Unit,
     onNameChanged: (String) -> Unit,
     onSaveClick: () -> Unit,
 ) {
     Scaffold(
+        snackbarHost = {
+            AppSnackbarHost(hostState = snackbarHostState)
+        },
         topBar = {
             AppBar(
                 title = stringResource(R.string.pidor_addition_title),
@@ -100,7 +123,7 @@ private fun PidorEditScreen(
     ) { contentPadding ->
         PidorEditScreenContent(
             state = state,
-            onAvatarPathChanged = onAvatarPathChanged,
+            onAvatarChanged = onAvatarChanged,
             onNameChanged = onNameChanged,
             onSaveClick = onSaveClick,
             modifier = Modifier.padding(contentPadding)
@@ -111,7 +134,7 @@ private fun PidorEditScreen(
 @Composable
 private fun PidorEditScreenContent(
     state: ViewState,
-    onAvatarPathChanged: (String) -> Unit,
+    onAvatarChanged: (Uri) -> Unit,
     onNameChanged: (String) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -119,73 +142,67 @@ private fun PidorEditScreenContent(
     val photoPicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia()
     ) { uri ->
-        val path = uri?.path
-
-        if (path != null) {
-            onAvatarPathChanged(path)
+        if (uri != null) {
+            onAvatarChanged(uri)
         }
     }
 
-    Box(
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
+            .padding(
+                start = Insets.Default,
+                end = Insets.Default,
+                top = Insets.Large
+            )
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+        AppTextField(
+            value = state.name,
+            placeholder = stringResource(R.string.pidor_addition_name_placeholder),
+            label = stringResource(R.string.pidor_addition_name_label),
+            onValueChange = onNameChanged,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(
-                    start = Insets.Default,
-                    end = Insets.Default,
-                    top = Insets.Large
-                )
-        ) {
-            AppTextField(
-                value = state.name,
-                placeholder = stringResource(R.string.pidor_addition_name_placeholder),
-                label = stringResource(R.string.pidor_addition_name_label),
-                onValueChange = onNameChanged,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-            )
+        )
 
-            Spacer(modifier = Modifier.height(Insets.Default))
+        Spacer(modifier = Modifier.height(Insets.Default))
 
-            AppButton(
-                text = stringResource(R.string.pidor_addition_select_photo),
-                onClick = {
-                    photoPicker.launch(
-                        PickVisualMediaRequest(
-                            ActivityResultContracts.PickVisualMedia.ImageOnly
-                        )
+        AppButton(
+            text = stringResource(R.string.pidor_addition_select_photo),
+            onClick = {
+                photoPicker.launch(
+                    PickVisualMediaRequest(
+                        ActivityResultContracts.PickVisualMedia.ImageOnly
                     )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-            )
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        )
 
-            Spacer(modifier = Modifier.height(Insets.Default))
+        Spacer(modifier = Modifier.height(Insets.Default))
 
-            val photoPainter = state.avatar.extract()
+        val photoPainter = state.avatar.extract()
 
-            Image(
-                painter = photoPainter,
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-            )
-        }
+        Image(
+            painter = photoPainter,
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
+            alignment = Alignment.TopCenter,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+        )
+
+        Spacer(modifier = Modifier.height(Insets.Default))
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .align(Alignment.BottomCenter)
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
@@ -199,6 +216,7 @@ private fun PidorEditScreenContent(
         ) {
             PagerScreenPaws(
                 onClick = onSaveClick,
+                isEnabled = state.canBeSaved,
                 text = stringResource(R.string.pidor_addition_save),
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
@@ -206,6 +224,41 @@ private fun PidorEditScreenContent(
             )
         }
     }
+}
+
+@Composable
+private fun PidorsScreenSideEffect(
+    sideEffects: Flow<SideEffect>,
+    snackbarHostState: SnackbarHostState,
+) {
+    val context = LocalContext.current
+
+    LaunchedEffect(sideEffects, context) {
+        sideEffects
+            .onEach { sideEffect ->
+                when (sideEffect) {
+                    is SideEffect.Message -> {
+                        handleMessageSideEffect(
+                            sideEffect = sideEffect,
+                            snackbarHostState = snackbarHostState,
+                            context = context,
+                        )
+                    }
+                }
+            }
+            .launchIn(this)
+    }
+}
+
+private suspend fun handleMessageSideEffect(
+    sideEffect: SideEffect.Message,
+    snackbarHostState: SnackbarHostState,
+    context: Context,
+) {
+    val message = sideEffect.message.extract(context)
+        ?: return
+
+    snackbarHostState.showSnackbar(message)
 }
 
 @Composable
@@ -222,7 +275,8 @@ private fun PidorsScreenPreview() {
             onNavigationButtonClick = {},
             onSaveClick = {},
             onNameChanged = {},
-            onAvatarPathChanged = {},
+            onAvatarChanged = {},
+            snackbarHostState = SnackbarHostState(),
         )
     }
 }
