@@ -21,6 +21,8 @@ object PidorsContract {
                 }.toImmutableList()
             )
         }
+
+        data class Error(val message: StringResource) : ViewState
     }
 
     sealed interface SideEffect {

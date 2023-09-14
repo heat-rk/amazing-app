@@ -6,7 +6,6 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.SimpleSyntax
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -36,22 +35,12 @@ class PidorsViewModel(
 
     init {
         intent {
-            reduce { ViewState.Loading }
-
-            viewModelScope.launchSafe(
-                block = {
-                    pidorsRepository.observeAllSorted()
-                        .map(List<Pidor>::toUIListItem)
-                        .onEach { items ->
-                            reduce { ViewState.Ok(items = items.toImmutableList()) }
-                        }
-                        .launchIn(this)
-                },
-                onError = {
-
-                }
-            )
+            initItemsObserving()
         }
+    }
+
+    fun onReloadClick() = intent {
+        initItemsObserving()
     }
 
     fun onCreateClick() = intent {
@@ -112,6 +101,24 @@ class PidorsViewModel(
 
     fun onItemLongClick(item: PidorItem) = intent {
         changeItemSelectedState(item)
+    }
+
+    private suspend fun SimpleSyntax<ViewState, SideEffect>.initItemsObserving() {
+        reduce { ViewState.Loading }
+
+        viewModelScope.launchSafe(
+            block = {
+                pidorsRepository.observeAllSorted()
+                    .map(List<Pidor>::toUIListItem)
+                    .onEach { items ->
+                        reduce { ViewState.Ok(items = items.toImmutableList()) }
+                    }
+                    .launchIn(this)
+            },
+            onError = {
+                reduce { ViewState.Error(strRes(R.string.error_ramil_blame)) }
+            }
+        )
     }
 
     private suspend fun SimpleSyntax<ViewState, SideEffect>.changeItemSelectedState(

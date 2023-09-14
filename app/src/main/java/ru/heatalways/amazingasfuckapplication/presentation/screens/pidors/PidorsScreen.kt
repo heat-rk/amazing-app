@@ -2,7 +2,6 @@ package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -63,6 +62,7 @@ fun PidorsScreen(viewModel: PidorsViewModel = koinViewModel()) {
         onDeleteClick = viewModel::onDeleteClick,
         onItemClick = viewModel::onItemClick,
         onItemLongClick = viewModel::onItemLongClick,
+        onReloadClick = viewModel::onReloadClick,
     )
 }
 
@@ -75,6 +75,7 @@ private fun PidorsScreen(
     onItemClick: (PidorItem) -> Unit,
     onItemLongClick: (PidorItem) -> Unit,
     onNavigationButtonClick: () -> Unit,
+    onReloadClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -108,6 +109,12 @@ private fun PidorsScreen(
                     modifier = Modifier.padding(contentPadding),
                 )
             }
+            is ViewState.Error -> {
+                PidorsErrorScreen(
+                    state = state,
+                    onReloadClick = onReloadClick,
+                )
+            }
         }
     }
 }
@@ -134,6 +141,35 @@ private fun PidorsLoadingScreen(
                 Spacer(modifier = Modifier.height(Insets.Medium))
             }
         }
+    }
+}
+
+@Composable
+private fun PidorsErrorScreen(
+    state: ViewState.Error,
+    onReloadClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .fillMaxSize()
+    ) {
+        Text(
+            text = state.message.extract() ?: "",
+            textAlign = TextAlign.Center,
+            color = AppTheme.colors.primary,
+            modifier = Modifier
+                .wrapContentSize()
+        )
+
+        PagerScreenPaws(
+            onClick = onReloadClick,
+            text = stringResource(R.string.error_try_again),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = Insets.ExtraLarge)
+        )
     }
 }
 
@@ -333,7 +369,6 @@ private fun getAppBarActions(
     onDeleteClick: () -> Unit,
 ): List<AppBarActionItem> =
     when (state) {
-        ViewState.Loading -> emptyList()
         is ViewState.Ok -> {
             val selected = state.items.filter { it.isSelected }
 
@@ -358,6 +393,7 @@ private fun getAppBarActions(
                 }
             }
         }
+        else -> emptyList()
     }
 
 @Composable
@@ -383,15 +419,18 @@ private fun PidorsScreenPreview() {
 
     val loadingState = ViewState.Loading
 
+    val errorState = ViewState.Error(strRes(R.string.error_ramil_blame))
+
     AppTheme {
         PidorsScreen(
-            state = okState,
+            state = errorState,
             onNavigationButtonClick = {},
             onCreateClick = {},
             onDeleteClick = {},
             onEditClick = {},
             onItemClick = {},
             onItemLongClick = {},
+            onReloadClick = {},
         )
     }
 }
