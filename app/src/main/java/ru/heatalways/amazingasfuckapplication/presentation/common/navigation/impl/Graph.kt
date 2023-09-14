@@ -28,6 +28,7 @@ fun NavGraphBuilder.buildGraph() {
 
     composable(PidorEditScreen.Route) {
         PidorEditScreen(
+            id = it.arguments?.getLong(PidorEditScreen.ID_PARAM) ?: -1,
             name = it.arguments?.getString(PidorEditScreen.NAME_PARAM) ?: "",
             photoPath = it.arguments?.getString(PidorEditScreen.PHOTO_PATH) ?: "",
         )

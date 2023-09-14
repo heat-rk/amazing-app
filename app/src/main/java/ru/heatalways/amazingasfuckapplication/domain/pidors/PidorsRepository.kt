@@ -1,12 +1,13 @@
 package ru.heatalways.amazingasfuckapplication.domain.pidors
 
 import kotlinx.coroutines.flow.Flow
+import java.io.File
 
 interface PidorsRepository {
     suspend fun observeAllSorted(): Flow<List<Pidor>>
 
     suspend fun create(
-        avatarUri: String,
+        avatarFile: File,
         name: String,
     )
 

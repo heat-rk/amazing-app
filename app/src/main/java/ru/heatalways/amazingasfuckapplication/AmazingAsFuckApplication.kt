@@ -11,6 +11,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import ru.heatalways.amazingasfuckapplication.di.catsModule
 import ru.heatalways.amazingasfuckapplication.di.coroutineScopesModule
+import ru.heatalways.amazingasfuckapplication.di.dataUtilsModule
 import ru.heatalways.amazingasfuckapplication.di.databaseModule
 import ru.heatalways.amazingasfuckapplication.di.dispatchersModule
 import ru.heatalways.amazingasfuckapplication.di.factsModule
@@ -18,6 +19,7 @@ import ru.heatalways.amazingasfuckapplication.di.httpClientModule
 import ru.heatalways.amazingasfuckapplication.di.insultsModule
 import ru.heatalways.amazingasfuckapplication.di.navigationModule
 import ru.heatalways.amazingasfuckapplication.di.pidorsModule
+import ru.heatalways.amazingasfuckapplication.di.tempFilesStorageModule
 import ru.heatalways.amazingasfuckapplication.di.translatorModule
 import ru.heatalways.amazingasfuckapplication.di.viewModelsModule
 
@@ -32,6 +34,8 @@ class AmazingAsFuckApplication : Application() {
             modules(
                 coroutineScopesModule,
                 databaseModule,
+                tempFilesStorageModule,
+                dataUtilsModule,
                 viewModelsModule,
                 navigationModule,
                 httpClientModule,

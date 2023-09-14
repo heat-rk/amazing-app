@@ -4,6 +4,7 @@ import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO
 import ru.heatalways.amazingasfuckapplication.domain.pidors.Pidor
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorItem
 import ru.heatalways.amazingasfuckapplication.utils.painterRes
+import java.io.File
 
 fun PidorDAO.toDomain() = Pidor(
     id = this.id,
@@ -22,7 +23,7 @@ fun Pidor.toDAO() = PidorDAO(
 fun Pidor.toUIListItem() = PidorItem(
     id = this.id,
     name = this.name,
-    avatar = painterRes(this.avatarPath),
+    avatar = painterRes(File(this.avatarPath)),
     tapCount = this.tapCount
 )
 

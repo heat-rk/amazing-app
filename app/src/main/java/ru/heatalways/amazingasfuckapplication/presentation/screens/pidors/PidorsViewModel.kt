@@ -20,6 +20,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditScreen
+import ru.heatalways.amazingasfuckapplication.utils.PainterResource
 import ru.heatalways.amazingasfuckapplication.utils.ifInstance
 import ru.heatalways.amazingasfuckapplication.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.utils.strRes
@@ -54,7 +55,18 @@ class PidorsViewModel(
     }
 
     fun onEditClick() = intent {
+        state.ifInstance<ViewState.Ok> { state ->
+            val itemToEdit = state.items.find { it.isSelected } ?: return@intent
+            val avatarPath = (itemToEdit.avatar as? PainterResource.ByFile)?.file?.path ?: return@intent
 
+            router.navigate(
+                route = PidorEditScreen.Route,
+                args = mapOf(
+                    PidorEditScreen.NAME_PARAM to itemToEdit.name,
+                    PidorEditScreen.PHOTO_PATH to avatarPath,
+                )
+            )
+        }
     }
 
     fun onDeleteClick() = intent {

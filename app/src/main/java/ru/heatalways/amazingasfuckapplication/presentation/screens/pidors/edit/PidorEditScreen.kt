@@ -53,11 +53,17 @@ import ru.heatalways.amazingasfuckapplication.utils.extract
 import ru.heatalways.amazingasfuckapplication.utils.painterRes
 
 object PidorEditScreen {
+    const val ID_PARAM = "id"
     const val NAME_PARAM = "name"
     const val PHOTO_PATH = "photo_path"
 
     object Route : ScreenRoute(
         params = listOf(
+            navArgument(ID_PARAM) {
+                type = NavType.LongType
+                defaultValue = -1L
+            },
+
             navArgument(NAME_PARAM) {
                 type = NavType.StringType
                 defaultValue = ""
@@ -73,10 +79,11 @@ object PidorEditScreen {
 
 @Composable
 fun PidorEditScreen(
+    id: Long,
     name: String,
     photoPath: String,
     viewModel: PidorEditViewModel = koinViewModel(
-        parameters = { parametersOf(name, photoPath) }
+        parameters = { parametersOf(id, name, photoPath) }
     ),
 ) {
     val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()

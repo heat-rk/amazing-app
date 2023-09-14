@@ -8,3 +8,6 @@ sealed interface RoutingAction {
 
     object NavigateBack : RoutingAction
 }
+
+fun RoutingAction.NavigateTo.routeWithArgs() =
+    route.withArgs(args)

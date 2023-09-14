@@ -17,7 +17,7 @@ import java.io.File
 sealed interface PainterResource {
     data class ByRes(@DrawableRes val res: Int) : PainterResource
     data class ByPainter(val painter: Painter) : PainterResource
-    data class ByPath(val path: String) : PainterResource
+    data class ByFile(val file: File) : PainterResource
     data class ByUri(val uri: Uri) : PainterResource
 }
 
@@ -25,7 +25,7 @@ fun painterRes(@DrawableRes res: Int) = PainterResource.ByRes(res)
 
 fun painterRes(painter: Painter) = PainterResource.ByPainter(painter)
 
-fun painterRes(path: String) = PainterResource.ByPath(path)
+fun painterRes(file: File) = PainterResource.ByFile(file)
 
 fun painterRes(uri: Uri) = PainterResource.ByUri(uri)
 
@@ -33,13 +33,13 @@ fun painterRes(uri: Uri) = PainterResource.ByUri(uri)
 fun PainterResource.extract() = when (this) {
     is PainterResource.ByPainter -> painter
     is PainterResource.ByRes -> painterResource(id = res)
-    is PainterResource.ByPath -> {
+    is PainterResource.ByFile -> {
         val context = LocalContext.current
         val imageLoader = context.imageLoader
 
         rememberAsyncImagePainter(
             model = ImageRequest.Builder(context)
-                .data(File(path))
+                .data(file)
                 .apply { size(Size.ORIGINAL) }
                 .build(),
             imageLoader = imageLoader,
@@ -60,9 +60,9 @@ fun PainterResource.extract() = when (this) {
 }
 
 fun PainterResource.isEmpty() = when (this) {
-    is PainterResource.ByPainter -> true
-    is PainterResource.ByPath -> path.isBlank()
-    is PainterResource.ByRes -> res > 0
+    is PainterResource.ByPainter -> false
+    is PainterResource.ByFile -> !file.canRead()
+    is PainterResource.ByRes -> res <= 0
     is PainterResource.ByUri -> uri.path?.isBlank() ?: true
 }
 

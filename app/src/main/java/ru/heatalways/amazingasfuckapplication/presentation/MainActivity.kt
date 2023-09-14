@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.compose.koinInject
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.RoutingAction
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.routeWithArgs
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.buildGraph
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
@@ -67,7 +68,7 @@ class MainActivity : ComponentActivity() {
                             navController.popBackStack()
                         }
                         is RoutingAction.NavigateTo -> {
-                            navController.navigate(action.route.withArgs())
+                            navController.navigate(action.routeWithArgs())
                         }
                     }
                 }

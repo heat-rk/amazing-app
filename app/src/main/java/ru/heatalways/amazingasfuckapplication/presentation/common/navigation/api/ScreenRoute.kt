@@ -14,7 +14,14 @@ abstract class ScreenRoute(
     val definition = "$definitionBase?${params.toQueryParams()}"
 
     fun withArgs(args: Map<String, String> = emptyMap()) =
-        "${definitionBase}?${args.toQueryArgs()}"
+        buildString {
+            append(definitionBase)
+
+            if (args.isNotEmpty()) {
+                append('?')
+                append(args.toQueryArgs())
+            }
+        }
 
     private fun Map<String, String>.toQueryArgs() =
         entries.joinToString(separator = "&") { "${it.key}=${it.value}" }

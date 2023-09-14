@@ -1,6 +1,5 @@
 package ru.heatalways.amazingasfuckapplication.data.pidors
 
-import android.net.Uri
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -12,6 +11,7 @@ import ru.heatalways.amazingasfuckapplication.data.pidors.storage.PidorsAvatarsS
 import ru.heatalways.amazingasfuckapplication.domain.pidors.Pidor
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.mappers.toDomain
+import java.io.File
 
 class PidorsRepositoryImpl(
     private val dbDataSource: PidorsDatabaseSource,
@@ -27,9 +27,9 @@ class PidorsRepositoryImpl(
         )
     }
 
-    override suspend fun create(avatarUri: String, name: String) {
+    override suspend fun create(avatarFile: File, name: String) {
         longRunningScope.launch(dispatcher) {
-            val avatarFileName = avatarsStorage.save(Uri.parse(avatarUri))
+            val avatarFileName = avatarsStorage.save(avatarFile)
 
             dbDataSource.insert(
                 PidorDAO(
@@ -52,14 +52,27 @@ class PidorsRepositoryImpl(
 
     override suspend fun delete(id: Long) {
         longRunningScope.launch(dispatcher) {
+            inMemoryCacheDataSource.value
+                ?.find { it.id == id }
+                ?.let { avatarsStorage.delete(it.avatarPath) }
+
             dbDataSource.delete(id)
+
             updateInMemoryCache()
         }.join()
     }
 
     override suspend fun delete(ids: List<Long>) {
         longRunningScope.launch(dispatcher) {
+            inMemoryCacheDataSource.value
+                ?.forEach {
+                    if (ids.contains(it.id)) {
+                        avatarsStorage.delete(it.avatarPath)
+                    }
+                }
+
             dbDataSource.delete(ids)
+
             updateInMemoryCache()
         }.join()
     }
