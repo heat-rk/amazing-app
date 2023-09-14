@@ -25,3 +25,5 @@ fun Pidor.toUIListItem() = PidorItem(
     avatar = painterRes(this.avatarPath),
     tapCount = this.tapCount
 )
+
+fun List<Pidor>.toUIListItem() = map(Pidor::toUIListItem)

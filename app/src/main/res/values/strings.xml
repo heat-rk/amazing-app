@@ -15,6 +15,8 @@
 
     <string name="pidors_empty_list_hint">Ого! Пидорасов еще нет! Надо срочно добавить!</string>
     <string name="add_pidor">Добавить пидораса!!</string>
+    <string name="delete_pidor">Удалить пидораса!!</string>
+    <string name="edit_pidor">Редактировать пидораса!!</string>
 
     <string name="pidor_addition_title">Добавление пидораса</string>
     <string name="pidor_addition_name_placeholder">Леонид</string>

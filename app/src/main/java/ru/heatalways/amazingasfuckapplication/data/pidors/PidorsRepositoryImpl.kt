@@ -21,8 +21,10 @@ class PidorsRepositoryImpl(
     private val avatarsStorage: PidorsAvatarsStorage,
 ) : PidorsRepository {
 
-    override suspend fun getAllSorted(): List<Pidor> = withContext(dispatcher) {
-        inMemoryCacheDataSource.getValueOrSave(dbDataSource.getAllSorted().map { it.toDomain() })
+    override suspend fun observeAllSorted() = withContext(dispatcher) {
+        inMemoryCacheDataSource.valueFlow(
+            defaultDataProvider = { dbDataSource.getAllSorted().map { it.toDomain() } }
+        )
     }
 
     override suspend fun create(avatarUri: String, name: String) {
@@ -51,6 +53,13 @@ class PidorsRepositoryImpl(
     override suspend fun delete(id: Long) {
         longRunningScope.launch(dispatcher) {
             dbDataSource.delete(id)
+            updateInMemoryCache()
+        }.join()
+    }
+
+    override suspend fun delete(ids: List<Long>) {
+        longRunningScope.launch(dispatcher) {
+            dbDataSource.delete(ids)
             updateInMemoryCache()
         }.join()
     }

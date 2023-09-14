@@ -44,7 +44,7 @@ fun AppOutlinedCard(
         modifier = modifier
             .combinedClickable(
                 onLongClick = onLongClick,
-                onClick = {}
+                onClick = onClick
             )
             .drawBackgroundLighting(color) { canvas, paint ->
                 val borderWidthPx = borderWidth.toPx()
@@ -81,7 +81,6 @@ fun AppOutlinedCard(
                     paint = paint,
                 )
             },
-        onClick = onClick,
         content = content,
     )
 }

@@ -24,4 +24,7 @@ interface PidorsDatabaseSource {
 
     @Query("DELETE FROM $TABLE_NAME WHERE $COLUMN_ID = :id")
     suspend fun delete(id: Long): Int
+
+    @Query("DELETE FROM $TABLE_NAME WHERE $COLUMN_ID in (:ids)")
+    suspend fun delete(ids: List<Long>): Int
 }

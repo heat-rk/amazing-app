@@ -1,5 +1,13 @@
 package ru.heatalways.amazingasfuckapplication.data.common.cache
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+
 /**
  * Utility class for caching data. Use this class in repositories to prevent
  * a lot of requests to server or in other use-cases
@@ -14,7 +22,7 @@ class InMemoryCacheContainer<T>(
     /**
      * Cached data
      */
-    private var cache: T? = null
+    private val cache: MutableStateFlow<T?> = MutableStateFlow(null)
 
     /**
      * The last cache write time
@@ -34,20 +42,26 @@ class InMemoryCacheContainer<T>(
 
     var value: T?
         get() {
-            if (isExpired) cache = null
-            return cache
+            if (isExpired) cache.value = null
+            return cache.value
         }
         set(value) {
             lastUpdateTime = System.currentTimeMillis()
-            cache = value
+            cache.value = value
         }
+
+    val valueFlow = cache.asStateFlow()
 
     fun getValueOrSave(value: T): T {
         return this.value ?: value.also { this.value = value }
     }
 
+    suspend fun valueFlow(defaultDataProvider: suspend () -> T): Flow<T> {
+        return valueFlow.map { value -> value ?: defaultDataProvider() }
+    }
+
     fun clear() {
-        cache = null
+        cache.value = null
     }
 
     companion object {

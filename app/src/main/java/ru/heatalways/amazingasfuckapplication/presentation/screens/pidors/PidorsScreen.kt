@@ -4,11 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +27,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -33,6 +36,7 @@ import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBarActionItem
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppOutlinedCard
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
@@ -43,6 +47,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.utils.extract
 import ru.heatalways.amazingasfuckapplication.utils.painterRes
+import ru.heatalways.amazingasfuckapplication.utils.strRes
 
 object PidorsScreenRoute : ScreenRoute()
 
@@ -54,6 +59,8 @@ fun PidorsScreen(viewModel: PidorsViewModel = koinViewModel()) {
         state = state,
         onNavigationButtonClick = viewModel::onNavigationButtonClick,
         onCreateClick = viewModel::onCreateClick,
+        onEditClick = viewModel::onEditClick,
+        onDeleteClick = viewModel::onDeleteClick,
         onItemClick = viewModel::onItemClick,
         onItemLongClick = viewModel::onItemLongClick,
     )
@@ -63,6 +70,8 @@ fun PidorsScreen(viewModel: PidorsViewModel = koinViewModel()) {
 private fun PidorsScreen(
     state: ViewState,
     onCreateClick: () -> Unit,
+    onEditClick: () -> Unit,
+    onDeleteClick: () -> Unit,
     onItemClick: (PidorItem) -> Unit,
     onItemLongClick: (PidorItem) -> Unit,
     onNavigationButtonClick: () -> Unit,
@@ -72,6 +81,12 @@ private fun PidorsScreen(
             AppBar(
                 title = stringResource(R.string.menu_item_pidors_list),
                 icon = painterResource(R.drawable.icon_leaderboard),
+                actions = getAppBarActions(
+                    state = state,
+                    onAddClick = onCreateClick,
+                    onEditClick = onEditClick,
+                    onDeleteClick = onDeleteClick,
+                ),
                 onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -108,7 +123,7 @@ private fun PidorsLoadingScreen(
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-        repeat(3) {
+        repeat(10) {
             item {
                 PidorItemShimmer(
                     modifier = Modifier
@@ -116,7 +131,7 @@ private fun PidorsLoadingScreen(
                         .wrapContentHeight()
                 )
 
-                Spacer(modifier = Modifier.height(Insets.Large))
+                Spacer(modifier = Modifier.height(Insets.Medium))
             }
         }
     }
@@ -191,7 +206,9 @@ private fun PidorItems(
                     .wrapContentHeight()
             )
 
-            Spacer(modifier = Modifier.height(Insets.Large))
+            if (index != items.lastIndex) {
+                Spacer(modifier = Modifier.height(Insets.Medium))
+            }
         }
     }
 }
@@ -222,27 +239,34 @@ private fun PidorItem(
         onLongClick = onLongClick,
         modifier = modifier
     ) {
-        Image(
-            painter = item.avatar.extract(),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(horizontal = Insets.Large)
-                .fillMaxWidth()
-                .height(Sizes.PidorAvatarHeight)
-        )
-
-        Spacer(modifier = Modifier.height(Insets.Default))
-
-        Text(
-            text = item.name,
-            textAlign = TextAlign.Center,
-            color = color,
-            style = AppTheme.typography.bodyLarge,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-        )
+                .wrapContentHeight()
+        ) {
+            Image(
+                painter = item.avatar.extract(),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(Sizes.PidorAvatarSize)
+            )
 
-        Spacer(modifier = Modifier.height(Insets.Default))
+            Spacer(modifier = Modifier.height(Insets.Default))
+
+            Text(
+                text = item.name,
+                color = color,
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis,
+                style = AppTheme.typography.bodyLarge,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(Insets.Small)
+            )
+
+            Spacer(modifier = Modifier.height(Insets.Default))
+        }
     }
 }
 
@@ -250,20 +274,16 @@ private fun PidorItem(
 private fun PidorItemShimmer(
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
         Box(
             modifier = Modifier
-                .padding(horizontal = Insets.Large)
-                .fillMaxWidth()
-                .height(Sizes.PidorAvatarHeight)
+                .size(Sizes.PidorAvatarSize)
                 .clip(AppTheme.shapes.medium)
                 .shimmerEffect()
         )
-
-        Spacer(modifier = Modifier.height(Insets.Default))
 
         val textLineHeight: Dp
 
@@ -273,6 +293,7 @@ private fun PidorItemShimmer(
 
         Box(
             modifier = Modifier
+                .padding(Insets.Small)
                 .height(textLineHeight)
                 .fillMaxWidth(0.6f)
                 .clip(AppTheme.shapes.medium)
@@ -280,6 +301,64 @@ private fun PidorItemShimmer(
         )
     }
 }
+
+private fun getAppBarAddAction(
+    onClick: () -> Unit
+) = AppBarActionItem(
+    icon = painterRes(R.drawable.icon_add),
+    contentDescription = strRes(R.string.add_pidor),
+    onClick = onClick
+)
+
+private fun getAppBarDeleteAction(
+    onClick: () -> Unit
+) = AppBarActionItem(
+    icon = painterRes(R.drawable.icon_delete),
+    contentDescription = strRes(R.string.delete_pidor),
+    onClick = onClick
+)
+
+private fun getAppBarEditAction(
+    onClick: () -> Unit
+) = AppBarActionItem(
+    icon = painterRes(R.drawable.icon_edit),
+    contentDescription = strRes(R.string.edit_pidor),
+    onClick = onClick
+)
+
+private fun getAppBarActions(
+    state: ViewState,
+    onAddClick: () -> Unit,
+    onEditClick: () -> Unit,
+    onDeleteClick: () -> Unit,
+): List<AppBarActionItem> =
+    when (state) {
+        ViewState.Loading -> emptyList()
+        is ViewState.Ok -> {
+            val selected = state.items.filter { it.isSelected }
+
+            when (selected.size) {
+                0 -> {
+                    listOf(
+                        getAppBarAddAction(onAddClick),
+                    )
+                }
+
+                1 -> {
+                    listOf(
+                        getAppBarDeleteAction(onDeleteClick),
+                        getAppBarEditAction(onEditClick),
+                    )
+                }
+
+                else -> {
+                    listOf(
+                        getAppBarDeleteAction(onDeleteClick),
+                    )
+                }
+            }
+        }
+    }
 
 @Composable
 @Preview
@@ -294,7 +373,7 @@ private fun PidorsScreenPreview() {
             ),
             PidorItem(
                 id = 2,
-                name = "№2 Лера",
+                name = "№2 Лера большое название прям очень большое большое название прям очень большое большое название прям очень большое большое название прям очень большое",
                 avatar = painterRes(R.drawable.icon_boobs),
             )
         ),
@@ -309,6 +388,8 @@ private fun PidorsScreenPreview() {
             state = okState,
             onNavigationButtonClick = {},
             onCreateClick = {},
+            onDeleteClick = {},
+            onEditClick = {},
             onItemClick = {},
             onItemLongClick = {},
         )

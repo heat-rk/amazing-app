@@ -1,7 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.styles
 
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 object Sizes {
     val MenuItemHeight = 192.dp
@@ -11,5 +10,5 @@ object Sizes {
     val WantMoreIcon = 100.dp
     val CatLoaderHeight = 96.dp
     val HeartStrokeWidth = 6.dp
-    val PidorAvatarHeight = 300.dp
+    val PidorAvatarSize = 100.dp
 }
