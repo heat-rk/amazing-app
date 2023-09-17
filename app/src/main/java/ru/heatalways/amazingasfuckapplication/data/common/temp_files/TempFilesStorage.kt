@@ -3,6 +3,8 @@ package ru.heatalways.amazingasfuckapplication.data.common.temp_files
 import android.content.Context
 import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
@@ -15,13 +17,11 @@ class TempFilesStorage(
 ) {
     private val lock = Mutex()
 
-    private val folderName = "$FOLDER_NAME_BASE-${UUID.randomUUID()}"
-
     @Suppress("BlockingMethodInNonBlockingContext")
     suspend fun new(): File = lock.withLock {
         withContext(dispatcher) {
             val destinationFileName = UUID.randomUUID().toString()
-            val destinationFile = File(applicationContext.filesDir, "$folderName/$destinationFileName")
+            val destinationFile = File(applicationContext.filesDir, "$FOLDER_NAME/$destinationFileName")
             val parent = destinationFile.parentFile
 
             check(parent == null || parent.exists() || parent.mkdirs()) {
@@ -38,12 +38,13 @@ class TempFilesStorage(
 
     suspend fun clear() = lock.withLock {
         withContext(dispatcher) {
-            File(folderName).deleteRecursively()
+            val clearResult = File(applicationContext.filesDir, FOLDER_NAME).deleteRecursively()
+            Log.d(TAG, "Temp files storage clear result = $clearResult")
         }
     }
 
     companion object {
         private const val TAG = "TempFilesStorage"
-        private const val FOLDER_NAME_BASE = "temp"
+        private const val FOLDER_NAME = "temp"
     }
 }

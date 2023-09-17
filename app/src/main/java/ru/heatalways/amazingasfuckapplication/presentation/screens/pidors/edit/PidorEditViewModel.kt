@@ -3,6 +3,8 @@ package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.SimpleSyntax
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -29,6 +31,7 @@ class PidorEditViewModel(
     private val pidorsRepository: PidorsRepository,
     private val tempFilesStorage: TempFilesStorage,
     private val uriToFileSaver: UriToFileSaver,
+    private val longRunningScope: CoroutineScope,
 ) : ViewModel(), ContainerHost<ViewState, SideEffect> {
 
     override val container = container<ViewState, SideEffect>(
@@ -39,7 +42,7 @@ class PidorEditViewModel(
     )
 
     override fun onCleared() {
-        intent { tempFilesStorage.clear() }
+        longRunningScope.launch { tempFilesStorage.clear() }
         super.onCleared()
     }
 
@@ -48,7 +51,6 @@ class PidorEditViewModel(
     }
 
     fun onAvatarChanged(uri: Uri) = intent {
-        tempFilesStorage.clear()
         val file = tempFilesStorage.new()
         uriToFileSaver.save(uri, destination = file)
         reduce { state.copy(avatar = PainterResource.ByFile(file)) }
