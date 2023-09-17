@@ -29,6 +29,7 @@ class PidorsRepositoryImpl(
     }
 
     override suspend fun create(
+        id: Long,
         avatarFile: File,
         avatarCrop: PidorAvatarCrop,
         name: String
@@ -36,13 +37,21 @@ class PidorsRepositoryImpl(
         longRunningScope.launch(dispatcher) {
             val avatarFileName = avatarsStorage.save(avatarFile, avatarCrop)
 
-            dbDataSource.insert(
-                PidorDAO(
+            if (id == -1L) {
+                dbDataSource.insert(
+                    PidorDAO(
+                        name = name,
+                        avatarPath = avatarFileName,
+                        tapCount = 0
+                    )
+                )
+            } else {
+                dbDataSource.update(
+                    id = id,
                     name = name,
                     avatarPath = avatarFileName,
-                    tapCount = 0
                 )
-            )
+            }
 
             updateInMemoryCache()
         }.join()

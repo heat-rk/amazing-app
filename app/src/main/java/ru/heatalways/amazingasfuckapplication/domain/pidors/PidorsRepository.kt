@@ -7,6 +7,7 @@ interface PidorsRepository {
     suspend fun observeAllSorted(): Flow<List<Pidor>>
 
     suspend fun create(
+        id: Long = -1,
         avatarFile: File,
         avatarCrop: PidorAvatarCrop,
         name: String,

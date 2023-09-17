@@ -6,6 +6,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.TABLE_NAME
 import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.COLUMN_TAP_COUNT
+import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.COLUMN_AVATAR_PATH
+import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.COLUMN_NAME
 import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.COLUMN_ID
 
 @Dao
@@ -21,6 +23,9 @@ interface PidorsDatabaseSource {
 
     @Query("UPDATE $TABLE_NAME SET $COLUMN_TAP_COUNT=:tapCount WHERE $COLUMN_ID=:id")
     suspend fun update(id: Long, tapCount: Int): Int
+
+    @Query("UPDATE $TABLE_NAME SET $COLUMN_NAME=:name, $COLUMN_AVATAR_PATH=:avatarPath WHERE $COLUMN_ID=:id")
+    suspend fun update(id: Long, name: String, avatarPath: String): Int
 
     @Query("DELETE FROM $TABLE_NAME WHERE $COLUMN_ID = :id")
     suspend fun delete(id: Long): Int

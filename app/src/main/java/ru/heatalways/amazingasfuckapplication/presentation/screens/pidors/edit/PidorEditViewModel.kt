@@ -85,6 +85,7 @@ class PidorEditViewModel(
         viewModelScope.launchSafe(
             block = {
                 pidorsRepository.create(
+                    id = id,
                     name = currentState.name,
                     avatarFile = currentState.avatar.file,
                     avatarCrop = avatarCrop,

@@ -62,6 +62,7 @@ class PidorsViewModel(
             router.navigate(
                 route = PidorEditScreen.Route,
                 args = mapOf(
+                    PidorEditScreen.ID_PARAM to itemToEdit.id.toString(),
                     PidorEditScreen.NAME_PARAM to itemToEdit.name,
                     PidorEditScreen.PHOTO_PATH to avatarPath,
                 )
