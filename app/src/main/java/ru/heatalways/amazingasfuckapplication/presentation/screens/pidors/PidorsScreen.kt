@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -240,6 +243,7 @@ private fun PidorItems(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
+                    .animateItemPlacement()
             )
 
             if (index != items.lastIndex) {
