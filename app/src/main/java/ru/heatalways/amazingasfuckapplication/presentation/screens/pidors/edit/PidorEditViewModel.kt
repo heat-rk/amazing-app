@@ -38,8 +38,6 @@ class PidorEditViewModel(
         )
     )
 
-    private var tempFile: File? = null
-
     override fun onCleared() {
         intent { tempFilesStorage.clear() }
         super.onCleared()
@@ -50,7 +48,8 @@ class PidorEditViewModel(
     }
 
     fun onAvatarChanged(uri: Uri) = intent {
-        val file = tempFile ?: tempFilesStorage.new().also { tempFile = it }
+        tempFilesStorage.clear()
+        val file = tempFilesStorage.new()
         uriToFileSaver.save(uri, destination = file)
         reduce { state.copy(avatar = PainterResource.ByFile(file)) }
     }

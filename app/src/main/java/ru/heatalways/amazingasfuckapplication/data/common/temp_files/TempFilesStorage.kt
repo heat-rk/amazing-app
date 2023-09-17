@@ -13,8 +13,6 @@ class TempFilesStorage(
     private val applicationContext: Context,
     private val dispatcher: CoroutineDispatcher,
 ) {
-    private var isCleared = false
-
     private val lock = Mutex()
 
     private val folderName = "$FOLDER_NAME_BASE-${UUID.randomUUID()}"
@@ -22,10 +20,6 @@ class TempFilesStorage(
     @Suppress("BlockingMethodInNonBlockingContext")
     suspend fun new(): File = lock.withLock {
         withContext(dispatcher) {
-            if (isCleared) {
-                throw IllegalStateException("New files creating prohibited because TempFilesStorage is already cleared")
-            }
-
             val destinationFileName = UUID.randomUUID().toString()
             val destinationFile = File(applicationContext.filesDir, "$folderName/$destinationFileName")
             val parent = destinationFile.parentFile
@@ -45,7 +39,6 @@ class TempFilesStorage(
     suspend fun clear() = lock.withLock {
         withContext(dispatcher) {
             File(folderName).deleteRecursively()
-            isCleared = true
         }
     }
 
