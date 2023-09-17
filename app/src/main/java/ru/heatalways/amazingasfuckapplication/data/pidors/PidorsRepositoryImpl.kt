@@ -9,6 +9,7 @@ import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO
 import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorsDatabaseSource
 import ru.heatalways.amazingasfuckapplication.data.pidors.storage.PidorsAvatarsStorage
 import ru.heatalways.amazingasfuckapplication.domain.pidors.Pidor
+import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorAvatarCrop
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.mappers.toDomain
 import java.io.File
@@ -27,9 +28,13 @@ class PidorsRepositoryImpl(
         )
     }
 
-    override suspend fun create(avatarFile: File, name: String) {
+    override suspend fun create(
+        avatarFile: File,
+        avatarCrop: PidorAvatarCrop,
+        name: String
+    ) {
         longRunningScope.launch(dispatcher) {
-            val avatarFileName = avatarsStorage.save(avatarFile)
+            val avatarFileName = avatarsStorage.save(avatarFile, avatarCrop)
 
             dbDataSource.insert(
                 PidorDAO(

@@ -8,6 +8,7 @@ interface PidorsRepository {
 
     suspend fun create(
         avatarFile: File,
+        avatarCrop: PidorAvatarCrop,
         name: String,
     )
 

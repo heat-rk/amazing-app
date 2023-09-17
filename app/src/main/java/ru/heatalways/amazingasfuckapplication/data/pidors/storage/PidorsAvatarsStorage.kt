@@ -1,7 +1,10 @@
 package ru.heatalways.amazingasfuckapplication.data.pidors.storage
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
+import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorAvatarCrop
 import java.io.File
 import java.util.UUID
 
@@ -9,7 +12,7 @@ class PidorsAvatarsStorage(
     private val applicationContext: Context,
 ) {
     @Suppress("BlockingMethodInNonBlockingContext")
-    suspend fun save(file: File): String {
+    suspend fun save(file: File, avatarCrop: PidorAvatarCrop): String {
         val destinationFileName = UUID.randomUUID().toString()
 
         val destinationFile = File(applicationContext.filesDir, "$FOLDER_NAME/$destinationFileName")
@@ -22,7 +25,28 @@ class PidorsAvatarsStorage(
 
         destinationFile.createNewFile()
 
-        file.copyTo(destinationFile, overwrite = true)
+        when (avatarCrop) {
+            is PidorAvatarCrop.Exactly -> {
+                val newBitmap = Bitmap.createBitmap(
+                    BitmapFactory.decodeFile(file.path),
+                    avatarCrop.left,
+                    avatarCrop.top,
+                    avatarCrop.width,
+                    avatarCrop.height
+                )
+
+                destinationFile.outputStream().use { outputStream ->
+                    newBitmap.compress(
+                        Bitmap.CompressFormat.JPEG,
+                        BITMAP_SAVING_QUALITY,
+                        outputStream
+                    )
+                }
+            }
+            PidorAvatarCrop.Full -> {
+                file.copyTo(destinationFile, overwrite = true)
+            }
+        }
 
         Log.d(TAG, "File saved: ${destinationFile.path}")
 
@@ -36,5 +60,6 @@ class PidorsAvatarsStorage(
     companion object {
         private const val TAG = "PidorsAvatarsStorage"
         private const val FOLDER_NAME = "pidors_avatars"
+        private const val BITMAP_SAVING_QUALITY = 100
     }
 }

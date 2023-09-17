@@ -102,6 +102,7 @@ fun PidorEditScreen(
         state = state,
         onNavigationButtonClick = viewModel::onNavigationButtonClick,
         onAvatarChanged = viewModel::onAvatarChanged,
+        onAvatarCropChanged = viewModel::onAvatarCropChanged,
         onNameChanged = viewModel::onNameChange,
         onSaveClick = viewModel::onSaveClick,
         snackbarHostState = snackbarHostState,
@@ -114,6 +115,7 @@ private fun PidorEditScreen(
     snackbarHostState: SnackbarHostState,
     onNavigationButtonClick: () -> Unit,
     onAvatarChanged: (Uri) -> Unit,
+    onAvatarCropChanged: (IntOffset, IntSize) -> Unit,
     onNameChanged: (String) -> Unit,
     onSaveClick: () -> Unit,
 ) {
@@ -134,6 +136,7 @@ private fun PidorEditScreen(
         PidorEditScreenContent(
             state = state,
             onAvatarChanged = onAvatarChanged,
+            onAvatarCropChanged = onAvatarCropChanged,
             onNameChanged = onNameChanged,
             onSaveClick = onSaveClick,
             modifier = Modifier.padding(contentPadding)
@@ -145,6 +148,7 @@ private fun PidorEditScreen(
 private fun PidorEditScreenContent(
     state: ViewState,
     onAvatarChanged: (Uri) -> Unit,
+    onAvatarCropChanged: (IntOffset, IntSize) -> Unit,
     onNameChanged: (String) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -200,9 +204,7 @@ private fun PidorEditScreenContent(
         RectangleImageCropper(
             painter = photoPainter,
             croppingBoxStrokeWidth = Sizes.PidorAvatarCroppingBoxStrokeWidth,
-            onCropChanged = { offset: IntOffset, size: IntSize ->
-                Log.d("2143", "offset = $offset; size = $size")
-            },
+            onCropChanged = onAvatarCropChanged,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
@@ -287,6 +289,7 @@ private fun PidorsScreenPreview() {
             onSaveClick = {},
             onNameChanged = {},
             onAvatarChanged = {},
+            onAvatarCropChanged = { _, _ -> },
             snackbarHostState = SnackbarHostState(),
         )
     }

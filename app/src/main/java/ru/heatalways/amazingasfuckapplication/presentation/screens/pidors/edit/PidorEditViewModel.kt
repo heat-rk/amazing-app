@@ -1,6 +1,8 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
 
 import android.net.Uri
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
@@ -14,6 +16,7 @@ import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.data.common.temp_files.TempFilesStorage
 import ru.heatalways.amazingasfuckapplication.data.common.utils.UriToFileSaver
+import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorAvatarCrop
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
@@ -41,6 +44,8 @@ class PidorEditViewModel(
         )
     )
 
+    private var avatarCrop: PidorAvatarCrop = PidorAvatarCrop.Full
+
     override fun onCleared() {
         longRunningScope.launch { tempFilesStorage.clear() }
         super.onCleared()
@@ -54,6 +59,15 @@ class PidorEditViewModel(
         val file = tempFilesStorage.new()
         uriToFileSaver.save(uri, destination = file)
         reduce { state.copy(avatar = PainterResource.ByFile(file)) }
+    }
+
+    fun onAvatarCropChanged(offset: IntOffset, size: IntSize) = intent {
+        avatarCrop = PidorAvatarCrop.Exactly(
+            left = offset.x,
+            top = offset.y,
+            width = size.width,
+            height = size.height,
+        )
     }
 
     fun onNavigationButtonClick() = intent {
@@ -73,6 +87,7 @@ class PidorEditViewModel(
                 pidorsRepository.create(
                     name = currentState.name,
                     avatarFile = currentState.avatar.file,
+                    avatarCrop = avatarCrop,
                 )
 
                 router.navigateBack()
