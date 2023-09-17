@@ -2,10 +2,10 @@ package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,11 +25,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -44,11 +45,13 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Ap
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppSnackbarHost
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppTextField
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.RectangleImageCropper
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
+import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.utils.extract
 import ru.heatalways.amazingasfuckapplication.utils.painterRes
 
@@ -194,14 +197,15 @@ private fun PidorEditScreenContent(
 
         val photoPainter = state.avatar.extract()
 
-        Image(
+        RectangleImageCropper(
             painter = photoPainter,
-            contentDescription = null,
-            contentScale = ContentScale.Fit,
-            alignment = Alignment.TopCenter,
+            croppingBoxStrokeWidth = Sizes.PidorAvatarCroppingBoxStrokeWidth,
+            onCropChanged = { offset: IntOffset, size: IntSize ->
+                Log.d("2143", "offset = $offset; size = $size")
+            },
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f),
+                .weight(1f)
         )
 
         Spacer(modifier = Modifier.height(Insets.Default))

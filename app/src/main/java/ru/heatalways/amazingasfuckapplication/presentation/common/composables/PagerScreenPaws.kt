@@ -51,6 +51,7 @@ fun PagerScreenPaws(
                 .clip(CircleShape)
                 .conditional(isEnabled) { radialBackgroundLighting(color) }
                 .clickable(
+                    enabled = isEnabled,
                     indication = rememberRipple(
                         color = color
                     ),

@@ -11,4 +11,5 @@ object Sizes {
     val CatLoaderHeight = 96.dp
     val HeartStrokeWidth = 6.dp
     val PidorAvatarSize = 100.dp
+    val PidorAvatarCroppingBoxStrokeWidth = 2.dp
 }
