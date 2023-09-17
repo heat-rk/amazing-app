@@ -5,6 +5,7 @@ package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -294,16 +296,30 @@ private fun PidorItem(
 
             Spacer(modifier = Modifier.height(Insets.Default))
 
-            Text(
-                text = item.name,
-                color = color,
-                maxLines = 3,
-                overflow = TextOverflow.Ellipsis,
-                style = AppTheme.typography.bodyLarge,
+            Column(
                 modifier = Modifier
-                    .wrapContentSize()
                     .padding(Insets.Small)
-            )
+            ) {
+                Text(
+                    text = item.name,
+                    color = color,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    style = AppTheme.typography.bodyLarge,
+                    modifier = Modifier
+                        .wrapContentSize()
+                )
+
+                Text(
+                    text = pluralStringResource(R.plurals.pidor_tap_count_description, item.tapCount, item.tapCount),
+                    color = color,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    style = AppTheme.typography.bodyLarge,
+                    modifier = Modifier
+                        .wrapContentSize()
+                )
+            }
 
             Spacer(modifier = Modifier.height(Insets.Default))
         }
@@ -410,6 +426,7 @@ private fun PidorsScreenPreview() {
                 name = "№1 Леня",
                 avatar = painterRes(R.drawable.icon_cat),
                 isSelected = true,
+                tapCount = 6,
             ),
             PidorItem(
                 id = 2,
@@ -427,7 +444,7 @@ private fun PidorsScreenPreview() {
 
     AppTheme {
         PidorsScreen(
-            state = errorState,
+            state = okState,
             onNavigationButtonClick = {},
             onCreateClick = {},
             onDeleteClick = {},
