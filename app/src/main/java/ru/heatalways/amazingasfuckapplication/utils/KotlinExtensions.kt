@@ -38,3 +38,5 @@ val Size.aspectRatio get() = width / height
 fun Size.roundToIntSize() = IntSize(width.roundToInt(), height.roundToInt())
 
 fun Offset.roundToIntOffset() = IntOffset(x.roundToInt(), y.roundToInt())
+
+operator fun Offset.plus(size: Size) = Offset(x + size.width, y + size.height)

@@ -48,10 +48,12 @@ import ru.heatalways.amazingasfuckapplication.utils.aspectRatio
 import ru.heatalways.amazingasfuckapplication.utils.coerceIn
 import ru.heatalways.amazingasfuckapplication.utils.roundToIntOffset
 import ru.heatalways.amazingasfuckapplication.utils.roundToIntSize
+import ru.heatalways.amazingasfuckapplication.utils.plus
 import kotlin.math.min
 
 private const val CROPPING_BOX_PADDING = 50f
 private const val CROP_CHANGING_FLOW_DEBOUNCE = 500L
+private const val MIN_SCALE = 1f
 
 @Composable
 fun RectangleImageCropper(
@@ -192,17 +194,19 @@ fun RectangleImageCropper(
             }
             .pointerInput(Unit) {
                 detectTransformGestures { _, pan, zoom, _ ->
+                    val oldScale = scale
+
                     scale = (scale * zoom).coerceIn(
-                        minimumValue = 1f,
+                        minimumValue = MIN_SCALE,
                         maximumValue = maxScale
                     )
 
-                    croppingBoxTranslation = (croppingBoxTranslation - pan)
+                    val scaleOffset = (croppingBoxTranslation + croppingBoxSize / 2f) * (scale / oldScale - 1)
+
+                    croppingBoxTranslation = (croppingBoxTranslation - pan + scaleOffset)
                         .coerceIn(croppingBoxTranslationBounds)
 
-                    coroutineScope.launch {
-                        cropChangingFlow.send(Unit)
-                    }
+                    coroutineScope.launch { cropChangingFlow.send(Unit) }
                 }
             }
     ) {
