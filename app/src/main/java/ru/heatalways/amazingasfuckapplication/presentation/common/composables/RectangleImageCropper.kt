@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -164,6 +165,7 @@ fun RectangleImageCropper(
     LaunchedEffect(cropChangingFlow, coroutineScope) {
         cropChangingFlow.receiveAsFlow()
             .debounce(CROP_CHANGING_FLOW_DEBOUNCE)
+            .filter { painter.intrinsicSize.isSpecified }
             .onEach {
                 val painterSize = painter.intrinsicSize
 
@@ -185,6 +187,15 @@ fun RectangleImageCropper(
             .launchIn(coroutineScope)
     }
 
+    LaunchedEffect(
+        imageSize,
+        croppingBoxTranslation,
+        croppingBoxSize,
+        painter.intrinsicSize
+    ) {
+        coroutineScope.launch { cropChangingFlow.send(Unit) }
+    }
+
     Canvas(
         modifier = modifier
             .fillMaxSize()
@@ -201,12 +212,11 @@ fun RectangleImageCropper(
                         maximumValue = maxScale
                     )
 
-                    val scaleOffset = (croppingBoxTranslation + croppingBoxSize / 2f) * (scale / oldScale - 1)
+                    val scaleOffset =
+                        (croppingBoxTranslation + croppingBoxSize / 2f) * (scale / oldScale - 1)
 
                     croppingBoxTranslation = (croppingBoxTranslation - pan + scaleOffset)
                         .coerceIn(croppingBoxTranslationBounds)
-
-                    coroutineScope.launch { cropChangingFlow.send(Unit) }
                 }
             }
     ) {
