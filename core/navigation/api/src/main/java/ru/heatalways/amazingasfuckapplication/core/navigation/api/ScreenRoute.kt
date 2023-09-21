@@ -1,9 +1,7 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api
-
-import androidx.navigation.NamedNavArgument
+package ru.heatalways.amazingasfuckapplication.core.navigation.api
 
 abstract class ScreenRoute(
-    val params: List<NamedNavArgument> = emptyList(),
+    params: List<String> = emptyList(),
 ) {
     private val definitionBase = this::class.java.name
     val definition = "$definitionBase?${params.toQueryParams()}"
@@ -21,6 +19,6 @@ abstract class ScreenRoute(
     private fun Map<String, String>.toQueryArgs() =
         entries.joinToString(separator = "&") { "${it.key}=${it.value}" }
 
-    private fun List<NamedNavArgument>.toQueryParams() =
-        joinToString(separator = "&") { "${it.name}={${it.name}}" }
+    private fun List<String>.toQueryParams() =
+        joinToString(separator = "&") { "${it}={${it}}" }
 }

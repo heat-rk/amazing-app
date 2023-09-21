@@ -1,5 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.menu
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavBackStackEntry
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.common.utils.extract
@@ -29,15 +31,16 @@ import ru.heatalways.amazingasfuckapplication.core.design.composables.radialBack
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
+import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
 
 object MenuScreen {
-    object Route : ComposeScreenRoute(
-        content = {
+    object Route : ComposeScreenRoute() {
+        @Composable
+        override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
             MenuScreen()
         }
-    )
+    }
 }
 
 @Composable

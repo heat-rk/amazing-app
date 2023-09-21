@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import kotlinx.coroutines.flow.Flow
@@ -48,9 +50,9 @@ import ru.heatalways.amazingasfuckapplication.core.design.composables.AppTextFie
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
+import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.RectangleImageCropper
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
@@ -61,7 +63,7 @@ object PidorEditScreen {
     const val PHOTO_PATH = "photo_path"
 
     object Route : ComposeScreenRoute(
-        params = listOf(
+        namedNavArguments = listOf(
             navArgument(ID_PARAM) {
                 type = NavType.LongType
                 defaultValue = -1L
@@ -76,15 +78,18 @@ object PidorEditScreen {
                 type = NavType.StringType
                 defaultValue = ""
             }
-        ),
-        content = {
+        )
+    ) {
+        @Composable
+        override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
             PidorEditScreen(
-                id = it.arguments?.getLong(ID_PARAM) ?: -1,
-                name = it.arguments?.getString(NAME_PARAM) ?: "",
-                photoPath = it.arguments?.getString(PHOTO_PATH) ?: "",
+                id = navBackStackEntry.arguments?.getLong(ID_PARAM) ?: -1,
+                name = navBackStackEntry.arguments?.getString(NAME_PARAM) ?: "",
+                photoPath = navBackStackEntry.arguments?.getString(PHOTO_PATH) ?: "",
             )
         }
-    )
+
+    }
 }
 
 @Composable

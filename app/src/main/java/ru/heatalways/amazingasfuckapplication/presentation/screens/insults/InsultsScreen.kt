@@ -1,5 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.insults
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.navigation.NavBackStackEntry
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
@@ -25,16 +27,17 @@ import ru.heatalways.amazingasfuckapplication.common.utils.extract
 import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
+import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object InsultsScreen {
-    object Route : ComposeScreenRoute(
-        content = {
+    object Route : ComposeScreenRoute() {
+        @Composable
+        override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
             InsultsScreen()
         }
-    )
+    }
 }
 
 @Composable

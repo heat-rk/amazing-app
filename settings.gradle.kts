@@ -18,3 +18,5 @@ rootProject.name = "AmazingAsFuckApplication"
 include(":app")
 include(":core:design")
 include(":common:utils")
+include(":core:navigation:api")
+include(":core:navigation:compose-impl")

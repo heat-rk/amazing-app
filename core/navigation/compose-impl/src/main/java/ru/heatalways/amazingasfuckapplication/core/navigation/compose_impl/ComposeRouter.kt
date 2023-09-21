@@ -1,10 +1,10 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl
+package ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.RoutingAction
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.core.navigation.api.RoutingAction
+import ru.heatalways.amazingasfuckapplication.core.navigation.api.ScreenRoute
 
 class ComposeRouter : Router {
     private val _actions = Channel<RoutingAction>(Channel.BUFFERED)

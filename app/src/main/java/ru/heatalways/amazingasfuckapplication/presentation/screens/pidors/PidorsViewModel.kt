@@ -13,17 +13,17 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.domain.pidors.Pidor
-import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
-import ru.heatalways.amazingasfuckapplication.mappers.toUIListItem
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditScreen
 import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
 import ru.heatalways.amazingasfuckapplication.common.utils.ifInstance
 import ru.heatalways.amazingasfuckapplication.common.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.domain.pidors.Pidor
+import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
+import ru.heatalways.amazingasfuckapplication.mappers.toUIListItem
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditScreen
 
 class PidorsViewModel(
     private val router: Router,

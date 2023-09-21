@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api
+package ru.heatalways.amazingasfuckapplication.core.navigation.api
 
 sealed interface RoutingAction {
     data class NavigateTo(

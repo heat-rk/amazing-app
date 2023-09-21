@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 
 class RememberViewModel(
     private val router: Router,

@@ -11,12 +11,12 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.common.utils.ifInstance
 import ru.heatalways.amazingasfuckapplication.common.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 
 abstract class PagerViewModel<T>(
     protected val router: Router,

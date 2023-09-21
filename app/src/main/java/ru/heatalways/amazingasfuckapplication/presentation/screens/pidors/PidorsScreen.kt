@@ -3,6 +3,7 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -41,6 +42,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavBackStackEntry
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.koinViewModel
@@ -55,17 +57,18 @@ import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEff
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
+import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object PidorsScreen {
-    object Route : ComposeScreenRoute(
-        content = {
+    object Route : ComposeScreenRoute() {
+        @Composable
+        override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
             PidorsScreen()
         }
-    )
+    }
 }
 
 @Composable

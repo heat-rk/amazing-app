@@ -5,7 +5,7 @@ import kotlinx.collections.immutable.toImmutableList
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.CatsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsScreen

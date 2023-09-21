@@ -1,5 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.cats
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -24,6 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavBackStackEntry
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.imageLoader
@@ -34,16 +36,17 @@ import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.core.design.composables.radialBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
+import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object CatsScreen {
-    object Route : ComposeScreenRoute(
-        content = {
+    object Route : ComposeScreenRoute() {
+        @Composable
+        override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
             CatsScreen()
         }
-    )
+    }
 }
 
 @Composable

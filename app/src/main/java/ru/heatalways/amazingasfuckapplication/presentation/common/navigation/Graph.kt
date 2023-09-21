@@ -1,6 +1,7 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl
+package ru.heatalways.amazingasfuckapplication.presentation.common.navigation
 
 import androidx.navigation.NavGraphBuilder
+import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.composable
 import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.CatsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.FactsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.InsultsScreen

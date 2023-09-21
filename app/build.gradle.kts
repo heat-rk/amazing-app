@@ -78,6 +78,8 @@ dependencies {
     // modules
     implementation(project(":common:utils"))
     implementation(project(":core:design"))
+    implementation(project(":core:navigation:api"))
+    implementation(project(":core:navigation:compose-impl"))
 
     // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)
