@@ -52,6 +52,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Ap
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
@@ -60,7 +61,13 @@ import ru.heatalways.amazingasfuckapplication.utils.extract
 import ru.heatalways.amazingasfuckapplication.utils.painterRes
 import ru.heatalways.amazingasfuckapplication.utils.strRes
 
-object PidorsScreenRoute : ScreenRoute()
+object PidorsScreen {
+    object Route : ComposeScreenRoute(
+        content = {
+            PidorsScreen()
+        }
+    )
+}
 
 @Composable
 fun PidorsScreen(viewModel: PidorsViewModel = koinViewModel()) {

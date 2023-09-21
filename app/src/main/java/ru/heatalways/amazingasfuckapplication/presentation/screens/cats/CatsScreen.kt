@@ -33,11 +33,18 @@ import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
 
-object CatsScreenRoute : ScreenRoute()
+object CatsScreen {
+    object Route : ComposeScreenRoute(
+        content = {
+            CatsScreen()
+        }
+    )
+}
 
 @Composable
 fun CatsScreen(viewModel: CatsViewModel = koinViewModel()) {
@@ -85,10 +92,12 @@ private fun CatsScreenContent(url: String) {
             CatsScreenContentShimmer(
                 modifier = Modifier
                     .height(Sizes.CatLoaderHeight)
-                    .align(BiasAlignment(
-                        horizontalBias = 0f,
-                        verticalBias = -0.5f,
-                    ))
+                    .align(
+                        BiasAlignment(
+                            horizontalBias = 0f,
+                            verticalBias = -0.5f,
+                        )
+                    )
             )
         }
     }

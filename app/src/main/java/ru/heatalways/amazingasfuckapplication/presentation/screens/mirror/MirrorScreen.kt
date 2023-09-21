@@ -51,12 +51,19 @@ import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Heart
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
 
-object MirrorScreenRoute : ScreenRoute()
+object MirrorScreen {
+    object Route : ComposeScreenRoute(
+        content = {
+            MirrorScreen()
+        }
+    )
+}
 
 private const val HEARTS_COUNT = 5
 private const val HEART_MIN_SIZE_DP = 30

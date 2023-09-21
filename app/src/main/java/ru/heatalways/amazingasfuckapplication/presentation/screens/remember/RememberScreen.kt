@@ -18,11 +18,16 @@ import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 
 object RememberScreen {
-    object Route : ScreenRoute()
+    object Route : ComposeScreenRoute(
+        content = {
+            RememberScreen()
+        }
+    )
 }
 
 @Composable
@@ -62,7 +67,12 @@ private fun RememberScreen(
                 textAlign = TextAlign.Center,
                 color = AppTheme.colors.primary,
                 modifier = Modifier
-                    .align(BiasAlignment(horizontalBias = 0f, verticalBias = contentVerticalAlignmentBias))
+                    .align(
+                        BiasAlignment(
+                            horizontalBias = 0f,
+                            verticalBias = contentVerticalAlignmentBias
+                        )
+                    )
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .padding(Insets.Default)

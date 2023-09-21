@@ -47,6 +47,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Ap
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.RectangleImageCropper
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
@@ -60,7 +61,7 @@ object PidorEditScreen {
     const val NAME_PARAM = "name"
     const val PHOTO_PATH = "photo_path"
 
-    object Route : ScreenRoute(
+    object Route : ComposeScreenRoute(
         params = listOf(
             navArgument(ID_PARAM) {
                 type = NavType.LongType
@@ -76,7 +77,14 @@ object PidorEditScreen {
                 type = NavType.StringType
                 defaultValue = ""
             }
-        )
+        ),
+        content = {
+            PidorEditScreen(
+                id = it.arguments?.getLong(ID_PARAM) ?: -1,
+                name = it.arguments?.getString(NAME_PARAM) ?: "",
+                photoPath = it.arguments?.getString(PHOTO_PATH) ?: "",
+            )
+        }
     )
 }
 

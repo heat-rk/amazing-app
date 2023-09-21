@@ -20,7 +20,7 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.RoutingAction
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.routeWithArgs
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.buildGraph
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreen
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = MenuScreenRoute.definition,
+                    startDestination = MenuScreen.Route.definition,
                     modifier = Modifier.background(backgroundColor),
                     builder = NavGraphBuilder::buildGraph
                 )

@@ -22,13 +22,20 @@ import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 import ru.heatalways.amazingasfuckapplication.utils.StringResource
 import ru.heatalways.amazingasfuckapplication.utils.extract
 
-object FactsScreenRoute : ScreenRoute()
+object FactsScreen {
+    object Route : ComposeScreenRoute(
+        content = {
+            FactsScreen()
+        }
+    )
+}
 
 @Composable
 fun FactsScreen(viewModel: FactsViewModel = koinViewModel()) {
