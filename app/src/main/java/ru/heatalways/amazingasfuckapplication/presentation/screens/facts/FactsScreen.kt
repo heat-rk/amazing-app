@@ -20,14 +20,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.common.utils.extract
+import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEffect
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
-import ru.heatalways.amazingasfuckapplication.utils.StringResource
-import ru.heatalways.amazingasfuckapplication.utils.extract
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object FactsScreen {
     object Route : ComposeScreenRoute(
@@ -42,7 +42,7 @@ fun FactsScreen(viewModel: FactsViewModel = koinViewModel()) {
     PagerScreen(
         viewModel = viewModel,
         title = stringResource(R.string.menu_item_facts),
-        icon = painterResource(R.drawable.icon_boobs),
+        icon = painterResource(DesignR.drawable.icon_boobs),
         content = {
             FactsScreenContent(fact = it)
         },

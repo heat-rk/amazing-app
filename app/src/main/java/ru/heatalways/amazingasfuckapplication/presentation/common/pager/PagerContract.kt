@@ -1,7 +1,7 @@
 package ru.heatalways.amazingasfuckapplication.presentation.common.pager
 
 import kotlinx.collections.immutable.ImmutableList
-import ru.heatalways.amazingasfuckapplication.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
 
 object PagerContract {
     sealed interface ViewState<T> {

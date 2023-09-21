@@ -23,15 +23,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppOutlinedCard
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.common.utils.extract
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppOutlinedCard
+import ru.heatalways.amazingasfuckapplication.core.design.composables.radialBackgroundLighting
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuContract.ViewState
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.utils.extract
 
 object MenuScreen {
     object Route : ComposeScreenRoute(

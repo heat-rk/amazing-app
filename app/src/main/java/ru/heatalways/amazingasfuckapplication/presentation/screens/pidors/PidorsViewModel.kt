@@ -20,10 +20,10 @@ import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditScreen
-import ru.heatalways.amazingasfuckapplication.utils.PainterResource
-import ru.heatalways.amazingasfuckapplication.utils.ifInstance
-import ru.heatalways.amazingasfuckapplication.utils.launchSafe
-import ru.heatalways.amazingasfuckapplication.utils.strRes
+import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
+import ru.heatalways.amazingasfuckapplication.common.utils.ifInstance
+import ru.heatalways.amazingasfuckapplication.common.utils.launchSafe
+import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 
 class PidorsViewModel(
     private val router: Router,

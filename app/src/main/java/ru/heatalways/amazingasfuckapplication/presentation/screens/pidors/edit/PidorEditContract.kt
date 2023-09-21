@@ -1,8 +1,8 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
 
-import ru.heatalways.amazingasfuckapplication.utils.PainterResource
-import ru.heatalways.amazingasfuckapplication.utils.StringResource
-import ru.heatalways.amazingasfuckapplication.utils.isNotEmpty
+import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
+import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.common.utils.isNotEmpty
 
 object PidorEditContract {
 

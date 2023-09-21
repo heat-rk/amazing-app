@@ -1,10 +1,11 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.menu
 
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.utils.PainterResource
-import ru.heatalways.amazingasfuckapplication.utils.StringResource
-import ru.heatalways.amazingasfuckapplication.utils.painterRes
-import ru.heatalways.amazingasfuckapplication.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
+import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
+import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.common.utils.painterRes
+import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 
 enum class MenuItem(
     val id: String,
@@ -14,31 +15,31 @@ enum class MenuItem(
     MIRROR(
         id = "mirror",
         title = strRes(R.string.menu_item_mirror),
-        icon = painterRes(R.drawable.icon_mirror)
+        icon = painterRes(DesignR.drawable.icon_mirror)
     ),
     CATS(
         id = "cats",
         title = strRes(R.string.menu_item_cats),
-        icon = painterRes(R.drawable.icon_cat)
+        icon = painterRes(DesignR.drawable.icon_cat)
     ),
     FACTS(
         id = "facts",
         title = strRes(R.string.menu_item_facts),
-        icon = painterRes(R.drawable.icon_boobs)
+        icon = painterRes(DesignR.drawable.icon_boobs)
     ),
     INSULTS(
         id = "insults",
         title = strRes(R.string.menu_item_insults),
-        icon = painterRes(R.drawable.icon_insult)
+        icon = painterRes(DesignR.drawable.icon_insult)
     ),
     PIDORS_LIST(
         id = "pidors_list",
         title = strRes(R.string.menu_item_pidors_list),
-        icon = painterRes(R.drawable.icon_leaderboard)
+        icon = painterRes(DesignR.drawable.icon_leaderboard)
     ),
     REMEMBER(
         id = "remember",
         title = strRes(R.string.menu_item_remember),
-        icon = painterRes(R.drawable.icon_light)
+        icon = painterRes(DesignR.drawable.icon_light)
     )
 }

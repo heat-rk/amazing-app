@@ -1,6 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.common.sharing.api
 
-import ru.heatalways.amazingasfuckapplication.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
 
 interface Sharing {
     suspend fun shareLink(link: String)

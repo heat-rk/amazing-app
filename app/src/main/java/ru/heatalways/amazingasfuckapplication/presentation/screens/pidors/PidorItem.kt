@@ -1,6 +1,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 
-import ru.heatalways.amazingasfuckapplication.utils.PainterResource
+import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
 
 data class PidorItem(
     val id: Long,

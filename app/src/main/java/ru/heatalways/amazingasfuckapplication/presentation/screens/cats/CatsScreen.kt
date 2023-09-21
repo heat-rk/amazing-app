@@ -31,12 +31,12 @@ import coil.request.ImageRequest
 import coil.size.Size
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.radialBackgroundLighting
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.core.design.composables.radialBackgroundLighting
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object CatsScreen {
     object Route : ComposeScreenRoute(
@@ -51,7 +51,7 @@ fun CatsScreen(viewModel: CatsViewModel = koinViewModel()) {
     PagerScreen(
         viewModel = viewModel,
         title = stringResource(R.string.menu_item_cats),
-        icon = painterResource(R.drawable.icon_cat),
+        icon = painterResource(DesignR.drawable.icon_cat),
         content = {
             CatsScreenContent(url = it)
         },
@@ -117,7 +117,7 @@ private fun CatsScreenContentShimmer(
     )
 
     Image(
-        painter = painterResource(R.drawable.icon_cat),
+        painter = painterResource(DesignR.drawable.icon_cat),
         colorFilter = ColorFilter.tint(AppTheme.colors.primary),
         contentDescription = null,
         contentScale = ContentScale.Inside,

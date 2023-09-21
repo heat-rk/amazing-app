@@ -16,12 +16,12 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.compose.koinInject
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.RoutingAction
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.routeWithArgs
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.buildGraph
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreen
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

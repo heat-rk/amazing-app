@@ -46,19 +46,20 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBarActionItem
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppSnackbarHost
+import ru.heatalways.amazingasfuckapplication.common.utils.extract
+import ru.heatalways.amazingasfuckapplication.common.utils.painterRes
+import ru.heatalways.amazingasfuckapplication.common.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBarActionItem
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppSnackbarHost
+import ru.heatalways.amazingasfuckapplication.core.design.composables.TitleSubtitle
+import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEffect
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.TitleSubtitle
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
-import ru.heatalways.amazingasfuckapplication.utils.extract
-import ru.heatalways.amazingasfuckapplication.utils.painterRes
-import ru.heatalways.amazingasfuckapplication.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable
 fun <T> PagerScreen(
@@ -315,7 +316,7 @@ private fun <T> getAppBarActionItems(
     is ViewState.Ok<T> -> {
         listOf(
             AppBarActionItem(
-                icon = painterRes(R.drawable.icon_share),
+                icon = painterRes(DesignR.drawable.icon_share),
                 contentDescription = strRes(R.string.share),
                 onClick = onShareClick
             )
@@ -352,7 +353,7 @@ private fun PagerScreenPreview() {
             onReloadButtonClick = {},
             onShareClick = {},
             title = "Крутые факты",
-            icon = painterResource(R.drawable.icon_cat),
+            icon = painterResource(DesignR.drawable.icon_cat),
             content = {
                 Text(
                     text = it,

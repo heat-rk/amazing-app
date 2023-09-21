@@ -75,6 +75,11 @@ android {
 }
 
 dependencies {
+    // modules
+    implementation(project(":common:utils"))
+    implementation(project(":core:design"))
+
+    // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)
 
     implementation(AppDependencies.immutableCollections)

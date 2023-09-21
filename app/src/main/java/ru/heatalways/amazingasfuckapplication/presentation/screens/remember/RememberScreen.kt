@@ -16,11 +16,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object RememberScreen {
     object Route : ComposeScreenRoute(
@@ -49,7 +49,7 @@ private fun RememberScreen(
         topBar = {
             AppBar(
                 title = stringResource(R.string.menu_item_remember),
-                icon = painterResource(R.drawable.icon_light),
+                icon = painterResource(DesignR.drawable.icon_light),
                 onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()

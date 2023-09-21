@@ -14,6 +14,9 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.R
+import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
+import ru.heatalways.amazingasfuckapplication.common.utils.launchSafe
+import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 import ru.heatalways.amazingasfuckapplication.data.common.temp_files.TempFilesStorage
 import ru.heatalways.amazingasfuckapplication.data.common.utils.UriToFileSaver
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorAvatarCrop
@@ -21,9 +24,6 @@ import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
-import ru.heatalways.amazingasfuckapplication.utils.PainterResource
-import ru.heatalways.amazingasfuckapplication.utils.launchSafe
-import ru.heatalways.amazingasfuckapplication.utils.strRes
 import java.io.File
 
 class PidorEditViewModel(

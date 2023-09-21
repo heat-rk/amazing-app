@@ -48,14 +48,14 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Heart
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object MirrorScreen {
     object Route : ComposeScreenRoute(
@@ -142,7 +142,7 @@ private fun MirrorPreview(
         topBar = {
             AppBar(
                 title = stringResource(R.string.menu_item_mirror),
-                icon = painterResource(R.drawable.icon_mirror),
+                icon = painterResource(DesignR.drawable.icon_mirror),
                 containerColor = Color.Transparent,
                 onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier.fillMaxWidth()

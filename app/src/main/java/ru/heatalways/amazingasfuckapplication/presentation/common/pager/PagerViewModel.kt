@@ -14,9 +14,9 @@ import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
-import ru.heatalways.amazingasfuckapplication.utils.ifInstance
-import ru.heatalways.amazingasfuckapplication.utils.launchSafe
-import ru.heatalways.amazingasfuckapplication.utils.strRes
+import ru.heatalways.amazingasfuckapplication.common.utils.ifInstance
+import ru.heatalways.amazingasfuckapplication.common.utils.launchSafe
+import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 
 abstract class PagerViewModel<T>(
     protected val router: Router,

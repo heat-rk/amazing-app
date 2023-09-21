@@ -2,7 +2,7 @@ package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import ru.heatalways.amazingasfuckapplication.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
 
 object PidorsContract {
     enum class StateKey {

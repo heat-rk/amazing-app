@@ -43,14 +43,14 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.utils.aspectRatio
-import ru.heatalways.amazingasfuckapplication.utils.coerceIn
-import ru.heatalways.amazingasfuckapplication.utils.roundToIntOffset
-import ru.heatalways.amazingasfuckapplication.utils.roundToIntSize
-import ru.heatalways.amazingasfuckapplication.utils.plus
+import ru.heatalways.amazingasfuckapplication.common.utils.aspectRatio
+import ru.heatalways.amazingasfuckapplication.common.utils.coerceIn
+import ru.heatalways.amazingasfuckapplication.common.utils.plus
+import ru.heatalways.amazingasfuckapplication.common.utils.roundToIntOffset
+import ru.heatalways.amazingasfuckapplication.common.utils.roundToIntSize
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import kotlin.math.min
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 private const val CROPPING_BOX_PADDING = 50f
 private const val CROP_CHANGING_FLOW_DEBOUNCE = 100L
@@ -255,7 +255,7 @@ fun RectangleImageCropper(
 private fun RectangleImageCropperPreview() {
     AppTheme {
         RectangleImageCropper(
-            painter = painterResource(R.drawable.icon_leaderboard),
+            painter = painterResource(DesignR.drawable.icon_leaderboard),
             onCropChanged = { _, _ ->  },
             modifier = Modifier
                 .fillMaxSize()

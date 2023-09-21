@@ -25,9 +25,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
+import ru.heatalways.amazingasfuckapplication.core.design.composables.conditional
+import ru.heatalways.amazingasfuckapplication.core.design.composables.radialBackgroundLighting
+import ru.heatalways.amazingasfuckapplication.core.design.composables.rectangularBackgroundLighting
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable
 fun PagerScreenPaws(
@@ -60,7 +64,7 @@ fun PagerScreenPaws(
                 )
         ) {
             Image(
-                painter = painterResource(R.drawable.icon_paws),
+                painter = painterResource(DesignR.drawable.icon_paws),
                 colorFilter = ColorFilter.tint(color),
                 contentDescription = stringResource(R.string.go_next_icon_content_description),
                 modifier = Modifier

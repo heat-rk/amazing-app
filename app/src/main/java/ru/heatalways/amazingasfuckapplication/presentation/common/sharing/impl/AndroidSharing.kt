@@ -2,9 +2,9 @@ package ru.heatalways.amazingasfuckapplication.presentation.common.sharing.impl
 
 import android.content.Context
 import android.content.Intent
+import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
+import ru.heatalways.amazingasfuckapplication.common.utils.extract
 import ru.heatalways.amazingasfuckapplication.presentation.common.sharing.api.Sharing
-import ru.heatalways.amazingasfuckapplication.utils.StringResource
-import ru.heatalways.amazingasfuckapplication.utils.extract
 
 class AndroidSharing(
     private val context: Context

@@ -14,5 +14,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "AmazingAsFuckApplication"
+
 include(":app")
- 
+include(":core:design")
+include(":common:utils")

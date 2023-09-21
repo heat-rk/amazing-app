@@ -2,7 +2,6 @@ package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -40,21 +39,21 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppButton
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppSnackbarHost
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppTextField
+import ru.heatalways.amazingasfuckapplication.common.utils.extract
+import ru.heatalways.amazingasfuckapplication.common.utils.painterRes
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppButton
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppSnackbarHost
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppTextField
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.RectangleImageCropper
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.utils.extract
-import ru.heatalways.amazingasfuckapplication.utils.painterRes
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object PidorEditScreen {
     const val ID_PARAM = "id"
@@ -138,7 +137,7 @@ private fun PidorEditScreen(
                 } else {
                     stringResource(R.string.pidor_addition_title)
                 },
-                icon = painterResource(R.drawable.icon_leaderboard),
+                icon = painterResource(DesignR.drawable.icon_leaderboard),
                 onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -291,7 +290,7 @@ private suspend fun handleMessageSideEffect(
 private fun PidorsScreenPreview() {
     val state = ViewState(
         name = "",
-        avatar = painterRes(R.drawable.icon_boobs),
+        avatar = painterRes(DesignR.drawable.icon_boobs),
         isEdition = false
     )
 

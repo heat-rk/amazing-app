@@ -3,7 +3,6 @@
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -46,20 +45,20 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBarActionItem
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppOutlinedCard
+import ru.heatalways.amazingasfuckapplication.common.utils.extract
+import ru.heatalways.amazingasfuckapplication.common.utils.painterRes
+import ru.heatalways.amazingasfuckapplication.common.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBarActionItem
+import ru.heatalways.amazingasfuckapplication.core.design.composables.AppOutlinedCard
+import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEffect
+import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
+import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.ScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
-import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
-import ru.heatalways.amazingasfuckapplication.presentation.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.utils.extract
-import ru.heatalways.amazingasfuckapplication.utils.painterRes
-import ru.heatalways.amazingasfuckapplication.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object PidorsScreen {
     object Route : ComposeScreenRoute(
@@ -100,7 +99,7 @@ private fun PidorsScreen(
         topBar = {
             AppBar(
                 title = stringResource(R.string.menu_item_pidors_list),
-                icon = painterResource(R.drawable.icon_leaderboard),
+                icon = painterResource(DesignR.drawable.icon_leaderboard),
                 actions = getAppBarActions(
                     state = state,
                     onAddClick = onCreateClick,
@@ -387,7 +386,7 @@ private fun PidorItemShimmer(
 private fun getAppBarAddAction(
     onClick: () -> Unit
 ) = AppBarActionItem(
-    icon = painterRes(R.drawable.icon_add),
+    icon = painterRes(DesignR.drawable.icon_add),
     contentDescription = strRes(R.string.add_pidor),
     onClick = onClick
 )
@@ -395,7 +394,7 @@ private fun getAppBarAddAction(
 private fun getAppBarDeleteAction(
     onClick: () -> Unit
 ) = AppBarActionItem(
-    icon = painterRes(R.drawable.icon_delete),
+    icon = painterRes(DesignR.drawable.icon_delete),
     contentDescription = strRes(R.string.delete_pidor),
     onClick = onClick
 )
@@ -403,7 +402,7 @@ private fun getAppBarDeleteAction(
 private fun getAppBarEditAction(
     onClick: () -> Unit
 ) = AppBarActionItem(
-    icon = painterRes(R.drawable.icon_edit),
+    icon = painterRes(DesignR.drawable.icon_edit),
     contentDescription = strRes(R.string.edit_pidor),
     onClick = onClick
 )
@@ -450,14 +449,14 @@ private fun PidorsScreenPreview() {
             PidorItem(
                 id = 1,
                 name = "№1 Леня",
-                avatar = painterRes(R.drawable.icon_cat),
+                avatar = painterRes(DesignR.drawable.icon_cat),
                 isSelected = true,
                 tapCount = 6,
             ),
             PidorItem(
                 id = 2,
                 name = "№2 Лера большое название прям очень большое большое название прям очень большое большое название прям очень большое большое название прям очень большое",
-                avatar = painterRes(R.drawable.icon_boobs),
+                avatar = painterRes(DesignR.drawable.icon_boobs),
             )
         ),
     )
