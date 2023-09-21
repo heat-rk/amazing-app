@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                 val systemUiController = rememberSystemUiController()
                 val backgroundColor = AppTheme.colors.background
 
-                SideEffect {
+                LaunchedEffect(systemUiController, backgroundColor) {
                     systemUiController.setStatusBarColor(
                         color = backgroundColor
                     )
