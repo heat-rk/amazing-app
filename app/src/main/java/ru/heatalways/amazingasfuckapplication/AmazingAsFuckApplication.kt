@@ -22,6 +22,7 @@ import ru.heatalways.amazingasfuckapplication.di.pidorsModule
 import ru.heatalways.amazingasfuckapplication.di.tempFilesStorageModule
 import ru.heatalways.amazingasfuckapplication.di.translatorModule
 import ru.heatalways.amazingasfuckapplication.di.viewModelsModule
+import ru.heatalways.amazingasfuckapplication.presentation.common.sharing.di.sharingModule
 
 class AmazingAsFuckApplication : Application() {
     override fun onCreate() {
@@ -32,6 +33,7 @@ class AmazingAsFuckApplication : Application() {
             androidContext(this@AmazingAsFuckApplication)
 
             modules(
+                sharingModule,
                 coroutineScopesModule,
                 databaseModule,
                 tempFilesStorageModule,

@@ -3,31 +3,35 @@ package ru.heatalways.amazingasfuckapplication.presentation.common.pager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
+import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
+import ru.heatalways.amazingasfuckapplication.utils.ifInstance
 import ru.heatalways.amazingasfuckapplication.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.utils.strRes
 
 abstract class PagerViewModel<T>(
     protected val router: Router,
     private val pageLoadOffset: Int,
-) : ViewModel(), ContainerHost<ViewState<T>, Unit> {
+) : ViewModel(), ContainerHost<ViewState<T>, SideEffect> {
 
-    override val container = container<ViewState<T>, Unit>(
+    override val container = container<ViewState<T>, SideEffect>(
         initialState = ViewState.Loading()
     )
 
     private val loadingLock = Mutex()
 
     protected abstract suspend fun load(offset: Int, limit: Int): List<T>
+
+    protected abstract suspend fun share(item: T)
 
     fun onReloadButtonClick() = intent {
         load(initialLoading = true)
@@ -38,10 +42,25 @@ abstract class PagerViewModel<T>(
     }
 
     fun onPageSelected(page: Int) = intent {
-        val currentState = state
+        state.ifInstance<ViewState.Ok<T>> { currentState ->
+            reduce { currentState.copy(currentPage = page) }
 
-        if (currentState is ViewState.Ok && page >= currentState.items.size - pageLoadOffset) {
-            load()
+            if (page >= currentState.items.size - pageLoadOffset) {
+                load()
+            }
+        }
+    }
+
+    fun onShareClick() = intent {
+        state.ifInstance<ViewState.Ok<T>> { currentState ->
+            viewModelScope.launchSafe(
+                block = {
+                    share(currentState.items[currentState.currentPage])
+                },
+                onError = {
+                    postSideEffect(SideEffect.Message(strRes(R.string.error_ramil_blame)))
+                }
+            )
         }
     }
 

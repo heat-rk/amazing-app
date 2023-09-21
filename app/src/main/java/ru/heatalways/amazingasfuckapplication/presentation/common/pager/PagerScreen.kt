@@ -2,6 +2,7 @@
 
 package ru.heatalways.amazingasfuckapplication.presentation.common.pager
 
+import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,10 +18,12 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -30,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -37,16 +41,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBar
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppBarActionItem
+import ru.heatalways.amazingasfuckapplication.presentation.common.composables.AppSnackbarHost
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.TitleSubtitle
 import ru.heatalways.amazingasfuckapplication.presentation.common.composables.shimmerEffect
+import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.presentation.styles.Insets
 import ru.heatalways.amazingasfuckapplication.utils.extract
+import ru.heatalways.amazingasfuckapplication.utils.painterRes
 import ru.heatalways.amazingasfuckapplication.utils.strRes
 
 @Composable
@@ -58,14 +69,23 @@ fun <T> PagerScreen(
     contentShimmer: @Composable () -> Unit,
 ) {
     val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()
+    val sideEffects = viewModel.container.sideEffectFlow
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    PagerScreenSideEffect(
+        sideEffects = sideEffects,
+        snackbarHostState = snackbarHostState
+    )
 
     PagerScreen(
         title = title,
         icon = icon,
         state = state,
+        snackbarHostState = snackbarHostState,
         onNavigationButtonClick = viewModel::onNavigateBack,
         onPageSelected = viewModel::onPageSelected,
         onReloadButtonClick = viewModel::onReloadButtonClick,
+        onShareClick = viewModel::onShareClick,
         content = content,
         contentShimmer = contentShimmer,
     )
@@ -76,20 +96,29 @@ private fun <T> PagerScreen(
     title: String,
     icon: Painter,
     state: ViewState<T>,
+    snackbarHostState: SnackbarHostState,
     onNavigationButtonClick: () -> Unit,
     onPageSelected: (Int) -> Unit,
     onReloadButtonClick: () -> Unit,
+    onShareClick: () -> Unit,
     content: @Composable (T) -> Unit,
     contentShimmer: @Composable () -> Unit,
 ) {
     val contentVerticalAlignmentBias = -0.5f
 
     Scaffold(
+        snackbarHost = {
+            AppSnackbarHost(hostState = snackbarHostState)
+        },
         topBar = {
             AppBar(
                 title = title,
                 icon = icon,
                 onGoBackClick = onNavigationButtonClick,
+                actions = getAppBarActionItems(
+                    state = state,
+                    onShareClick = onShareClick
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
             )
@@ -225,10 +254,12 @@ private fun <T> PagerScreenErrorState(
             subtitle = state.message.extract() ?: "",
             modifier = Modifier
                 .wrapContentSize()
-                .align(BiasAlignment(
-                    horizontalBias = 0f,
-                    verticalBias = contentVerticalAlignmentBias
-                ))
+                .align(
+                    BiasAlignment(
+                        horizontalBias = 0f,
+                        verticalBias = contentVerticalAlignmentBias
+                    )
+                )
         )
 
         PagerScreenPaws(
@@ -239,6 +270,60 @@ private fun <T> PagerScreenErrorState(
                 .align(Alignment.BottomCenter)
                 .padding(bottom = Insets.ExtraLarge)
         )
+    }
+}
+
+@Composable
+private fun PagerScreenSideEffect(
+    sideEffects: Flow<SideEffect>,
+    snackbarHostState: SnackbarHostState,
+) {
+    val context = LocalContext.current
+
+    LaunchedEffect(sideEffects, context) {
+        sideEffects
+            .onEach { sideEffect ->
+                when (sideEffect) {
+                    is SideEffect.Message -> {
+                        handleMessageSideEffect(
+                            sideEffect = sideEffect,
+                            snackbarHostState = snackbarHostState,
+                            context = context,
+                        )
+                    }
+                }
+            }
+            .launchIn(this)
+    }
+}
+
+private suspend fun handleMessageSideEffect(
+    sideEffect: SideEffect.Message,
+    snackbarHostState: SnackbarHostState,
+    context: Context,
+) {
+    val message = sideEffect.message.extract(context)
+        ?: return
+
+    snackbarHostState.showSnackbar(message)
+}
+
+private fun <T> getAppBarActionItems(
+    state: ViewState<T>,
+    onShareClick: () -> Unit
+) = when (state) {
+    is ViewState.Ok<T> -> {
+        listOf(
+            AppBarActionItem(
+                icon = painterRes(R.drawable.icon_share),
+                contentDescription = strRes(R.string.share),
+                onClick = onShareClick
+            )
+        )
+    }
+
+    else -> {
+        emptyList()
     }
 }
 
@@ -261,9 +346,11 @@ private fun PagerScreenPreview() {
     AppTheme {
         PagerScreen(
             state = okState,
+            snackbarHostState = SnackbarHostState(),
             onPageSelected = {},
             onNavigationButtonClick = {},
             onReloadButtonClick = {},
+            onShareClick = {},
             title = "Крутые факты",
             icon = painterResource(R.drawable.icon_cat),
             content = {

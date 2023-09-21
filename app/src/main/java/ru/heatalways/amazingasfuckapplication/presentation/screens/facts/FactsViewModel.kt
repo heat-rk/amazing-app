@@ -3,12 +3,14 @@ package ru.heatalways.amazingasfuckapplication.presentation.screens.facts
 import ru.heatalways.amazingasfuckapplication.domain.facts.FactsRepository
 import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerViewModel
+import ru.heatalways.amazingasfuckapplication.presentation.common.sharing.api.Sharing
 import ru.heatalways.amazingasfuckapplication.utils.StringResource
 import ru.heatalways.amazingasfuckapplication.utils.strRes
 
 class FactsViewModel(
     router: Router,
-    private val factsRepository: FactsRepository
+    private val factsRepository: FactsRepository,
+    private val sharing: Sharing,
 ) : PagerViewModel<StringResource>(
     router = router,
     pageLoadOffset = 1
@@ -19,5 +21,9 @@ class FactsViewModel(
 
     override suspend fun load(offset: Int, limit: Int): List<StringResource> {
         return listOf(strRes(factsRepository.getRandomFact()))
+    }
+
+    override suspend fun share(item: StringResource) {
+        sharing.shareText(item)
     }
 }
