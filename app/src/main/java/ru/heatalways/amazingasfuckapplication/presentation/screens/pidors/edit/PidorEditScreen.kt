@@ -125,7 +125,11 @@ private fun PidorEditScreen(
         },
         topBar = {
             AppBar(
-                title = stringResource(R.string.pidor_addition_title),
+                title = if (state.isEdition) {
+                    stringResource(R.string.pidor_edition_title)
+                } else {
+                    stringResource(R.string.pidor_addition_title)
+                },
                 icon = painterResource(R.drawable.icon_leaderboard),
                 onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
@@ -280,6 +284,7 @@ private fun PidorsScreenPreview() {
     val state = ViewState(
         name = "",
         avatar = painterRes(R.drawable.icon_boobs),
+        isEdition = false
     )
 
     AppTheme {

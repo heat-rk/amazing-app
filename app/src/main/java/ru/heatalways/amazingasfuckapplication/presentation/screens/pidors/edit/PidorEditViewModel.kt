@@ -40,7 +40,8 @@ class PidorEditViewModel(
     override val container = container<ViewState, SideEffect>(
         initialState = ViewState(
             name = name,
-            avatar = PainterResource.ByFile(File(photoPath))
+            avatar = PainterResource.ByFile(File(photoPath)),
+            isEdition = id != -1L
         )
     )
 

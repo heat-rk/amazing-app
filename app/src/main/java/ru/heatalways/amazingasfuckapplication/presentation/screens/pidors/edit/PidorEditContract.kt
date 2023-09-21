@@ -9,6 +9,7 @@ object PidorEditContract {
     data class ViewState(
         val name: String,
         val avatar: PainterResource,
+        val isEdition: Boolean,
     ) {
         val canBeSaved get() =
             name.isNotBlank() &&

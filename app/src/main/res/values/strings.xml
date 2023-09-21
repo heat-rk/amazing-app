@@ -19,6 +19,7 @@
     <string name="edit_pidor">Редактировать пидораса!!</string>
 
     <string name="pidor_addition_title">Добавление пидораса</string>
+    <string name="pidor_edition_title">Редактирование пидораса</string>
     <string name="pidor_addition_name_placeholder">Леонид</string>
     <string name="pidor_addition_name_label">Имя</string>
     <string name="pidor_addition_save">Сохранить пидораса!</string>
