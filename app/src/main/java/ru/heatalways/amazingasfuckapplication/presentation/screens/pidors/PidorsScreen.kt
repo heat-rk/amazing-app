@@ -2,6 +2,13 @@
 
 package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -99,26 +106,38 @@ private fun PidorsScreen(
             )
         }
     ) { contentPadding ->
-        when (state) {
-            ViewState.Loading -> {
-                PidorsLoadingScreen(
-                    modifier = Modifier.padding(contentPadding),
-                )
+        AnimatedContent(
+            targetState = state,
+            contentKey = ViewState::key,
+            label = "PidorsScreenContentAnimation",
+            transitionSpec = {
+                fadeIn() + slideInVertically(
+                    animationSpec = tween(400),
+                    initialOffsetY = { fullHeight -> fullHeight }
+                ) togetherWith fadeOut(animationSpec = tween(200))
             }
-            is ViewState.Ok -> {
-                PidorsOkScreen(
-                    state = state,
-                    onCreateClick = onCreateClick,
-                    onItemClick = onItemClick,
-                    onItemLongClick = onItemLongClick,
-                    modifier = Modifier.padding(contentPadding),
-                )
-            }
-            is ViewState.Error -> {
-                PidorsErrorScreen(
-                    state = state,
-                    onReloadClick = onReloadClick,
-                )
+        ) { state ->
+            when (state) {
+                ViewState.Loading -> {
+                    PidorsLoadingScreen(
+                        modifier = Modifier.padding(contentPadding),
+                    )
+                }
+                is ViewState.Ok -> {
+                    PidorsOkScreen(
+                        state = state,
+                        onCreateClick = onCreateClick,
+                        onItemClick = onItemClick,
+                        onItemLongClick = onItemLongClick,
+                        modifier = Modifier.padding(contentPadding),
+                    )
+                }
+                is ViewState.Error -> {
+                    PidorsErrorScreen(
+                        state = state,
+                        onReloadClick = onReloadClick,
+                    )
+                }
             }
         }
     }

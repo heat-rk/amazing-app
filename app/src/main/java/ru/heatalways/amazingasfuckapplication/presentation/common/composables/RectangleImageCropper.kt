@@ -160,7 +160,9 @@ fun RectangleImageCropper(
 
     val coroutineScope = rememberCoroutineScope()
 
-    val cropChangingFlow = Channel<Unit>(Channel.BUFFERED)
+    val cropChangingFlow = remember {
+        Channel<Unit>(Channel.BUFFERED)
+    }
 
     LaunchedEffect(cropChangingFlow, coroutineScope) {
         cropChangingFlow.receiveAsFlow()
@@ -191,7 +193,9 @@ fun RectangleImageCropper(
         imageSize,
         croppingBoxTranslation,
         croppingBoxSize,
-        painter.intrinsicSize
+        painter.intrinsicSize,
+        coroutineScope,
+        cropChangingFlow
     ) {
         coroutineScope.launch { cropChangingFlow.send(Unit) }
     }
