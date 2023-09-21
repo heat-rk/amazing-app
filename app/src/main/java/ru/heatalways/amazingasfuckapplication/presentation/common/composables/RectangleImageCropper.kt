@@ -53,7 +53,7 @@ import ru.heatalways.amazingasfuckapplication.utils.plus
 import kotlin.math.min
 
 private const val CROPPING_BOX_PADDING = 50f
-private const val CROP_CHANGING_FLOW_DEBOUNCE = 500L
+private const val CROP_CHANGING_FLOW_DEBOUNCE = 100L
 private const val MIN_SCALE = 1f
 
 @Composable
