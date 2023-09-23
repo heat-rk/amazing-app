@@ -2,4 +2,10 @@
 <resources>
     <string name="go_back_icon_content_description">Вернуться назад</string>
     <string name="go_next_icon_content_description">Загрузить следующее</string>
+    <string name="ok">Балдеееж!</string>
+    <string name="share">Поделиться</string>
+    <string name="error_title">Ошибка!</string>
+    <string name="error_something_went_wrong">Что-то к хуям сломалось :(</string>
+    <string name="error_ramil_blame">Рамиль хуево сделал, не работает :(</string>
+    <string name="error_try_again">Вольяжно перезагрузить</string>
 </resources>

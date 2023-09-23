@@ -198,7 +198,7 @@ private fun PidorsErrorScreen(
 
         PagerScreenPaws(
             onClick = onReloadClick,
-            text = stringResource(R.string.error_try_again),
+            text = stringResource(DesignR.string.error_try_again),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = Insets.ExtraLarge)
@@ -468,7 +468,7 @@ private fun PidorsScreenPreview() {
 
     val loadingState = ViewState.Loading
 
-    val errorState = ViewState.Error(strRes(R.string.error_ramil_blame))
+    val errorState = ViewState.Error(strRes("Что-то пошло не так"))
 
     AppTheme {
         PidorsScreen(

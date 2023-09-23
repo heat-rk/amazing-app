@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.pager
+package ru.heatalways.amazingasfuckapplication.core.composables.pager
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,13 +10,13 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.ifInstance
 import ru.heatalways.amazingasfuckapplication.common.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 abstract class PagerViewModel<T>(
     protected val router: Router,
@@ -58,7 +58,7 @@ abstract class PagerViewModel<T>(
                     share(currentState.items[currentState.currentPage])
                 },
                 onError = {
-                    postSideEffect(SideEffect.Message(strRes(R.string.error_ramil_blame)))
+                    postSideEffect(SideEffect.Message(strRes(DesignR.string.error_ramil_blame)))
                 }
             )
         }
@@ -93,7 +93,7 @@ abstract class PagerViewModel<T>(
             },
             onError = {
                 reduce {
-                    ViewState.Error(strRes(R.string.error_something_went_wrong))
+                    ViewState.Error(strRes(DesignR.string.error_something_went_wrong))
                 }
             }
         )

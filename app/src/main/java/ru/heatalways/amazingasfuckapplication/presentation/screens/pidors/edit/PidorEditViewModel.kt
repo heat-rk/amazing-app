@@ -13,7 +13,6 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
 import ru.heatalways.amazingasfuckapplication.common.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
@@ -25,6 +24,7 @@ import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
 import java.io.File
+import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 class PidorEditViewModel(
     private val id: Long = -1,
@@ -79,7 +79,7 @@ class PidorEditViewModel(
         val currentState = state
 
         if (currentState.avatar !is PainterResource.ByFile) {
-            postSideEffect(SideEffect.Message(strRes(R.string.error_ramil_blame)))
+            postSideEffect(SideEffect.Message(strRes(DesignR.string.error_ramil_blame)))
             return@intent
         }
 
@@ -99,6 +99,6 @@ class PidorEditViewModel(
     }
 
     private suspend fun SimpleSyntax<ViewState, SideEffect>.handleError() {
-        postSideEffect(SideEffect.Message(strRes(R.string.error_ramil_blame)))
+        postSideEffect(SideEffect.Message(strRes(DesignR.string.error_ramil_blame)))
     }
 }

@@ -33,11 +33,11 @@ import coil.request.ImageRequest
 import coil.size.Size
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
+import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.core.design.composables.radialBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 object CatsScreen {

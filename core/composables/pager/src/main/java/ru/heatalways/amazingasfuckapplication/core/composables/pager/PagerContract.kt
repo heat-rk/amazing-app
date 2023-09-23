@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.pager
+package ru.heatalways.amazingasfuckapplication.core.composables.pager
 
 import kotlinx.collections.immutable.ImmutableList
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource

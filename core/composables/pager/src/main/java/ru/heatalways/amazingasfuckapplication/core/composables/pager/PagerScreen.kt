@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package ru.heatalways.amazingasfuckapplication.presentation.common.pager
+package ru.heatalways.amazingasfuckapplication.core.composables.pager
 
 import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -45,10 +45,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.extract
 import ru.heatalways.amazingasfuckapplication.common.utils.painterRes
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBarActionItem
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppSnackbarHost
@@ -57,8 +58,6 @@ import ru.heatalways.amazingasfuckapplication.core.design.composables.TitleSubti
 import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.presentation.common.pager.PagerContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable
@@ -251,7 +250,7 @@ private fun <T> PagerScreenErrorState(
             .fillMaxSize()
     ) {
         TitleSubtitle(
-            title = stringResource(R.string.error_title),
+            title = stringResource(DesignR.string.error_title),
             subtitle = state.message.extract() ?: "",
             modifier = Modifier
                 .wrapContentSize()
@@ -265,7 +264,7 @@ private fun <T> PagerScreenErrorState(
 
         PagerScreenPaws(
             onClick = onReloadButtonClick,
-            text = stringResource(R.string.error_try_again),
+            text = stringResource(DesignR.string.error_try_again),
             modifier = Modifier
                 .wrapContentSize()
                 .align(Alignment.BottomCenter)
@@ -317,7 +316,7 @@ private fun <T> getAppBarActionItems(
         listOf(
             AppBarActionItem(
                 icon = painterRes(DesignR.drawable.icon_share),
-                contentDescription = strRes(R.string.share),
+                contentDescription = strRes(DesignR.string.share),
                 onClick = onShareClick
             )
         )
