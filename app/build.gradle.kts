@@ -81,6 +81,7 @@ dependencies {
     implementation(project(":core:navigation:api"))
     implementation(project(":core:navigation:compose-impl"))
     implementation(project(":core:composables:heart"))
+    implementation(project(":core:composables:image-cropper"))
 
     // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)

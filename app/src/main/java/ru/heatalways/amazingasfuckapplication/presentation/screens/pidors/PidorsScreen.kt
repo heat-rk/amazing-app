@@ -53,12 +53,12 @@ import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBarActionItem
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppOutlinedCard
+import ru.heatalways.amazingasfuckapplication.core.design.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 

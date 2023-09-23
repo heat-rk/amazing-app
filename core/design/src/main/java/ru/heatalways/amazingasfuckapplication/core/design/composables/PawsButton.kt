@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.composables
+package ru.heatalways.amazingasfuckapplication.core.design.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -24,10 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import ru.heatalways.amazingasfuckapplication.R
-import ru.heatalways.amazingasfuckapplication.core.design.composables.conditional
-import ru.heatalways.amazingasfuckapplication.core.design.composables.radialBackgroundLighting
-import ru.heatalways.amazingasfuckapplication.core.design.composables.rectangularBackgroundLighting
+import ru.heatalways.amazingasfuckapplication.core.design.R
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
@@ -90,7 +87,7 @@ private fun PagerScreenPawsPreview() {
     PagerScreenPaws(
         onClick = {},
         isEnabled = false,
-        text = stringResource(R.string.pidor_addition_save),
+        text = "Тык на лапку",
         modifier = Modifier
             .padding(bottom = Insets.ExtraLarge)
     )

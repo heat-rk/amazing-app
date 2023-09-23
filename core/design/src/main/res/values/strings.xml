@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="go_back_icon_content_description">Вернуться назад</string>
+    <string name="go_next_icon_content_description">Загрузить следующее</string>
 </resources>

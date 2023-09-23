@@ -43,16 +43,16 @@ import org.koin.core.parameter.parametersOf
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.extract
 import ru.heatalways.amazingasfuckapplication.common.utils.painterRes
+import ru.heatalways.amazingasfuckapplication.core.composables.image_cropper.RectangleImageCropper
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppButton
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppSnackbarHost
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppTextField
+import ru.heatalways.amazingasfuckapplication.core.design.composables.PagerScreenPaws
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.PagerScreenPaws
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.RectangleImageCropper
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR

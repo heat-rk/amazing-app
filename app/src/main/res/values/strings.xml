@@ -10,8 +10,6 @@
 
     <string name="want_more">Хочу еще!!!</string>
 
-    <string name="go_next_icon_content_description">Загрузить следующее</string>
-
     <string name="pidors_empty_list_hint">Ого! Пидорасов еще нет! Надо срочно добавить!</string>
     <string name="add_pidor">Добавить пидораса!!</string>
     <string name="delete_pidor">Удалить пидораса!!</string>

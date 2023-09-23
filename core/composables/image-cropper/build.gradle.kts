@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.composables.heart"
+    namespace = "ru.heatalways.amazingasfuckapplication.core.composables.image_cropper"
 
     compileSdk = AppConfig.Sdk.compile
 
@@ -54,6 +54,7 @@ android {
 dependencies {
     // Modules
     implementation(project(":core:design"))
+    implementation(project(":common:utils"))
 
     // Dependencies
     implementation(AppDependencies.Compose.allImplementations)

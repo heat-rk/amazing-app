@@ -1,6 +1,6 @@
 @file:OptIn(FlowPreview::class)
 
-package ru.heatalways.amazingasfuckapplication.presentation.common.composables
+package ru.heatalways.amazingasfuckapplication.core.composables.image_cropper
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTransformGestures
