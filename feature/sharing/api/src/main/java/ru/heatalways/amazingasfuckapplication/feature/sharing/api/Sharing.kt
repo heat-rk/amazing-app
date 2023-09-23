@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.sharing.api
+package ru.heatalways.amazingasfuckapplication.feature.sharing.api
 
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
 

@@ -5,7 +5,7 @@ import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerViewModel
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.domain.facts.FactsRepository
-import ru.heatalways.amazingasfuckapplication.presentation.common.sharing.api.Sharing
+import ru.heatalways.amazingasfuckapplication.feature.sharing.api.Sharing
 
 class FactsViewModel(
     router: Router,
