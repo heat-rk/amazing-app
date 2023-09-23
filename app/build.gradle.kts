@@ -80,6 +80,7 @@ dependencies {
     implementation(project(":core:design"))
     implementation(project(":core:navigation:api"))
     implementation(project(":core:navigation:compose-impl"))
+    implementation(project(":core:composables:heart"))
 
     // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)

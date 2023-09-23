@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.common.composables
+package ru.heatalways.amazingasfuckapplication.core.composables.heart
 
 import android.graphics.BlurMaskFilter
 import androidx.compose.foundation.Canvas

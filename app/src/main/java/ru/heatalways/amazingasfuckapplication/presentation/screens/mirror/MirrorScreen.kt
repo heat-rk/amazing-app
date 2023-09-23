@@ -50,10 +50,10 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
+import ru.heatalways.amazingasfuckapplication.core.composables.heart.Heart
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.common.composables.Heart
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
