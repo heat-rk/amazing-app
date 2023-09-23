@@ -93,7 +93,7 @@ fun MirrorScreen(viewModel: MirrorViewModel = koinViewModel()) {
                 mutableStateOf(CameraSelector.DEFAULT_FRONT_CAMERA)
             }
 
-            LaunchedEffect(Unit) {
+            LaunchedEffect(context, lifecycleOwner, preview, cameraSelector) {
                 val cameraProvider = suspendCoroutine { continuation ->
                     ProcessCameraProvider.getInstance(context).also { future ->
                         future.addListener(
