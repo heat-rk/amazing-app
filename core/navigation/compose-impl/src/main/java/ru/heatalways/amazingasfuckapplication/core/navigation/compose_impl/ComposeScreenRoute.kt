@@ -2,9 +2,12 @@ package ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.ScreenRoute
 
@@ -31,5 +34,20 @@ fun NavGraphBuilder.composable(
                 Content(navBackStackEntry)
             }
         },
+    )
+}
+
+@Composable
+fun NavHost(
+    navController: NavHostController,
+    startDestination: ComposeScreenRoute,
+    modifier: Modifier = Modifier,
+    builder: NavGraphBuilder.() -> Unit,
+) {
+    NavHost(
+        navController = navController,
+        startDestination = startDestination.definition,
+        modifier = modifier,
+        builder = builder,
     )
 }

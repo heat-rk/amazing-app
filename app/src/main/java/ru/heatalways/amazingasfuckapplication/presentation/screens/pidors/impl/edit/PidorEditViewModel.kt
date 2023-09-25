@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
+package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit
 
 import android.net.Uri
 import androidx.compose.ui.unit.IntOffset
@@ -21,8 +21,8 @@ import ru.heatalways.amazingasfuckapplication.data.common.temp_files.TempFilesSt
 import ru.heatalways.amazingasfuckapplication.data.common.utils.UriToFileSaver
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorAvatarCrop
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditContract.ViewState
 import java.io.File
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 

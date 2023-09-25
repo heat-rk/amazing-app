@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.mirror
+package ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.impl
 
 import androidx.lifecycle.ViewModel
 import org.orbitmvi.orbit.ContainerHost

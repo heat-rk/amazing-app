@@ -1,6 +1,5 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.insults
+package ru.heatalways.amazingasfuckapplication.presentation.screens.facts.impl
 
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,7 +18,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import androidx.navigation.NavBackStackEntry
 import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
@@ -28,37 +26,27 @@ import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEffect
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
-import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
-object InsultsScreen {
-    object Route : ComposeScreenRoute() {
-        @Composable
-        override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
-            InsultsScreen()
-        }
-    }
-}
-
 @Composable
-fun InsultsScreen(viewModel: InsultsViewModel = koinViewModel()) {
+fun FactsScreen(viewModel: FactsViewModel = koinViewModel()) {
     PagerScreen(
         viewModel = viewModel,
-        title = stringResource(R.string.menu_item_insults),
-        icon = painterResource(DesignR.drawable.icon_insult),
+        title = stringResource(R.string.menu_item_facts),
+        icon = painterResource(DesignR.drawable.icon_boobs),
         content = {
-            InsultsScreenContent(insult = it)
+            FactsScreenContent(fact = it)
         },
         contentShimmer = {
-            InsultsScreenContentShimmer()
+            FactsScreenContentShimmer()
         }
     )
 }
 
 @Composable
-private fun InsultsScreenContent(insult: StringResource) {
+private fun FactsScreenContent(fact: StringResource) {
     Text(
-        text = insult.extract() ?: "-",
+        text = fact.extract() ?: "-",
         textAlign = TextAlign.Center,
         color = AppTheme.colors.primary,
         modifier = Modifier
@@ -69,7 +57,7 @@ private fun InsultsScreenContent(insult: StringResource) {
 }
 
 @Composable
-private fun InsultsScreenContentShimmer() {
+private fun FactsScreenContentShimmer() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.remember
+package ru.heatalways.amazingasfuckapplication.presentation.screens.remember.impl
 
 import androidx.lifecycle.ViewModel
 import org.orbitmvi.orbit.ContainerHost

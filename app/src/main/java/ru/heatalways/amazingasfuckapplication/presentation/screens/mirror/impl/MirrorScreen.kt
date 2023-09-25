@@ -1,13 +1,12 @@
 @file:OptIn(ExperimentalPermissionsApi::class)
 
-package ru.heatalways.amazingasfuckapplication.presentation.screens.mirror
+package ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.impl
 
 import android.Manifest
 import android.content.Context
 import androidx.camera.core.CameraSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -43,7 +42,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavBackStackEntry
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
@@ -53,20 +51,10 @@ import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.core.composables.heart.Heart
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
-import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
-
-object MirrorScreen {
-    object Route : ComposeScreenRoute() {
-        @Composable
-        override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
-            MirrorScreen()
-        }
-    }
-}
 
 private const val HEARTS_COUNT = 5
 private const val HEART_MIN_SIZE_DP = 30

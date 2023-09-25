@@ -6,11 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.flow.launchIn
@@ -20,8 +18,8 @@ import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.RoutingAction
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.routeWithArgs
-import ru.heatalways.amazingasfuckapplication.presentation.common.navigation.buildGraph
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuScreen
+import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.NavHost
+import ru.heatalways.amazingasfuckapplication.di.MenuScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,9 +45,9 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = MenuScreen.Route.definition,
+                    startDestination = MenuScreen.Route,
                     modifier = Modifier.background(backgroundColor),
-                    builder = NavGraphBuilder::buildGraph
+                    builder = koinInject()
                 )
             }
         }

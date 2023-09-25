@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.cats
+package ru.heatalways.amazingasfuckapplication.presentation.screens.cats.impl
 
 import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerViewModel
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router

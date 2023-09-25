@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
+package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit
 
 import android.content.Context
 import android.net.Uri
@@ -53,44 +53,9 @@ import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit.PidorEditContract.ViewState
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
-
-object PidorEditScreen {
-    const val ID_PARAM = "id"
-    const val NAME_PARAM = "name"
-    const val PHOTO_PATH = "photo_path"
-
-    object Route : ComposeScreenRoute(
-        namedNavArguments = listOf(
-            navArgument(ID_PARAM) {
-                type = NavType.LongType
-                defaultValue = -1L
-            },
-
-            navArgument(NAME_PARAM) {
-                type = NavType.StringType
-                defaultValue = ""
-            },
-
-            navArgument(PHOTO_PATH) {
-                type = NavType.StringType
-                defaultValue = ""
-            }
-        )
-    ) {
-        @Composable
-        override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
-            PidorEditScreen(
-                id = navBackStackEntry.arguments?.getLong(ID_PARAM) ?: -1,
-                name = navBackStackEntry.arguments?.getString(NAME_PARAM) ?: "",
-                photoPath = navBackStackEntry.arguments?.getString(PHOTO_PATH) ?: "",
-            )
-        }
-
-    }
-}
 
 @Composable
 fun PidorEditScreen(

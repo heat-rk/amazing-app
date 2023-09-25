@@ -1,3 +1,0 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.mirror
-
-object MirrorContract

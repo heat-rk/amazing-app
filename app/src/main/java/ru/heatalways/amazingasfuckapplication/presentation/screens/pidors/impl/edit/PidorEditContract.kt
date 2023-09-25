@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.edit
+package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit
 
 import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource

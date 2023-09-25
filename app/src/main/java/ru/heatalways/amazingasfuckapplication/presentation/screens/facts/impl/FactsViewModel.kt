@@ -1,15 +1,15 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.insults
+package ru.heatalways.amazingasfuckapplication.presentation.screens.facts.impl
 
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerViewModel
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.domain.insults.InsultsRepository
+import ru.heatalways.amazingasfuckapplication.domain.facts.FactsRepository
 import ru.heatalways.amazingasfuckapplication.feature.sharing.api.Sharing
 
-class InsultsViewModel(
+class FactsViewModel(
     router: Router,
-    private val insultsRepository: InsultsRepository,
+    private val factsRepository: FactsRepository,
     private val sharing: Sharing,
 ) : PagerViewModel<StringResource>(
     router = router,
@@ -20,7 +20,7 @@ class InsultsViewModel(
     }
 
     override suspend fun load(offset: Int, limit: Int): List<StringResource> {
-        return listOf(strRes(insultsRepository.getRandomInsult()))
+        return listOf(strRes(factsRepository.getRandomFact()))
     }
 
     override suspend fun share(item: StringResource) {
