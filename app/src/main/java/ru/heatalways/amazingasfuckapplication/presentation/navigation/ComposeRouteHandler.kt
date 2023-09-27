@@ -3,7 +3,7 @@ package ru.heatalways.amazingasfuckapplication.presentation.navigation
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Route
 import ru.heatalways.amazingasfuckapplication.feature.cats.api.navigation.CatsScreenRoute
 import ru.heatalways.amazingasfuckapplication.feature.facts.api.navigation.FactsScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.api.InsultsScreenRoute
+import ru.heatalways.amazingasfuckapplication.feature.insults.api.navigation.InsultsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.api.MirrorScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorEditScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorsListScreenRoute

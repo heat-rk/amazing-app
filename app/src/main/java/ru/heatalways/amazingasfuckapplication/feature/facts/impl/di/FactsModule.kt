@@ -14,6 +14,7 @@ import ru.heatalways.amazingasfuckapplication.feature.facts.impl.ui.FactsViewMod
 private val internalFactsModule = module {
     factoryOf(::FactsApiService)
     factoryOf(::FactsParserService)
+    viewModelOf(::FactsViewModel)
 }
 
 val factsModule = module {
@@ -27,6 +28,4 @@ val factsModule = module {
             translator = get(EnglishToRuTranslatorQualifier)
         )
     }
-
-    viewModelOf(::FactsViewModel)
 }

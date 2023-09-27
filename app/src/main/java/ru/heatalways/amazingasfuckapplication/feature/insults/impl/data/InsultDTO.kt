@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.data.insults
+package ru.heatalways.amazingasfuckapplication.feature.insults.impl.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

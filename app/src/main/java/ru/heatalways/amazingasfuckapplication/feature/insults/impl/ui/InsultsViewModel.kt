@@ -1,10 +1,10 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.insults.impl
+package ru.heatalways.amazingasfuckapplication.feature.insults.impl.ui
 
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerViewModel
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.domain.insults.InsultsRepository
+import ru.heatalways.amazingasfuckapplication.feature.insults.api.domain.InsultsRepository
 import ru.heatalways.amazingasfuckapplication.feature.sharing.api.Sharing
 
 class InsultsViewModel(

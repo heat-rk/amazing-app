@@ -11,6 +11,7 @@ import ru.heatalways.amazingasfuckapplication.feature.cats.impl.ui.CatsViewModel
 
 private val internalCatsModule = module {
     singleOf(::CatsApiService)
+    viewModelOf(::CatsViewModel)
 }
 
 val catsModule = module {
@@ -22,6 +23,4 @@ val catsModule = module {
             dispatcher = get(IoDispatcherQualifier),
         )
     }
-
-    viewModelOf(::CatsViewModel)
 }

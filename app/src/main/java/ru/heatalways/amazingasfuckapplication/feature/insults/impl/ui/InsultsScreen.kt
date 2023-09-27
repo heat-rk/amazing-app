@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.insults.impl
+package ru.heatalways.amazingasfuckapplication.feature.insults.impl.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

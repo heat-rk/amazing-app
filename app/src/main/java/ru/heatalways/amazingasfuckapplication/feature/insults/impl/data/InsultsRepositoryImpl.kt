@@ -1,8 +1,8 @@
-package ru.heatalways.amazingasfuckapplication.data.insults
+package ru.heatalways.amazingasfuckapplication.feature.insults.impl.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.heatalways.amazingasfuckapplication.domain.insults.InsultsRepository
+import ru.heatalways.amazingasfuckapplication.feature.insults.api.domain.InsultsRepository
 import java.io.IOException
 
 class InsultsRepositoryImpl(
