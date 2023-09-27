@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.domain.cats
+package ru.heatalways.amazingasfuckapplication.feature.cats.api.domain
 
 interface CatsRepository {
     suspend fun getRandomCatGifUrl(): String

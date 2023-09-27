@@ -1,8 +1,8 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.cats.impl
+package ru.heatalways.amazingasfuckapplication.feature.cats.impl.ui
 
 import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerViewModel
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.domain.cats.CatsRepository
+import ru.heatalways.amazingasfuckapplication.feature.cats.api.domain.CatsRepository
 import ru.heatalways.amazingasfuckapplication.feature.sharing.api.Sharing
 
 class CatsViewModel(

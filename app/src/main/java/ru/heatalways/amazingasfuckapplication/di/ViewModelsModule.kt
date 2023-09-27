@@ -6,7 +6,6 @@ import org.koin.dsl.module
 import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.impl.FactsViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.impl.MenuViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.impl.InsultsViewModel
-import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.impl.CatsViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.impl.MirrorViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.PidorsViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditViewModel
@@ -16,7 +15,6 @@ val viewModelsModule = module {
     viewModelOf(::MenuViewModel)
     viewModelOf(::FactsViewModel)
     viewModelOf(::InsultsViewModel)
-    viewModelOf(::CatsViewModel)
     viewModelOf(::MirrorViewModel)
     viewModelOf(::PidorsViewModel)
     viewModelOf(::RememberViewModel)

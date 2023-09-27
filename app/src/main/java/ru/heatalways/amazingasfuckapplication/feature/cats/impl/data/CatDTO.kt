@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.data.cats
+package ru.heatalways.amazingasfuckapplication.feature.cats.impl.data
 
 
 import kotlinx.serialization.SerialName

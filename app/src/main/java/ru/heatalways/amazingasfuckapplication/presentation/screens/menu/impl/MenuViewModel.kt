@@ -6,7 +6,7 @@ import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.api.CatsScreenRoute
+import ru.heatalways.amazingasfuckapplication.feature.cats.api.navigation.CatsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.api.FactsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.api.InsultsScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.impl.MenuContract.ViewState

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.cats.impl
+package ru.heatalways.amazingasfuckapplication.feature.cats.impl.ui
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat

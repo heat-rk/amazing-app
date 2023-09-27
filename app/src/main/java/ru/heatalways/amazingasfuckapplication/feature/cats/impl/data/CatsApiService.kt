@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.data.cats
+package ru.heatalways.amazingasfuckapplication.feature.cats.impl.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
