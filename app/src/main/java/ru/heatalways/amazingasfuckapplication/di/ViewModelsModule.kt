@@ -4,7 +4,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.impl.FactsViewModel
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.MenuViewModel
+import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.impl.MenuViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.impl.InsultsViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.cats.impl.CatsViewModel
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.impl.MirrorViewModel

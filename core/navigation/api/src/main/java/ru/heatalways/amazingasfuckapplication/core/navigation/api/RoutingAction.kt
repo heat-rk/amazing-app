@@ -1,13 +1,7 @@
 package ru.heatalways.amazingasfuckapplication.core.navigation.api
 
 sealed interface RoutingAction {
-    data class NavigateTo(
-        val route: ScreenRoute,
-        val args: Map<String, String> = emptyMap()
-    ) : RoutingAction
+    data class NavigateTo(val route: Route) : RoutingAction
 
     object NavigateBack : RoutingAction
 }
-
-fun RoutingAction.NavigateTo.routeWithArgs() =
-    route.withArgs(args)

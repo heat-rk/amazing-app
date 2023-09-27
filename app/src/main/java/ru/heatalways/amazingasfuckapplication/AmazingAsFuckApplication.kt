@@ -17,7 +17,6 @@ import ru.heatalways.amazingasfuckapplication.di.dispatchersModule
 import ru.heatalways.amazingasfuckapplication.di.factsModule
 import ru.heatalways.amazingasfuckapplication.di.httpClientModule
 import ru.heatalways.amazingasfuckapplication.di.insultsModule
-import ru.heatalways.amazingasfuckapplication.di.navigationGraphModule
 import ru.heatalways.amazingasfuckapplication.di.pidorsModule
 import ru.heatalways.amazingasfuckapplication.di.tempFilesStorageModule
 import ru.heatalways.amazingasfuckapplication.di.translatorModule
@@ -33,7 +32,6 @@ class AmazingAsFuckApplication : Application() {
             androidContext(this@AmazingAsFuckApplication)
 
             modules(
-                navigationGraphModule,
                 androidSharingModule,
                 coroutineScopesModule,
                 databaseModule,

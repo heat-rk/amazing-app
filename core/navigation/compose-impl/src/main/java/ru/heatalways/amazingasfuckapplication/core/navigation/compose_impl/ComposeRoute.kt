@@ -9,11 +9,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import ru.heatalways.amazingasfuckapplication.core.navigation.api.ScreenRoute
 
-abstract class ComposeScreenRoute(
+abstract class ComposeRoute(
     val namedNavArguments: List<NamedNavArgument> = emptyList(),
-) : ScreenRoute(namedNavArguments.map { it.name }) {
+) {
     /*
     Composable content should be passed throw constructor of this class ideally,
     but there is bug in some of Kotlin features.
@@ -21,10 +20,31 @@ abstract class ComposeScreenRoute(
      */
     @Composable
     abstract fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry)
+
+    private val params = namedNavArguments.map(NamedNavArgument::name)
+
+    private val definitionBase = this::class.java.name
+    val definition = "$definitionBase?${params.toQueryParams()}"
+
+    fun withArgs(args: Map<String, String> = emptyMap()) =
+        buildString {
+            append(definitionBase)
+
+            if (args.isNotEmpty()) {
+                append('?')
+                append(args.toQueryArgs())
+            }
+        }
+
+    private fun Map<String, String>.toQueryArgs() =
+        entries.joinToString(separator = "&") { "${it.key}=${it.value}" }
+
+    private fun List<String>.toQueryParams() =
+        joinToString(separator = "&") { "${it}={${it}}" }
 }
 
 fun NavGraphBuilder.composable(
-    route: ComposeScreenRoute
+    route: ComposeRoute
 ) {
     composable(
         route = route.definition,
@@ -40,7 +60,7 @@ fun NavGraphBuilder.composable(
 @Composable
 fun NavHost(
     navController: NavHostController,
-    startDestination: ComposeScreenRoute,
+    startDestination: ComposeRoute,
     modifier: Modifier = Modifier,
     builder: NavGraphBuilder.() -> Unit,
 ) {

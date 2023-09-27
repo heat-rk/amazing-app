@@ -20,7 +20,7 @@ import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.domain.pidors.Pidor
 import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.mappers.toUIListItem
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorsScreenNavigator
+import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorEditScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.PidorsContract.SideEffect
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
@@ -28,7 +28,6 @@ import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 class PidorsViewModel(
     private val router: Router,
     private val pidorsRepository: PidorsRepository,
-    private val pidorsScreenNavigator: PidorsScreenNavigator,
 ) : ViewModel(), ContainerHost<ViewState, SideEffect> {
 
     override val container = container<ViewState, SideEffect>(
@@ -46,7 +45,7 @@ class PidorsViewModel(
     }
 
     fun onCreateClick() = intent {
-        pidorsScreenNavigator.navigateToEdition()
+        router.navigate(PidorEditScreenRoute())
     }
 
     fun onEditClick() = intent {
@@ -54,10 +53,12 @@ class PidorsViewModel(
             val itemToEdit = state.items.find { it.isSelected } ?: return@intent
             val avatarPath = (itemToEdit.avatar as? PainterResource.ByFile)?.file?.path ?: return@intent
 
-            pidorsScreenNavigator.navigateToEdition(
-                id = itemToEdit.id,
-                name = itemToEdit.name,
-                photoPath = avatarPath
+            router.navigate(
+                PidorEditScreenRoute(
+                    id = itemToEdit.id,
+                    name = itemToEdit.name,
+                    photoPath = avatarPath
+                )
             )
         }
     }

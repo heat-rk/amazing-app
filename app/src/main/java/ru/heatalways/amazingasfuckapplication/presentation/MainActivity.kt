@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.flow.launchIn
@@ -17,9 +16,8 @@ import org.koin.compose.koinInject
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.RoutingAction
-import ru.heatalways.amazingasfuckapplication.core.navigation.api.routeWithArgs
-import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.NavHost
-import ru.heatalways.amazingasfuckapplication.di.MenuScreen
+import ru.heatalways.amazingasfuckapplication.presentation.navigation.AppNavHost
+import ru.heatalways.amazingasfuckapplication.presentation.navigation.composeRoute
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,11 +41,9 @@ class MainActivity : ComponentActivity() {
 
                 LaunchedRouterEffect(navController = navController)
 
-                NavHost(
+                AppNavHost(
                     navController = navController,
-                    startDestination = MenuScreen.Route,
                     modifier = Modifier.background(backgroundColor),
-                    builder = koinInject()
                 )
             }
         }
@@ -66,7 +62,7 @@ class MainActivity : ComponentActivity() {
                             navController.popBackStack()
                         }
                         is RoutingAction.NavigateTo -> {
-                            navController.navigate(action.routeWithArgs())
+                            navController.navigate(composeRoute(action.route))
                         }
                     }
                 }
