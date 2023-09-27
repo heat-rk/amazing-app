@@ -13,7 +13,6 @@ import ru.heatalways.amazingasfuckapplication.di.coroutineScopesModule
 import ru.heatalways.amazingasfuckapplication.di.dataUtilsModule
 import ru.heatalways.amazingasfuckapplication.di.databaseModule
 import ru.heatalways.amazingasfuckapplication.di.dispatchersModule
-import ru.heatalways.amazingasfuckapplication.di.factsModule
 import ru.heatalways.amazingasfuckapplication.di.httpClientModule
 import ru.heatalways.amazingasfuckapplication.di.insultsModule
 import ru.heatalways.amazingasfuckapplication.di.pidorsModule
@@ -21,6 +20,7 @@ import ru.heatalways.amazingasfuckapplication.di.tempFilesStorageModule
 import ru.heatalways.amazingasfuckapplication.di.translatorModule
 import ru.heatalways.amazingasfuckapplication.di.viewModelsModule
 import ru.heatalways.amazingasfuckapplication.feature.cats.impl.di.catsModule
+import ru.heatalways.amazingasfuckapplication.feature.facts.impl.di.factsModule
 import ru.heatalways.amazingasfuckapplication.feature.sharing.android_impl.di.androidSharingModule
 
 class AmazingAsFuckApplication : Application() {

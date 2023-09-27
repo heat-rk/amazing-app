@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.facts.impl
+package ru.heatalways.amazingasfuckapplication.feature.facts.impl.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

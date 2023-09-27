@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.data.facts
+package ru.heatalways.amazingasfuckapplication.feature.facts.impl.data
 
 import com.gargoylesoftware.htmlunit.BrowserVersion
 import com.gargoylesoftware.htmlunit.WebClient

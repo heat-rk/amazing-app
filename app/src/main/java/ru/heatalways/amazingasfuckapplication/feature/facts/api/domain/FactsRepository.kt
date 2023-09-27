@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.domain.facts
+package ru.heatalways.amazingasfuckapplication.feature.facts.api.domain
 
 interface FactsRepository {
     suspend fun getRandomFacts(limit: Int): List<String>

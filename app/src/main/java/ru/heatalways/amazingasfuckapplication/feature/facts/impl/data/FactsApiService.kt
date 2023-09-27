@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.data.facts
+package ru.heatalways.amazingasfuckapplication.feature.facts.impl.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

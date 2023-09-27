@@ -14,7 +14,7 @@ import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.Compo
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.NavHost
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.composable
 import ru.heatalways.amazingasfuckapplication.feature.cats.impl.ui.CatsScreen
-import ru.heatalways.amazingasfuckapplication.presentation.screens.facts.impl.FactsScreen
+import ru.heatalways.amazingasfuckapplication.feature.facts.impl.ui.FactsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.insults.impl.InsultsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.impl.MenuScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.impl.MirrorScreen
