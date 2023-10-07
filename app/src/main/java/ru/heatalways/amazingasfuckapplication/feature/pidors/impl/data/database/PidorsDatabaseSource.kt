@@ -1,14 +1,14 @@
-package ru.heatalways.amazingasfuckapplication.data.pidors.database
+package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.TABLE_NAME
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.COLUMN_TAP_COUNT
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.COLUMN_AVATAR_PATH
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.COLUMN_NAME
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO.Companion.COLUMN_ID
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.TABLE_NAME
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.COLUMN_TAP_COUNT
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.COLUMN_AVATAR_PATH
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.COLUMN_NAME
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.COLUMN_ID
 
 @Dao
 interface PidorsDatabaseSource {

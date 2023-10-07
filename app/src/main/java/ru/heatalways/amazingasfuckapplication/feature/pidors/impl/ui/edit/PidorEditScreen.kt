@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit
+package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit
 
 import android.content.Context
 import android.net.Uri
@@ -48,8 +48,8 @@ import ru.heatalways.amazingasfuckapplication.core.design.composables.PagerScree
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditContract.ViewState
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable

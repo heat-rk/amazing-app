@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.domain.pidors
+package ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain
 
 data class Pidor(
     val id: Long,

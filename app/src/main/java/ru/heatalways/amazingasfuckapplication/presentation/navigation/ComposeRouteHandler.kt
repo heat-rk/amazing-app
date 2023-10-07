@@ -6,8 +6,8 @@ import ru.heatalways.amazingasfuckapplication.feature.facts.api.navigation.Facts
 import ru.heatalways.amazingasfuckapplication.feature.insults.api.navigation.InsultsScreenRoute
 import ru.heatalways.amazingasfuckapplication.feature.remember.api.navigation.RememberScreenRoute
 import ru.heatalways.amazingasfuckapplication.feature.mirror.api.navigation.MirrorScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorEditScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorsListScreenRoute
+import ru.heatalways.amazingasfuckapplication.feature.pidors.api.navigation.PidorEditScreenRoute
+import ru.heatalways.amazingasfuckapplication.feature.pidors.api.navigation.PidorsListScreenRoute
 
 fun composeRoute(route: Route) = when (route) {
     CatsScreenRoute -> {

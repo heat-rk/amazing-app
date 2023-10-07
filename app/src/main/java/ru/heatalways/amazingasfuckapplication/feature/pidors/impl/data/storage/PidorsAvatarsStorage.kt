@@ -1,10 +1,10 @@
-package ru.heatalways.amazingasfuckapplication.data.pidors.storage
+package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.storage
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
-import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorAvatarCrop
+import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorAvatarCrop
 import java.io.File
 import java.util.UUID
 

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.data.pidors.database
+package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -11,7 +11,7 @@ import ru.heatalways.amazingasfuckapplication.feature.facts.api.navigation.Facts
 import ru.heatalways.amazingasfuckapplication.feature.insults.api.navigation.InsultsScreenRoute
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuContract.ViewState
 import ru.heatalways.amazingasfuckapplication.feature.mirror.api.navigation.MirrorScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorsListScreenRoute
+import ru.heatalways.amazingasfuckapplication.feature.pidors.api.navigation.PidorsListScreenRoute
 import ru.heatalways.amazingasfuckapplication.feature.remember.api.navigation.RememberScreenRoute
 
 class MenuViewModel(

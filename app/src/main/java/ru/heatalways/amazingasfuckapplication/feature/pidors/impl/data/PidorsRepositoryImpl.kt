@@ -1,16 +1,16 @@
-package ru.heatalways.amazingasfuckapplication.data.pidors
+package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.heatalways.amazingasfuckapplication.data.common.cache.InMemoryCacheContainer
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorsDatabaseSource
-import ru.heatalways.amazingasfuckapplication.data.pidors.storage.PidorsAvatarsStorage
-import ru.heatalways.amazingasfuckapplication.domain.pidors.Pidor
-import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorAvatarCrop
-import ru.heatalways.amazingasfuckapplication.domain.pidors.PidorsRepository
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorsDatabaseSource
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.storage.PidorsAvatarsStorage
+import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.Pidor
+import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorAvatarCrop
+import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.mappers.toDomain
 import java.io.File
 

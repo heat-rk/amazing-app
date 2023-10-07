@@ -2,8 +2,8 @@ package ru.heatalways.amazingasfuckapplication.data.common.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorDAO
-import ru.heatalways.amazingasfuckapplication.data.pidors.database.PidorsDatabaseSource
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO
+import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorsDatabaseSource
 
 @Database(entities = [PidorDAO::class], version = AppDatabase.VERSION)
 abstract class AppDatabase : RoomDatabase() {

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.domain.pidors
+package ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain
 
 sealed interface PidorAvatarCrop {
     object Full : PidorAvatarCrop

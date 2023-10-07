@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl
+package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui
 
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
