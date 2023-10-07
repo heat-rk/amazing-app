@@ -20,7 +20,7 @@ import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.impl.MirrorScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.PidorsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditScreen
-import ru.heatalways.amazingasfuckapplication.presentation.screens.remember.impl.RememberScreen
+import ru.heatalways.amazingasfuckapplication.feature.remember.impl.ui.RememberScreen
 
 object ComposeMenuScreen {
     object Route : ComposeRoute() {

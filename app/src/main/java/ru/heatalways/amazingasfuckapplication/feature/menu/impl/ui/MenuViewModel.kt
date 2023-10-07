@@ -12,7 +12,7 @@ import ru.heatalways.amazingasfuckapplication.feature.insults.api.navigation.Ins
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.api.MirrorScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorsListScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.remember.api.RememberScreenRoute
+import ru.heatalways.amazingasfuckapplication.feature.remember.api.navigation.RememberScreenRoute
 
 class MenuViewModel(
     private val router: Router,
