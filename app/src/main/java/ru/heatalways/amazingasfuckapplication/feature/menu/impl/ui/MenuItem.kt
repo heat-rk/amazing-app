@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.menu.impl
+package ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui
 
 import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR

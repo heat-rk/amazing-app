@@ -22,6 +22,7 @@ import ru.heatalways.amazingasfuckapplication.feature.cats.impl.di.catsModule
 import ru.heatalways.amazingasfuckapplication.feature.facts.impl.di.factsModule
 import ru.heatalways.amazingasfuckapplication.feature.insults.impl.di.insultsModule
 import ru.heatalways.amazingasfuckapplication.feature.sharing.android_impl.di.androidSharingModule
+import ru.heatalways.amazingasfuckapplication.feature.menu.impl.di.menuModule
 
 class AmazingAsFuckApplication : Application() {
     override fun onCreate() {
@@ -42,6 +43,7 @@ class AmazingAsFuckApplication : Application() {
                 httpClientModule,
                 dispatchersModule,
                 translatorModule,
+                menuModule,
                 factsModule,
                 insultsModule,
                 catsModule,

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.menu.impl
+package ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui
 
 import kotlinx.collections.immutable.ImmutableList
 

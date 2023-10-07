@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.menu.impl
+package ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui
 
 import androidx.lifecycle.ViewModel
 import kotlinx.collections.immutable.toImmutableList
@@ -9,7 +9,7 @@ import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.feature.cats.api.navigation.CatsScreenRoute
 import ru.heatalways.amazingasfuckapplication.feature.facts.api.navigation.FactsScreenRoute
 import ru.heatalways.amazingasfuckapplication.feature.insults.api.navigation.InsultsScreenRoute
-import ru.heatalways.amazingasfuckapplication.presentation.screens.menu.impl.MenuContract.ViewState
+import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuContract.ViewState
 import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.api.MirrorScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.api.PidorsListScreenRoute
 import ru.heatalways.amazingasfuckapplication.presentation.screens.remember.api.RememberScreenRoute
