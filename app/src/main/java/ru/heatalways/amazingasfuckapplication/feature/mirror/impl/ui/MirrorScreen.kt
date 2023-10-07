@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalPermissionsApi::class)
 
-package ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.impl
+package ru.heatalways.amazingasfuckapplication.feature.mirror.impl.ui
 
 import android.Manifest
 import android.content.Context

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.api
+package ru.heatalways.amazingasfuckapplication.feature.mirror.api.navigation
 
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Route
 

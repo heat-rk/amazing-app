@@ -17,7 +17,7 @@ import ru.heatalways.amazingasfuckapplication.feature.cats.impl.ui.CatsScreen
 import ru.heatalways.amazingasfuckapplication.feature.facts.impl.ui.FactsScreen
 import ru.heatalways.amazingasfuckapplication.feature.insults.impl.ui.InsultsScreen
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuScreen
-import ru.heatalways.amazingasfuckapplication.presentation.screens.mirror.impl.MirrorScreen
+import ru.heatalways.amazingasfuckapplication.feature.mirror.impl.ui.MirrorScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.PidorsScreen
 import ru.heatalways.amazingasfuckapplication.presentation.screens.pidors.impl.edit.PidorEditScreen
 import ru.heatalways.amazingasfuckapplication.feature.remember.impl.ui.RememberScreen

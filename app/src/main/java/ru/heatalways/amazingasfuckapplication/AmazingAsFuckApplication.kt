@@ -23,6 +23,7 @@ import ru.heatalways.amazingasfuckapplication.feature.facts.impl.di.factsModule
 import ru.heatalways.amazingasfuckapplication.feature.insults.impl.di.insultsModule
 import ru.heatalways.amazingasfuckapplication.feature.sharing.android_impl.di.androidSharingModule
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.di.menuModule
+import ru.heatalways.amazingasfuckapplication.feature.mirror.impl.di.mirrorModule
 import ru.heatalways.amazingasfuckapplication.feature.remember.impl.di.rememberModule
 
 class AmazingAsFuckApplication : Application() {
@@ -50,6 +51,7 @@ class AmazingAsFuckApplication : Application() {
                 catsModule,
                 pidorsModule,
                 rememberModule,
+                mirrorModule,
             )
         }
 
