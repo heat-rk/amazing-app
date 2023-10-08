@@ -83,6 +83,7 @@ dependencies {
     implementation(project(":core:composables:heart"))
     implementation(project(":core:composables:image-cropper"))
     implementation(project(":core:composables:pager"))
+    implementation(project(":core:coroutines:dispatchers"))
     implementation(project(":feature:sharing:api"))
     implementation(project(":feature:sharing:android-impl"))
 

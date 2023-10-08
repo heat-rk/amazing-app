@@ -4,9 +4,9 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
+import ru.heatalways.amazingasfuckapplication.core.coroutines.dispatchers.IoDispatcherQualifier
 import ru.heatalways.amazingasfuckapplication.data.common.cache.InMemoryCacheContainer
 import ru.heatalways.amazingasfuckapplication.data.common.database.AppDatabase
-import ru.heatalways.amazingasfuckapplication.di.IoDispatcherQualifier
 import ru.heatalways.amazingasfuckapplication.di.LongRunningCoroutineScopeQualifier
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.PidorsRepositoryImpl

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.di
+package ru.heatalways.amazingasfuckapplication.core.coroutines.dispatchers
 
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.qualifier.qualifier

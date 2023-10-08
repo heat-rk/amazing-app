@@ -8,11 +8,11 @@ import coil.decode.ImageDecoderDecoder
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import ru.heatalways.amazingasfuckapplication.core.coroutines.dispatchers.dispatchersModule
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.di.composeNavigationModule
 import ru.heatalways.amazingasfuckapplication.di.coroutineScopesModule
 import ru.heatalways.amazingasfuckapplication.di.dataUtilsModule
 import ru.heatalways.amazingasfuckapplication.di.databaseModule
-import ru.heatalways.amazingasfuckapplication.di.dispatchersModule
 import ru.heatalways.amazingasfuckapplication.di.httpClientModule
 import ru.heatalways.amazingasfuckapplication.di.tempFilesStorageModule
 import ru.heatalways.amazingasfuckapplication.di.translatorModule
