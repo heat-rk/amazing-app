@@ -1,8 +1,7 @@
-package ru.heatalways.amazingasfuckapplication.data.common.utils
+package ru.heatalways.amazingasfuckapplication.core.data.utils
 
 import android.content.Context
 import android.net.Uri
-import okio.use
 import java.io.File
 
 class UriToFileSaver(
