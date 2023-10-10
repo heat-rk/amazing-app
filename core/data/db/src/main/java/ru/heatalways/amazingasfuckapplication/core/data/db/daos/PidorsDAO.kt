@@ -1,25 +1,26 @@
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database
+package ru.heatalways.amazingasfuckapplication.core.data.db.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.TABLE_NAME
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.COLUMN_TAP_COUNT
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.COLUMN_AVATAR_PATH
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.COLUMN_NAME
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database.PidorDAO.Companion.COLUMN_ID
+import ru.heatalways.amazingasfuckapplication.core.data.db.entities.PidorEntity
+import ru.heatalways.amazingasfuckapplication.core.data.db.entities.PidorEntity.Companion.COLUMN_AVATAR_PATH
+import ru.heatalways.amazingasfuckapplication.core.data.db.entities.PidorEntity.Companion.COLUMN_ID
+import ru.heatalways.amazingasfuckapplication.core.data.db.entities.PidorEntity.Companion.COLUMN_NAME
+import ru.heatalways.amazingasfuckapplication.core.data.db.entities.PidorEntity.Companion.COLUMN_TAP_COUNT
+import ru.heatalways.amazingasfuckapplication.core.data.db.entities.PidorEntity.Companion.TABLE_NAME
 
 @Dao
-interface PidorsDatabaseSource {
+interface PidorsDAO {
     @Query("SELECT * FROM $TABLE_NAME ORDER BY $COLUMN_TAP_COUNT DESC")
-    suspend fun getAllSorted(): List<PidorDAO>
+    suspend fun getAllSorted(): List<PidorEntity>
 
     @Query("SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID=:id")
-    suspend fun get(id: Long): PidorDAO
+    suspend fun get(id: Long): PidorEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(pidor: PidorDAO)
+    suspend fun insert(pidor: PidorEntity)
 
     @Query("UPDATE $TABLE_NAME SET $COLUMN_TAP_COUNT=:tapCount WHERE $COLUMN_ID=:id")
     suspend fun update(id: Long, tapCount: Int): Int

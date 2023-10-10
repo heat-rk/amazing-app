@@ -1,11 +1,11 @@
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.database
+package ru.heatalways.amazingasfuckapplication.core.data.db.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = PidorDAO.TABLE_NAME)
-data class PidorDAO(
+@Entity(tableName = PidorEntity.TABLE_NAME)
+data class PidorEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_ID)
     val id: Long = 0,

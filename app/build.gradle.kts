@@ -86,6 +86,7 @@ dependencies {
     implementation(project(":core:coroutines:dispatchers"))
     implementation(project(":core:data:utils"))
     implementation(project(":core:data:translator"))
+    implementation(project(":core:data:db"))
     implementation(project(":feature:sharing:api"))
     implementation(project(":feature:sharing:android-impl"))
 
