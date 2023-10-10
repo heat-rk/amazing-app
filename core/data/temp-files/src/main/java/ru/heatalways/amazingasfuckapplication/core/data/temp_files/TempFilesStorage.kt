@@ -1,10 +1,8 @@
-package ru.heatalways.amazingasfuckapplication.data.common.temp_files
+package ru.heatalways.amazingasfuckapplication.core.data.temp_files
 
 import android.content.Context
 import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext

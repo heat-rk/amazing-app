@@ -16,9 +16,9 @@ import org.orbitmvi.orbit.viewmodel.container
 import ru.heatalways.amazingasfuckapplication.common.utils.PainterResource
 import ru.heatalways.amazingasfuckapplication.common.utils.launchSafe
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
+import ru.heatalways.amazingasfuckapplication.core.data.temp_files.TempFilesStorage
 import ru.heatalways.amazingasfuckapplication.core.data.utils.UriToFileSaver
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
-import ru.heatalways.amazingasfuckapplication.data.common.temp_files.TempFilesStorage
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorAvatarCrop
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorsRepository
 import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditContract.SideEffect

@@ -10,12 +10,12 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import ru.heatalways.amazingasfuckapplication.core.coroutines.dispatchers.dispatchersModule
 import ru.heatalways.amazingasfuckapplication.core.data.db.di.databaseModule
+import ru.heatalways.amazingasfuckapplication.core.data.temp_files.di.tempFilesStorageModule
 import ru.heatalways.amazingasfuckapplication.core.data.translator.di.translatorModule
 import ru.heatalways.amazingasfuckapplication.core.data.utils.di.dataUtilsModule
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.di.composeNavigationModule
 import ru.heatalways.amazingasfuckapplication.di.coroutineScopesModule
 import ru.heatalways.amazingasfuckapplication.di.httpClientModule
-import ru.heatalways.amazingasfuckapplication.di.tempFilesStorageModule
 import ru.heatalways.amazingasfuckapplication.feature.cats.impl.di.catsModule
 import ru.heatalways.amazingasfuckapplication.feature.facts.impl.di.factsModule
 import ru.heatalways.amazingasfuckapplication.feature.insults.impl.di.insultsModule
