@@ -2,7 +2,7 @@ package ru.heatalways.amazingasfuckapplication.feature.facts.impl.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.heatalways.amazingasfuckapplication.data.translator.Translator
+import ru.heatalways.amazingasfuckapplication.core.data.translator.Translator
 import ru.heatalways.amazingasfuckapplication.feature.facts.api.domain.FactsRepository
 import java.io.IOException
 

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.data.translator
+package ru.heatalways.amazingasfuckapplication.core.data.translator
 
 import androidx.core.os.LocaleListCompat
 import com.google.mlkit.common.model.DownloadConditions
@@ -9,8 +9,8 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class Translator(
-    private val sourceLanguage: String,
-    private val targetLanguage: String = getAppLanguage(),
+    sourceLanguage: String,
+    targetLanguage: String = getAppLanguage(),
 ) {
     private val translatorOptions = TranslatorOptions.Builder()
         .setSourceLanguage(sourceLanguage)

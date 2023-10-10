@@ -4,7 +4,7 @@ import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 import ru.heatalways.amazingasfuckapplication.core.coroutines.dispatchers.IoDispatcherQualifier
-import ru.heatalways.amazingasfuckapplication.di.EnglishToRuTranslatorQualifier
+import ru.heatalways.amazingasfuckapplication.core.data.translator.di.EnglishToRuTranslatorQualifier
 import ru.heatalways.amazingasfuckapplication.feature.facts.api.domain.FactsRepository
 import ru.heatalways.amazingasfuckapplication.feature.facts.impl.data.FactsApiService
 import ru.heatalways.amazingasfuckapplication.feature.facts.impl.data.FactsParserService
