@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.storage
+package ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.data.storage
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,7 +8,7 @@ import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorAva
 import java.io.File
 import java.util.UUID
 
-class PidorsAvatarsStorage(
+internal class PidorsAvatarsStorage(
     private val applicationContext: Context,
 ) {
     @Suppress("BlockingMethodInNonBlockingContext")

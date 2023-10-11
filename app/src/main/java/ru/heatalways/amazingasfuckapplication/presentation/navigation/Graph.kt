@@ -20,8 +20,8 @@ import ru.heatalways.amazingasfuckapplication.feature.facts.compose_impl.ui.Fact
 import ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl.ui.InsultsScreen
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuScreen
 import ru.heatalways.amazingasfuckapplication.feature.mirror.compose_impl.ui.MirrorScreen
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.PidorsScreen
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditScreen
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.PidorsScreen
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.edit.PidorEditScreen
 import ru.heatalways.amazingasfuckapplication.feature.remember.compose_impl.ui.RememberScreen
 
 object ComposeMenuScreen {
@@ -73,7 +73,7 @@ object ComposePidorsScreen {
     object Route : ComposeRoute() {
         @Composable
         override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
-            PidorsScreen()
+            PidorsScreen(title = stringResource(id = R.string.menu_item_pidors_list))
         }
     }
 }

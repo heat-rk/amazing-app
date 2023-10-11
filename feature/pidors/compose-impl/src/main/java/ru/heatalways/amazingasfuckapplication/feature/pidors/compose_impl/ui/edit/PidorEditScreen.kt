@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit
+package ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.edit
 
 import android.content.Context
 import android.net.Uri
@@ -36,7 +36,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.extract
 import ru.heatalways.amazingasfuckapplication.common.utils.painterRes
 import ru.heatalways.amazingasfuckapplication.core.composables.image_cropper.RectangleImageCropper
@@ -48,8 +47,9 @@ import ru.heatalways.amazingasfuckapplication.core.design.composables.PagerScree
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditContract.ViewState
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.R
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.edit.PidorEditContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.edit.PidorEditContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable

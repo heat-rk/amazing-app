@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pidors_empty_list_hint">Ого! Пидорасов еще нет! Надо срочно добавить!</string>
+    <string name="add_pidor">Добавить пидораса!!</string>
+    <string name="delete_pidor">Удалить пидораса!!</string>
+    <string name="edit_pidor">Редактировать пидораса!!</string>
+
+    <string name="pidor_addition_title">Добавление пидораса</string>
+    <string name="pidor_edition_title">Редактирование пидораса</string>
+    <string name="pidor_addition_name_placeholder">Леонид</string>
+    <string name="pidor_addition_name_label">Имя</string>
+    <string name="pidor_addition_save">Сохранить пидораса!</string>
+    <string name="pidor_addition_select_photo">Выбрать фотку</string>
+
+    <plurals name="pidor_tap_count_description">
+        <item quantity="zero">Нет тыкалок</item>
+        <item quantity="one">%1$d тыкалка</item>
+        <item quantity="two">%1$d тыкалки</item>
+        <item quantity="few">%1$d тыкалки</item>
+        <item quantity="many">%1$d тыкалок</item>
+        <item quantity="other">%1$d тыкалок</item>
+    </plurals>
+</resources>

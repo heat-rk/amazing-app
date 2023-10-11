@@ -103,6 +103,8 @@ dependencies {
     implementation(project(":feature:mirror:compose-impl"))
     implementation(project(":feature:remember:api"))
     implementation(project(":feature:remember:compose-impl"))
+    implementation(project(":feature:pidors:api"))
+    implementation(project(":feature:pidors:compose-impl"))
 
     // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)

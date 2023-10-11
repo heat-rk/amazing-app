@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.di
+package ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.di
 
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -9,10 +9,10 @@ import ru.heatalways.amazingasfuckapplication.core.coroutines.scopes.di.LongRunn
 import ru.heatalways.amazingasfuckapplication.core.data.cache.InMemoryCacheContainer
 import ru.heatalways.amazingasfuckapplication.core.data.db.entities.PidorEntity
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorsRepository
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.PidorsRepositoryImpl
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.storage.PidorsAvatarsStorage
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.PidorsViewModel
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditViewModel
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.data.PidorsRepositoryImpl
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.data.storage.PidorsAvatarsStorage
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.PidorsViewModel
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.edit.PidorEditViewModel
 
 private val internalPidorsModule = module {
     single {

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui
+package ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -44,7 +44,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.koinViewModel
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.extract
 import ru.heatalways.amazingasfuckapplication.common.utils.painterRes
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
@@ -56,14 +55,19 @@ import ru.heatalways.amazingasfuckapplication.core.design.composables.shimmerEff
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.PidorsContract.ViewState
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.R
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable
-fun PidorsScreen(viewModel: PidorsViewModel = koinViewModel()) {
+fun PidorsScreen(
+    viewModel: PidorsViewModel = koinViewModel(),
+    title: String,
+) {
     val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()
 
     PidorsScreen(
+        title = title,
         state = state,
         onNavigationButtonClick = viewModel::onNavigationButtonClick,
         onCreateClick = viewModel::onCreateClick,
@@ -85,11 +89,12 @@ private fun PidorsScreen(
     onItemLongClick: (PidorItem) -> Unit,
     onNavigationButtonClick: () -> Unit,
     onReloadClick: () -> Unit,
+    title: String,
 ) {
     Scaffold(
         topBar = {
             AppBar(
-                title = stringResource(R.string.menu_item_pidors_list),
+                title = title,
                 icon = painterResource(DesignR.drawable.icon_leaderboard),
                 actions = getAppBarActions(
                     state = state,
@@ -460,6 +465,7 @@ private fun PidorsScreenPreview() {
 
     AppTheme {
         PidorsScreen(
+            title = "Пидоры",
             state = okState,
             onNavigationButtonClick = {},
             onCreateClick = {},

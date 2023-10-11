@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data
+package ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -10,11 +10,11 @@ import ru.heatalways.amazingasfuckapplication.core.data.db.entities.PidorEntity
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.Pidor
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorAvatarCrop
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorsRepository
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.data.storage.PidorsAvatarsStorage
-import ru.heatalways.amazingasfuckapplication.mappers.toDomain
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.data.storage.PidorsAvatarsStorage
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.mappers.toDomain
 import java.io.File
 
-class PidorsRepositoryImpl(
+internal class PidorsRepositoryImpl(
     private val pidorsDao: PidorsDAO,
     private val inMemoryCacheDataSource: InMemoryCacheContainer<List<Pidor>>,
     private val dispatcher: CoroutineDispatcher,

@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui
+package ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,10 +19,10 @@ import ru.heatalways.amazingasfuckapplication.common.utils.strRes
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.Pidor
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorsRepository
-import ru.heatalways.amazingasfuckapplication.mappers.toUIListItem
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.navigation.PidorEditScreenRoute
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.PidorsContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.PidorsContract.ViewState
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.mappers.toUIListItem
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.PidorsContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.PidorsContract.ViewState
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 class PidorsViewModel(

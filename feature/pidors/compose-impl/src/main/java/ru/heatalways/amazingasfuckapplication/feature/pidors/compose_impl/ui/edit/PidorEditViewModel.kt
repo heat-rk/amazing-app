@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit
+package ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.edit
 
 import android.net.Uri
 import androidx.compose.ui.unit.IntOffset
@@ -21,8 +21,8 @@ import ru.heatalways.amazingasfuckapplication.core.data.utils.UriToFileSaver
 import ru.heatalways.amazingasfuckapplication.core.navigation.api.Router
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorAvatarCrop
 import ru.heatalways.amazingasfuckapplication.feature.pidors.api.domain.PidorsRepository
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditContract.SideEffect
-import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditContract.ViewState
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.edit.PidorEditContract.SideEffect
+import ru.heatalways.amazingasfuckapplication.feature.pidors.compose_impl.ui.edit.PidorEditContract.ViewState
 import java.io.File
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
