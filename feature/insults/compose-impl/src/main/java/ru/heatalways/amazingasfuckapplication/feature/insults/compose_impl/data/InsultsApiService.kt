@@ -1,9 +1,9 @@
-package ru.heatalways.amazingasfuckapplication.feature.insults.impl.data
+package ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import ru.heatalways.amazingasfuckapplication.BuildConfig
+import ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl.BuildConfig
 
 class InsultsApiService(
     private val httpClient: HttpClient

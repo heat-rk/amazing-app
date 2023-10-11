@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.insults.impl.ui
+package ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import org.koin.androidx.compose.koinViewModel
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
 import ru.heatalways.amazingasfuckapplication.common.utils.extract
 import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerScreen
@@ -29,10 +27,13 @@ import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable
-fun InsultsScreen(viewModel: InsultsViewModel = koinViewModel()) {
+fun InsultsScreen(
+    viewModel: InsultsViewModel = koinViewModel(),
+    title: String,
+) {
     PagerScreen(
         viewModel = viewModel,
-        title = stringResource(R.string.menu_item_insults),
+        title = title,
         icon = painterResource(DesignR.drawable.icon_insult),
         content = {
             InsultsScreenContent(insult = it)

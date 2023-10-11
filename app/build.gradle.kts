@@ -97,6 +97,8 @@ dependencies {
     implementation(project(":feature:cats:compose-impl"))
     implementation(project(":feature:facts:api"))
     implementation(project(":feature:facts:compose-impl"))
+    implementation(project(":feature:insults:api"))
+    implementation(project(":feature:insults:compose-impl"))
 
     // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)

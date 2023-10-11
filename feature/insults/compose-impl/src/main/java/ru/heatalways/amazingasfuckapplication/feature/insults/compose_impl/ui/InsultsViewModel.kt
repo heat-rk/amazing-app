@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.insults.impl.ui
+package ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl.ui
 
 import ru.heatalways.amazingasfuckapplication.common.utils.StringResource
 import ru.heatalways.amazingasfuckapplication.common.utils.strRes
