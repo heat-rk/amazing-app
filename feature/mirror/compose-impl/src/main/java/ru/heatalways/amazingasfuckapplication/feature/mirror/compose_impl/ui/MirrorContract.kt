@@ -1,0 +1,3 @@
+package ru.heatalways.amazingasfuckapplication.feature.mirror.compose_impl.ui
+
+object MirrorContract

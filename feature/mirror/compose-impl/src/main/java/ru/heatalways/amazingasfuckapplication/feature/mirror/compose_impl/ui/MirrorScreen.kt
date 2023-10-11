@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalPermissionsApi::class)
 
-package ru.heatalways.amazingasfuckapplication.feature.mirror.impl.ui
+package ru.heatalways.amazingasfuckapplication.feature.mirror.compose_impl.ui
 
 import android.Manifest
 import android.content.Context
@@ -37,7 +37,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -47,7 +46,6 @@ import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import org.koin.androidx.compose.koinViewModel
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.core.composables.heart.Heart
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
@@ -64,7 +62,10 @@ private const val HEART_MAX_ROTATION = 45
 private const val HEART_ANIMATION_DURATION = 5000
 
 @Composable
-fun MirrorScreen(viewModel: MirrorViewModel = koinViewModel()) {
+fun MirrorScreen(
+    viewModel: MirrorViewModel = koinViewModel(),
+    title: String,
+) {
     val context = LocalContext.current
 
     val cameraPermissionState = rememberPermissionState(
@@ -101,6 +102,7 @@ fun MirrorScreen(viewModel: MirrorViewModel = koinViewModel()) {
             }
 
             MirrorPreview(
+                title = title,
                 previewFactory = {
                     val previewView = PreviewView(context)
                     preview.setSurfaceProvider(previewView.surfaceProvider)
@@ -124,7 +126,8 @@ fun MirrorScreen(viewModel: MirrorViewModel = koinViewModel()) {
 @Composable
 private fun MirrorPreview(
     previewFactory: (Context) -> PreviewView,
-    onNavigationButtonClick: () -> Unit
+    onNavigationButtonClick: () -> Unit,
+    title: String,
 ) {
     var screenWidth by remember { mutableIntStateOf(0) }
     var screenHeight by remember { mutableIntStateOf(0) }
@@ -132,7 +135,7 @@ private fun MirrorPreview(
     Scaffold(
         topBar = {
             AppBar(
-                title = stringResource(R.string.menu_item_mirror),
+                title = title,
                 icon = painterResource(DesignR.drawable.icon_mirror),
                 containerColor = Color.Transparent,
                 onGoBackClick = onNavigationButtonClick,
@@ -210,6 +213,6 @@ private fun MirrorPreview(
 @Preview
 private fun MirrorScreenPreview() {
     AppTheme {
-        MirrorScreen()
+        MirrorScreen(title = "Зеркало")
     }
 }

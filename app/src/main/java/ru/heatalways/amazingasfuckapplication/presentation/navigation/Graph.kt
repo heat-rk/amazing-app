@@ -19,7 +19,7 @@ import ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.ui.CatsS
 import ru.heatalways.amazingasfuckapplication.feature.facts.compose_impl.ui.FactsScreen
 import ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl.ui.InsultsScreen
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuScreen
-import ru.heatalways.amazingasfuckapplication.feature.mirror.impl.ui.MirrorScreen
+import ru.heatalways.amazingasfuckapplication.feature.mirror.compose_impl.ui.MirrorScreen
 import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.PidorsScreen
 import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditScreen
 import ru.heatalways.amazingasfuckapplication.feature.remember.impl.ui.RememberScreen
@@ -64,7 +64,7 @@ object ComposeMirrorScreen {
     object Route : ComposeRoute() {
         @Composable
         override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
-            MirrorScreen()
+            MirrorScreen(title = stringResource(id = R.string.menu_item_mirror))
         }
     }
 }

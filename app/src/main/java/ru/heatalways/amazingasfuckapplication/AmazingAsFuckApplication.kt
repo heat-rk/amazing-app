@@ -20,7 +20,7 @@ import ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.di.catsM
 import ru.heatalways.amazingasfuckapplication.feature.facts.compose_impl.di.factsModule
 import ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl.di.insultsModule
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.di.menuModule
-import ru.heatalways.amazingasfuckapplication.feature.mirror.impl.di.mirrorModule
+import ru.heatalways.amazingasfuckapplication.feature.mirror.compose_impl.di.mirrorModule
 import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.di.pidorsModule
 import ru.heatalways.amazingasfuckapplication.feature.remember.impl.di.rememberModule
 import ru.heatalways.amazingasfuckapplication.feature.sharing.android_impl.di.androidSharingModule
