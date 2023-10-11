@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.cats.impl.ui
+package ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.ui
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -23,14 +23,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.imageLoader
 import coil.request.ImageRequest
 import coil.size.Size
 import org.koin.androidx.compose.koinViewModel
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.core.composables.pager.PagerScreen
 import ru.heatalways.amazingasfuckapplication.core.design.composables.radialBackgroundLighting
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
@@ -38,10 +36,13 @@ import ru.heatalways.amazingasfuckapplication.core.design.styles.Sizes
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable
-fun CatsScreen(viewModel: CatsViewModel = koinViewModel()) {
+fun CatsScreen(
+    viewModel: CatsViewModel = koinViewModel(),
+    title: String,
+) {
     PagerScreen(
         viewModel = viewModel,
-        title = stringResource(R.string.menu_item_cats),
+        title = title,
         icon = painterResource(DesignR.drawable.icon_cat),
         content = {
             CatsScreenContent(url = it)

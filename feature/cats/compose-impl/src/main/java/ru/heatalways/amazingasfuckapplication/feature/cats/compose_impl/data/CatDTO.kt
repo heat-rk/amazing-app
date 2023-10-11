@@ -1,11 +1,11 @@
-package ru.heatalways.amazingasfuckapplication.feature.cats.impl.data
+package ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.data
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CatDTO(
+internal data class CatDTO(
     @SerialName("createdAt") val createdAt: String? = null,
     @SerialName("file") val file: String? = null,
     @SerialName("_id") val id: String? = null,

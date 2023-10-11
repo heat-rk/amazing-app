@@ -18,6 +18,12 @@ fun DependencyHandler.implementation(dependencies: Array<String>) {
     }
 }
 
+fun DependencyHandler.api(dependencies: Array<String>) {
+    dependencies.forEach { dependency ->
+        add("api", dependency)
+    }
+}
+
 fun DependencyHandler.debugImplementation(dependencies: Array<String>) {
     dependencies.forEach { dependency ->
         add("debugImplementation", dependency)

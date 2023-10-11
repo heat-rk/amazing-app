@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.composables.pager"
+    namespace = "ru.heatalways.amazingasfuckapplication.feature.cats.api"
 
     compileSdk = AppConfig.Sdk.compile
 
@@ -42,24 +42,10 @@ android {
     }
 
     buildFeatures {
-        compose = true
         buildConfig = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = AppConfig.composeKotlinCompilerExtensionVersion
     }
 }
 
 dependencies {
-    // Modules
-    implementation(project(":core:design"))
     implementation(project(":core:navigation:api"))
-    implementation(project(":common:utils"))
-
-    // Dependencies
-    implementation(AppDependencies.Compose.allImplementations)
-    implementation(AppDependencies.immutableCollections)
-
-    api(AppDependencies.Orbit.allImplementations)
 }

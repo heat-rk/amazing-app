@@ -93,6 +93,8 @@ dependencies {
     implementation(project(":core:data:http-client"))
     implementation(project(":feature:sharing:api"))
     implementation(project(":feature:sharing:android-impl"))
+    implementation(project(":feature:cats:api"))
+    implementation(project(":feature:cats:compose-impl"))
 
     // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)

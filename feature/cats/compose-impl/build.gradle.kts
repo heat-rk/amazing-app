@@ -1,10 +1,13 @@
 plugins {
     id(AppPlugins.androidLibrary)
     id(AppPlugins.androidKotlin)
+    id(AppPlugins.parcelize)
+
+    kotlin(AppPlugins.serialization) version AppPlugins.Versions.serialization
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.composables.pager"
+    namespace = "ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl"
 
     compileSdk = AppConfig.Sdk.compile
 
@@ -42,8 +45,8 @@ android {
     }
 
     buildFeatures {
-        compose = true
         buildConfig = true
+        compose = true
     }
 
     composeOptions {
@@ -53,13 +56,16 @@ android {
 
 dependencies {
     // Modules
-    implementation(project(":core:design"))
-    implementation(project(":core:navigation:api"))
+    implementation(project(":feature:cats:api"))
+    implementation(project(":feature:sharing:api"))
     implementation(project(":common:utils"))
+    implementation(project(":core:design"))
+    implementation(project(":core:composables:pager"))
+    implementation(project(":core:coroutines:dispatchers"))
+    implementation(project(":core:navigation:api"))
 
     // Dependencies
-    implementation(AppDependencies.Compose.allImplementations)
-    implementation(AppDependencies.immutableCollections)
-
-    api(AppDependencies.Orbit.allImplementations)
+    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Ktor.allImplementations)
+    implementation(AppDependencies.Coil.allImplementations)
 }

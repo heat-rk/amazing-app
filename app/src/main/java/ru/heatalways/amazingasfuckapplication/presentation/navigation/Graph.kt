@@ -3,17 +3,19 @@ package ru.heatalways.amazingasfuckapplication.presentation.navigation
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.common.utils.requireLongArg
 import ru.heatalways.amazingasfuckapplication.common.utils.requireStringArg
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.ComposeRoute
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.NavHost
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.composable
-import ru.heatalways.amazingasfuckapplication.feature.cats.impl.ui.CatsScreen
+import ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.ui.CatsScreen
 import ru.heatalways.amazingasfuckapplication.feature.facts.impl.ui.FactsScreen
 import ru.heatalways.amazingasfuckapplication.feature.insults.impl.ui.InsultsScreen
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuScreen
@@ -35,7 +37,7 @@ object ComposeCatsScreen {
     object Route : ComposeRoute() {
         @Composable
         override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
-            CatsScreen()
+            CatsScreen(title = stringResource(id = R.string.menu_item_cats))
         }
     }
 }

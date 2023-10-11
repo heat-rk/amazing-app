@@ -1,12 +1,12 @@
-package ru.heatalways.amazingasfuckapplication.feature.cats.impl.data
+package ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.heatalways.amazingasfuckapplication.BuildConfig
+import ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.BuildConfig
 import ru.heatalways.amazingasfuckapplication.feature.cats.api.domain.CatsRepository
 import java.io.IOException
 
-class CatsRepositoryImpl(
+internal class CatsRepositoryImpl(
     private val catsService: CatsApiService,
     private val dispatcher: CoroutineDispatcher,
 ) : CatsRepository {
