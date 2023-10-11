@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl"
+    namespace = "ru.heatalways.amazingapplication.feature.insults.compose_impl"
 
     compileSdk = AppConfig.Sdk.compile
 

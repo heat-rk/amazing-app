@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.feature.sharing.android_impl"
+    namespace = "ru.heatalways.amazingapplication.feature.sharing.android_impl"
 
     compileSdk = AppConfig.Sdk.compile
 

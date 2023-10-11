@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.composables.pager"
+    namespace = "ru.heatalways.amazingapplication.core.composables.pager"
 
     compileSdk = AppConfig.Sdk.compile
 

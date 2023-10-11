@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hate_top_empty_list_hint">Ого! Список пуст! Надо срочно кого-то добавить!</string>
+    <string name="add_hate_top_unit">Добавить негодника!!</string>
+    <string name="delete_hate_top_unit">Удалить негодника!!</string>
+    <string name="edit_hate_top_unit">Редактировать негодника!!</string>
+
+    <string name="hate_top_addition_title">Добавление негодника</string>
+    <string name="hate_top_edition_title">Редактирование негодника</string>
+    <string name="hate_top_addition_name_placeholder">Моргенштерн</string>
+    <string name="hate_top_addition_name_label">Имя</string>
+    <string name="hate_top_addition_save">Сохранить негодника!</string>
+    <string name="hate_top_addition_select_photo">Выбрать фотку</string>
+
+    <plurals name="hate_top_tap_count_description">
+        <item quantity="zero">Нет тыкалок</item>
+        <item quantity="one">%1$d тыкалка</item>
+        <item quantity="two">%1$d тыкалки</item>
+        <item quantity="few">%1$d тыкалки</item>
+        <item quantity="many">%1$d тыкалок</item>
+        <item quantity="other">%1$d тыкалок</item>
+    </plurals>
+</resources>

@@ -1,3 +1,0 @@
-package ru.heatalways.amazingasfuckapplication.feature.remember.compose_impl.ui
-
-object RememberContract

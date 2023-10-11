@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.data.cache"
+    namespace = "ru.heatalways.amazingapplication.core.data.cache"
 
     compileSdk = AppConfig.Sdk.compile
 

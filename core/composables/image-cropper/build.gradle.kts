@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.composables.image_cropper"
+    namespace = "ru.heatalways.amazingapplication.core.composables.image_cropper"
 
     compileSdk = AppConfig.Sdk.compile
 

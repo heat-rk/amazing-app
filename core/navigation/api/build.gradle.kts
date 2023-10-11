@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.navigation.api"
+    namespace = "ru.heatalways.amazingapplication.core.navigation.api"
 
     compileSdk = AppConfig.Sdk.compile
 

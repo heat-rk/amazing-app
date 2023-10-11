@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.data.translator"
+    namespace = "ru.heatalways.amazingapplication.core.data.translator"
 
     compileSdk = AppConfig.Sdk.compile
 

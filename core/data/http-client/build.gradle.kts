@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.data.http_client"
+    namespace = "ru.heatalways.amazingapplication.core.data.http_client"
 
     compileSdk = AppConfig.Sdk.compile
 

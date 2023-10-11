@@ -1,5 +1,5 @@
 object AppConfig {
-    const val applicationId = "ru.heatalways.amazingasfuckapplication"
+    const val applicationId = "ru.heatalways.amazingapplication"
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val jvmTarget = "17"
     const val composeKotlinCompilerExtensionVersion = "1.4.8"

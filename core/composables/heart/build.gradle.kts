@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.composables.heart"
+    namespace = "ru.heatalways.amazingapplication.core.composables.heart"
 
     compileSdk = AppConfig.Sdk.compile
 

@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AmazingAsFuckApplication"
+rootProject.name = "AmazingApplication"
 
 include(":app")
 include(":core:design")
@@ -41,7 +41,5 @@ include(":feature:insults:api")
 include(":feature:insults:compose-impl")
 include(":feature:mirror:api")
 include(":feature:mirror:compose-impl")
-include(":feature:remember:api")
-include(":feature:remember:compose-impl")
-include(":feature:pidors:api")
-include(":feature:pidors:compose-impl")
+include(":feature:hate-top:api")
+include(":feature:hate-top:compose-impl")

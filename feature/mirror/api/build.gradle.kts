@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.feature.mirror.api"
+    namespace = "ru.heatalways.amazingapplication.feature.mirror.api"
 
     compileSdk = AppConfig.Sdk.compile
 

@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name">Пиздатое приложение</string>
+    <string name="app_name">Невероятное приложение</string>
     
-    <string name="menu_item_mirror">Пиздатое зеркало</string>
-    <string name="menu_item_cats">Пиздатые котики</string>
-    <string name="menu_item_facts">Пиздатые факты</string>
-    <string name="menu_item_insults">Пиздатые оскорбления</string>
-    <string name="menu_item_pidors_list">Топ пидорасов</string>
-    <string name="menu_item_remember">Помни</string>
+    <string name="menu_item_mirror">Невероятное зеркало</string>
+    <string name="menu_item_cats">Невероятные котики</string>
+    <string name="menu_item_facts">Невероятные факты</string>
+    <string name="menu_item_insults">Невероятные оскорбления</string>
+    <string name="menu_item_hate_top">Хейт-топ</string>
 </resources>

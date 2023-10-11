@@ -1,0 +1,11 @@
+package ru.heatalways.amazingapplication.core.navigation.compose_impl.di
+
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
+import ru.heatalways.amazingapplication.core.navigation.api.Router
+import ru.heatalways.amazingapplication.core.navigation.compose_impl.ComposeRouter
+
+val composeNavigationModule = module {
+    singleOf(::ComposeRouter) { bind<Router>() }
+}

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.heatalways.amazingasfuckapplication.core.coroutines.scopes"
+    namespace = "ru.heatalways.amazingapplication.core.coroutines.scopes"
 
     compileSdk = AppConfig.Sdk.compile
 
