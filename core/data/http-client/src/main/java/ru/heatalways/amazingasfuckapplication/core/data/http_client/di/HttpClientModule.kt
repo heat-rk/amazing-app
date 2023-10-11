@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.di
+package ru.heatalways.amazingasfuckapplication.core.data.http_client.di
 
 import android.util.Log
 import io.ktor.client.HttpClient

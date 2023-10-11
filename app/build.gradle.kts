@@ -89,6 +89,7 @@ dependencies {
     implementation(project(":core:data:db"))
     implementation(project(":core:data:cache"))
     implementation(project(":core:data:temp-files"))
+    implementation(project(":core:data:http-client"))
     implementation(project(":feature:sharing:api"))
     implementation(project(":feature:sharing:android-impl"))
 
