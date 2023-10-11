@@ -1,10 +1,10 @@
-package ru.heatalways.amazingasfuckapplication.feature.facts.impl.data
+package ru.heatalways.amazingasfuckapplication.feature.facts.compose_impl.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
-import ru.heatalways.amazingasfuckapplication.BuildConfig
+import ru.heatalways.amazingasfuckapplication.feature.facts.compose_impl.BuildConfig
 
 class FactsApiService(
     private val httpClient: HttpClient

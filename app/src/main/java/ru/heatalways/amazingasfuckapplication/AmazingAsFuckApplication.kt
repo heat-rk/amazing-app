@@ -17,7 +17,7 @@ import ru.heatalways.amazingasfuckapplication.core.data.translator.di.translator
 import ru.heatalways.amazingasfuckapplication.core.data.utils.di.dataUtilsModule
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.di.composeNavigationModule
 import ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.di.catsModule
-import ru.heatalways.amazingasfuckapplication.feature.facts.impl.di.factsModule
+import ru.heatalways.amazingasfuckapplication.feature.facts.compose_impl.di.factsModule
 import ru.heatalways.amazingasfuckapplication.feature.insults.impl.di.insultsModule
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.di.menuModule
 import ru.heatalways.amazingasfuckapplication.feature.mirror.impl.di.mirrorModule

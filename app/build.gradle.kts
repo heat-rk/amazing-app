@@ -95,6 +95,8 @@ dependencies {
     implementation(project(":feature:sharing:android-impl"))
     implementation(project(":feature:cats:api"))
     implementation(project(":feature:cats:compose-impl"))
+    implementation(project(":feature:facts:api"))
+    implementation(project(":feature:facts:compose-impl"))
 
     // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)

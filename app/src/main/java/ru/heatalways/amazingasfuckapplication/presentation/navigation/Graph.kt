@@ -16,7 +16,7 @@ import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.Compo
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.NavHost
 import ru.heatalways.amazingasfuckapplication.core.navigation.compose_impl.composable
 import ru.heatalways.amazingasfuckapplication.feature.cats.compose_impl.ui.CatsScreen
-import ru.heatalways.amazingasfuckapplication.feature.facts.impl.ui.FactsScreen
+import ru.heatalways.amazingasfuckapplication.feature.facts.compose_impl.ui.FactsScreen
 import ru.heatalways.amazingasfuckapplication.feature.insults.impl.ui.InsultsScreen
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuScreen
 import ru.heatalways.amazingasfuckapplication.feature.mirror.impl.ui.MirrorScreen
@@ -46,7 +46,7 @@ object ComposeFactsScreen {
     object Route : ComposeRoute() {
         @Composable
         override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
-            FactsScreen()
+            FactsScreen(title = stringResource(id = R.string.menu_item_facts))
         }
     }
 }

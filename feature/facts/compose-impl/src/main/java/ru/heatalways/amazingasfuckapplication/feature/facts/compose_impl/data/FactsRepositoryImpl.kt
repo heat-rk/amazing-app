@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.facts.impl.data
+package ru.heatalways.amazingasfuckapplication.feature.facts.compose_impl.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
