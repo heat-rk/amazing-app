@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.remember.impl.ui
+package ru.heatalways.amazingasfuckapplication.feature.remember.compose_impl.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,31 +15,35 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import ru.heatalways.amazingasfuckapplication.R
 import ru.heatalways.amazingasfuckapplication.core.design.composables.AppBar
 import ru.heatalways.amazingasfuckapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingasfuckapplication.core.design.styles.Insets
+import ru.heatalways.amazingasfuckapplication.feature.remember.compose_impl.R
+import ru.heatalways.amazingasfuckapplication.feature.remember.impl.ui.RememberViewModel
 import ru.heatalways.amazingasfuckapplication.core.design.R as DesignR
 
 @Composable
 fun RememberScreen(
     viewModel: RememberViewModel = koinViewModel(),
+    title: String,
 ) {
     RememberScreen(
-       onNavigationButtonClick = viewModel::onNavigationButtonClick
+        title = title,
+        onNavigationButtonClick = viewModel::onNavigationButtonClick
     )
 }
 
 @Composable
 private fun RememberScreen(
     onNavigationButtonClick: () -> Unit,
+    title: String,
 ) {
     val contentVerticalAlignmentBias = -0.5f
 
     Scaffold(
         topBar = {
             AppBar(
-                title = stringResource(R.string.menu_item_remember),
+                title = title,
                 icon = painterResource(DesignR.drawable.icon_light),
                 onGoBackClick = onNavigationButtonClick,
                 modifier = Modifier
@@ -77,6 +81,7 @@ private fun RememberScreen(
 private fun PagerScreenPreview() {
     AppTheme {
         RememberScreen(
+            title = "Помни",
             onNavigationButtonClick = {},
         )
     }

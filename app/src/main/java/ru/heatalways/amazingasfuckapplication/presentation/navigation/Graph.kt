@@ -22,7 +22,7 @@ import ru.heatalways.amazingasfuckapplication.feature.menu.impl.ui.MenuScreen
 import ru.heatalways.amazingasfuckapplication.feature.mirror.compose_impl.ui.MirrorScreen
 import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.PidorsScreen
 import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.ui.edit.PidorEditScreen
-import ru.heatalways.amazingasfuckapplication.feature.remember.impl.ui.RememberScreen
+import ru.heatalways.amazingasfuckapplication.feature.remember.compose_impl.ui.RememberScreen
 
 object ComposeMenuScreen {
     object Route : ComposeRoute() {
@@ -114,7 +114,7 @@ object ComposeRememberScreen {
     object Route : ComposeRoute() {
         @Composable
         override fun AnimatedContentScope.Content(navBackStackEntry: NavBackStackEntry) {
-            RememberScreen()
+            RememberScreen(title = stringResource(id = R.string.menu_item_remember))
         }
     }
 }

@@ -101,6 +101,8 @@ dependencies {
     implementation(project(":feature:insults:compose-impl"))
     implementation(project(":feature:mirror:api"))
     implementation(project(":feature:mirror:compose-impl"))
+    implementation(project(":feature:remember:api"))
+    implementation(project(":feature:remember:compose-impl"))
 
     // dependencies
     platformImplementation(AppDependencies.Compose.platformImplementations)

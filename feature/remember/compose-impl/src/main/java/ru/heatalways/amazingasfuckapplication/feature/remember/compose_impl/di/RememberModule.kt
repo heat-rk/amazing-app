@@ -1,4 +1,4 @@
-package ru.heatalways.amazingasfuckapplication.feature.remember.impl.di
+package ru.heatalways.amazingasfuckapplication.feature.remember.compose_impl.di
 
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module

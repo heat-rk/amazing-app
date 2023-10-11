@@ -22,7 +22,7 @@ import ru.heatalways.amazingasfuckapplication.feature.insults.compose_impl.di.in
 import ru.heatalways.amazingasfuckapplication.feature.menu.impl.di.menuModule
 import ru.heatalways.amazingasfuckapplication.feature.mirror.compose_impl.di.mirrorModule
 import ru.heatalways.amazingasfuckapplication.feature.pidors.impl.di.pidorsModule
-import ru.heatalways.amazingasfuckapplication.feature.remember.impl.di.rememberModule
+import ru.heatalways.amazingasfuckapplication.feature.remember.compose_impl.di.rememberModule
 import ru.heatalways.amazingasfuckapplication.feature.sharing.android_impl.di.androidSharingModule
 
 class AmazingAsFuckApplication : Application() {
