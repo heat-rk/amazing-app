@@ -68,4 +68,6 @@ dependencies {
     implementation(AppDependencies.Koin.allImplementations)
     implementation(AppDependencies.Ktor.allImplementations)
     implementation(AppDependencies.Coil.allImplementations)
+
+    debugImplementation(AppDependencies.Compose.debugImplementations)
 }

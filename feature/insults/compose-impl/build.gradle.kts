@@ -69,4 +69,6 @@ dependencies {
     implementation(AppDependencies.Ktor.allImplementations)
     implementation(AppDependencies.Coil.allImplementations)
     implementation(AppDependencies.Compose.material)
+
+    debugImplementation(AppDependencies.Compose.debugImplementations)
 }

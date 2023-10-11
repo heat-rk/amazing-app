@@ -1,9 +1,6 @@
 plugins {
     id(AppPlugins.androidLibrary)
     id(AppPlugins.androidKotlin)
-    id(AppPlugins.parcelize)
-
-    kotlin(AppPlugins.serialization) version AppPlugins.Versions.serialization
 }
 
 android {
@@ -66,4 +63,6 @@ dependencies {
     implementation(AppDependencies.Compose.material)
     implementation(AppDependencies.Compose.preview)
     implementation(AppDependencies.Orbit.allImplementations)
+
+    debugImplementation(AppDependencies.Compose.debugImplementations)
 }

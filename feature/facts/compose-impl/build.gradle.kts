@@ -71,4 +71,6 @@ dependencies {
     implementation(AppDependencies.Coil.allImplementations)
     implementation(AppDependencies.Compose.material)
     implementation(AppDependencies.htmlUnit)
+
+    debugImplementation(AppDependencies.Compose.debugImplementations)
 }
