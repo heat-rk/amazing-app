@@ -2,7 +2,6 @@ plugins {
     id(AppPlugins.androidApplication)
     id(AppPlugins.androidKotlin)
     id(AppPlugins.kotlinKapt)
-    id(AppPlugins.detekt) version AppPlugins.Versions.detekt
 }
 
 android {
@@ -43,21 +42,6 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
-    }
-
-    detekt {
-        buildUponDefaultConfig = true
-        allRules = false
-        autoCorrect = true
-        config = files("${rootProject.rootDir}/detekt-config.yml")
-    }
-
-    tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-        jvmTarget = AppConfig.jvmTarget
-    }
-
-    tasks.withType<io.gitlab.arturbosch.detekt.DetektCreateBaselineTask>().configureEach {
         jvmTarget = AppConfig.jvmTarget
     }
 
