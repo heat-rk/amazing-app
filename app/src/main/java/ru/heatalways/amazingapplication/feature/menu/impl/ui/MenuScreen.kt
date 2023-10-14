@@ -21,18 +21,23 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.collections.immutable.toImmutableList
-import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingapplication.common.utils.extract
 import ru.heatalways.amazingapplication.core.design.composables.AppOutlinedCard
 import ru.heatalways.amazingapplication.core.design.composables.radialBackgroundLighting
 import ru.heatalways.amazingapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingapplication.core.design.styles.Insets
 import ru.heatalways.amazingapplication.core.design.styles.Sizes
+import ru.heatalways.amazingapplication.feature.menu.impl.di.MenuComponent
 import ru.heatalways.amazingapplication.feature.menu.impl.ui.MenuContract.ViewState
 
 @Composable
-fun MenuScreen(viewModel: MenuViewModel = koinViewModel()) {
+fun MenuScreen(
+    viewModel: MenuViewModel = viewModel(
+        factory = MenuComponent.menuViewModelFactory
+    )
+) {
     val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()
 
     MenuScreen(

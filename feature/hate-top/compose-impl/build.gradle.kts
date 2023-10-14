@@ -68,7 +68,7 @@ dependencies {
     implementation(project(":core:data:http-client"))
 
     // Dependencies
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
     implementation(AppDependencies.Coil.allImplementations)
     implementation(AppDependencies.Room.allImplementations)
     implementation(AppDependencies.Orbit.allImplementations)
@@ -79,6 +79,7 @@ dependencies {
     implementation(AppDependencies.Compose.material)
     implementation(AppDependencies.Compose.preview)
     implementation(AppDependencies.Compose.activity)
+    implementation(AppDependencies.Compose.viewModel)
 
     kapt(AppDependencies.Room.compiler)
 

@@ -58,5 +58,5 @@ dependencies {
 
     // Dependencies
     implementation(AppDependencies.Compose.navigation)
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
 }

@@ -88,7 +88,7 @@ dependencies {
     implementation(AppDependencies.Ktx.allImplementations)
 
     implementation(AppDependencies.Coroutines.allImplementations)
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
     implementation(AppDependencies.Accompanist.allImplementations)
     implementation(AppDependencies.Orbit.allImplementations)
     implementation(AppDependencies.Coil.allImplementations)

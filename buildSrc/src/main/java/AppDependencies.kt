@@ -12,9 +12,9 @@ object AppDependencies {
         val allImplementations = arrayOf(core, engine, negotiation, serialization, logging)
     }
 
-    object Koin {
-        const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
-        val allImplementations = arrayOf(compose)
+    object Scout {
+        const val core = "com.yandex.scout:scout-core:${Versions.scout}"
+        val allImplementations = arrayOf(core)
     }
 
     object Accompanist {
@@ -83,7 +83,7 @@ object AppDependencies {
     }
 
     object Versions {
-        const val koin = "3.4.6"
+        const val scout = "0.9.3"
         const val coreKtx = "1.10.1"
         const val navigation = "2.5.1"
         const val coroutines = "1.7.3"

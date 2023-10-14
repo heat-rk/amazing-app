@@ -1,24 +1,18 @@
 package ru.heatalways.amazingapplication.core.data.db.di
 
 import androidx.room.Room
-import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module
 import ru.heatalways.amazingapplication.core.data.db.AppDatabase
+import ru.heatalways.amazingapplication.core.data.db.daos.HateTopDAO
+import scout.definition.Registry
 
-private val internalDatabaseModule = module {
-    single {
+fun Registry.useDatabaseBeans() {
+    singleton<AppDatabase> {
         Room.databaseBuilder(
-            context = androidApplication(),
+            context = get(),
             klass = AppDatabase::class.java,
             name = AppDatabase.NAME
         ).build()
     }
-}
 
-val databaseModule = module {
-    includes(internalDatabaseModule)
-
-    factory {
-        get<AppDatabase>().hateTopDAO()
-    }
+    reusable<HateTopDAO> { get<AppDatabase>().hateTopDAO() }
 }

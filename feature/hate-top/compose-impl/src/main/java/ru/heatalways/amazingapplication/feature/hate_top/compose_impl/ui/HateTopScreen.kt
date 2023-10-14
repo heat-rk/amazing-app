@@ -41,9 +41,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingapplication.common.utils.extract
 import ru.heatalways.amazingapplication.common.utils.painterRes
 import ru.heatalways.amazingapplication.common.utils.strRes
@@ -56,12 +56,13 @@ import ru.heatalways.amazingapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingapplication.core.design.styles.Insets
 import ru.heatalways.amazingapplication.core.design.styles.Sizes
 import ru.heatalways.amazingapplication.feature.hate_top.compose_impl.R
+import ru.heatalways.amazingapplication.feature.hate_top.compose_impl.di.HateTopComponent
 import ru.heatalways.amazingapplication.feature.hate_top.compose_impl.ui.HateTopContract.ViewState
 import ru.heatalways.amazingapplication.core.design.R as DesignR
 
 @Composable
 fun HateTopScreen(
-    viewModel: HateTopViewModel = koinViewModel(),
+    viewModel: HateTopViewModel = viewModel(factory = HateTopComponent.hateTopViewModelFactory),
     title: String,
 ) {
     val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()

@@ -23,21 +23,22 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.imageLoader
 import coil.request.ImageRequest
 import coil.size.Size
-import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingapplication.core.composables.pager.PagerScreen
 import ru.heatalways.amazingapplication.core.design.composables.radialBackgroundLighting
 import ru.heatalways.amazingapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingapplication.core.design.styles.Sizes
+import ru.heatalways.amazingapplication.feature.cats.compose_impl.di.CatsComponent
 import ru.heatalways.amazingapplication.core.design.R as DesignR
 
 @Composable
 fun CatsScreen(
-    viewModel: CatsViewModel = koinViewModel(),
+    viewModel: CatsViewModel = viewModel(factory = CatsComponent.catsViewModelFactory),
     title: String,
 ) {
     PagerScreen(

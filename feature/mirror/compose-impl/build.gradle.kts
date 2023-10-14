@@ -60,11 +60,12 @@ dependencies {
     implementation(project(":core:composables:heart"))
 
     // Dependencies
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
     implementation(AppDependencies.Camera.allImplementations)
     implementation(AppDependencies.Accompanist.permissions)
     implementation(AppDependencies.Compose.material)
     implementation(AppDependencies.Compose.preview)
+    implementation(AppDependencies.Compose.viewModel)
     implementation(AppDependencies.Orbit.allImplementations)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)

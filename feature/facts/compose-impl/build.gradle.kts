@@ -66,10 +66,11 @@ dependencies {
     implementation(project(":core:navigation:api"))
 
     // Dependencies
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
     implementation(AppDependencies.Ktor.allImplementations)
     implementation(AppDependencies.Coil.allImplementations)
     implementation(AppDependencies.Compose.material)
+    implementation(AppDependencies.Compose.viewModel)
     implementation(AppDependencies.htmlUnit)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)

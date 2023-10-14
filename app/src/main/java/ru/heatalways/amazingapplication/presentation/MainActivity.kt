@@ -12,10 +12,10 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.compose.koinInject
 import ru.heatalways.amazingapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingapplication.core.navigation.api.Router
 import ru.heatalways.amazingapplication.core.navigation.api.RoutingAction
+import ru.heatalways.amazingapplication.di.AppComponent
 import ru.heatalways.amazingapplication.presentation.navigation.AppNavHost
 import ru.heatalways.amazingapplication.presentation.navigation.composeRoute
 
@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun LaunchedRouterEffect(
         navController: NavController,
-        router: Router = koinInject(),
+        router: Router = AppComponent.router,
     ) {
         LaunchedEffect(navController, router) {
             router.actions

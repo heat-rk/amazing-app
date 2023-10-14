@@ -48,5 +48,5 @@ android {
 dependencies {
     // dependencies
     implementation(AppDependencies.Ktor.allImplementations)
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
 }

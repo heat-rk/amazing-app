@@ -52,5 +52,5 @@ dependencies {
     implementation(project(":common:utils"))
 
     // Dependencies
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
 }

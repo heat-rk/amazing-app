@@ -47,7 +47,7 @@ android {
 }
 
 dependencies {
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
     implementation(AppDependencies.Room.allImplementations)
 
     kapt(AppDependencies.Room.compiler)

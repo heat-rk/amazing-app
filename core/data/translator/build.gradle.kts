@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
     implementation(AppDependencies.Coroutines.allImplementations)
     implementation(AppDependencies.Mlkit.translate)
 }

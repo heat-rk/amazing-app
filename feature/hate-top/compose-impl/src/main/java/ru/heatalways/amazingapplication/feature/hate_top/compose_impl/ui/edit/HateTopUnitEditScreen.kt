@@ -31,11 +31,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.MutableCreationExtras
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
 import ru.heatalways.amazingapplication.common.utils.extract
 import ru.heatalways.amazingapplication.common.utils.painterRes
 import ru.heatalways.amazingapplication.core.composables.image_cropper.RectangleImageCropper
@@ -48,6 +48,7 @@ import ru.heatalways.amazingapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingapplication.core.design.styles.Insets
 import ru.heatalways.amazingapplication.core.design.styles.Sizes
 import ru.heatalways.amazingapplication.feature.hate_top.compose_impl.R
+import ru.heatalways.amazingapplication.feature.hate_top.compose_impl.di.HateTopComponent
 import ru.heatalways.amazingapplication.feature.hate_top.compose_impl.ui.edit.HateTopUnitEditContract.SideEffect
 import ru.heatalways.amazingapplication.feature.hate_top.compose_impl.ui.edit.HateTopUnitEditContract.ViewState
 import ru.heatalways.amazingapplication.core.design.R as DesignR
@@ -57,8 +58,13 @@ fun HateTopUnitEditScreen(
     id: Long,
     name: String,
     photoPath: String,
-    viewModel: HateTopUnitEditViewModel = koinViewModel(
-        parameters = { parametersOf(id, name, photoPath) }
+    viewModel: HateTopUnitEditViewModel = viewModel(
+        factory = HateTopComponent.hateTopUnitEditViewModelFactory,
+        extras = MutableCreationExtras().apply {
+            set(HateTopUnitEditViewModel.IdKey, id)
+            set(HateTopUnitEditViewModel.NameKey, name)
+            set(HateTopUnitEditViewModel.PhotoPathKey, photoPath)
+        }
     ),
 ) {
     val state by viewModel.container.stateFlow.collectAsStateWithLifecycle()

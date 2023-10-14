@@ -17,18 +17,19 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import org.koin.androidx.compose.koinViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.heatalways.amazingapplication.common.utils.StringResource
 import ru.heatalways.amazingapplication.common.utils.extract
 import ru.heatalways.amazingapplication.core.composables.pager.PagerScreen
 import ru.heatalways.amazingapplication.core.design.composables.shimmerEffect
 import ru.heatalways.amazingapplication.core.design.styles.AppTheme
 import ru.heatalways.amazingapplication.core.design.styles.Insets
+import ru.heatalways.amazingapplication.feature.facts.compose_impl.di.FactsComponent
 import ru.heatalways.amazingapplication.core.design.R as DesignR
 
 @Composable
 fun FactsScreen(
-    viewModel: FactsViewModel = koinViewModel(),
+    viewModel: FactsViewModel = viewModel(factory = FactsComponent.factsViewModelFactory),
     title: String,
 ) {
     PagerScreen(

@@ -41,14 +41,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
-import org.koin.androidx.compose.koinViewModel
 import ru.heatalways.amazingapplication.core.composables.heart.Heart
 import ru.heatalways.amazingapplication.core.design.composables.AppBar
 import ru.heatalways.amazingapplication.core.design.styles.AppTheme
+import ru.heatalways.amazingapplication.feature.mirror.compose_impl.di.MirrorComponent
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
@@ -63,7 +64,7 @@ private const val HEART_ANIMATION_DURATION = 5000
 
 @Composable
 fun MirrorScreen(
-    viewModel: MirrorViewModel = koinViewModel(),
+    viewModel: MirrorViewModel = viewModel(factory = MirrorComponent.mirrorViewModelFactory),
     title: String,
 ) {
     val context = LocalContext.current

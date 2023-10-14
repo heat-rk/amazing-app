@@ -5,6 +5,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.CreationExtras
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.ContainerHost
@@ -100,5 +101,29 @@ class HateTopUnitEditViewModel(
 
     private suspend fun SimpleSyntax<ViewState, SideEffect>.handleError() {
         postSideEffect(SideEffect.Message(strRes(DesignR.string.error_ramil_blame)))
+    }
+
+    object IdKey : CreationExtras.Key<Long>
+    object NameKey : CreationExtras.Key<String>
+    object PhotoPathKey : CreationExtras.Key<String>
+
+    companion object {
+        fun create(
+            creationExtras: CreationExtras,
+            router: Router,
+            hateTopRepository: HateTopRepository,
+            tempFilesStorage: TempFilesStorage,
+            uriToFileSaver: UriToFileSaver,
+            longRunningScope: CoroutineScope,
+        ) = HateTopUnitEditViewModel(
+            id = creationExtras[IdKey] ?: -1,
+            name = creationExtras[NameKey] ?: "",
+            photoPath = creationExtras[PhotoPathKey] ?: "",
+            router = router,
+            hateTopRepository = hateTopRepository,
+            tempFilesStorage = tempFilesStorage,
+            uriToFileSaver = uriToFileSaver,
+            longRunningScope = longRunningScope
+        )
     }
 }

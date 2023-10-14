@@ -47,5 +47,5 @@ android {
 
 dependencies {
     implementation(AppDependencies.Coroutines.allImplementations)
-    implementation(AppDependencies.Koin.allImplementations)
+    implementation(AppDependencies.Scout.allImplementations)
 }
