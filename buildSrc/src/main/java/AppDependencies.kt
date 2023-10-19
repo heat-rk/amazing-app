@@ -1,6 +1,6 @@
 object AppDependencies {
     const val immutableCollections = "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.immutableCollections}"
-    const val htmlUnit = "net.sourceforge.htmlunit:htmlunit-android:${Versions.htmlUnit}"
+    const val jsoup = "org.jsoup:jsoup:${Versions.jsoup}"
 
     object Ktor {
         const val core = "io.ktor:ktor-client-core:${Versions.ktor}"
@@ -88,7 +88,7 @@ object AppDependencies {
         const val navigation = "2.5.1"
         const val coroutines = "1.7.3"
         const val detekt = "1.23.1"
-        const val composeBom = "2023.08.00"
+        const val composeBom = "2023.10.00"
         const val composeActivity = "1.7.2"
         const val composeViewModel = "2.6.1"
         const val composeNavigation = "2.7.0"
@@ -97,7 +97,7 @@ object AppDependencies {
         const val systemUiController = "0.30.1"
         const val ktor = "2.3.3"
         const val mlkitTranslate = "17.0.1"
-        const val htmlUnit = "2.67.0"
+        const val jsoup = "1.16.1"
         const val coil = "2.4.0"
         const val camera = "1.2.3"
         const val permission = "0.32.0"

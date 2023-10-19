@@ -71,7 +71,7 @@ dependencies {
     implementation(AppDependencies.Coil.allImplementations)
     implementation(AppDependencies.Compose.material)
     implementation(AppDependencies.Compose.viewModel)
-    implementation(AppDependencies.htmlUnit)
+    implementation(AppDependencies.jsoup)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)
 }

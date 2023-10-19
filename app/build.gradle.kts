@@ -20,7 +20,9 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("debug")
 
@@ -96,6 +98,7 @@ dependencies {
     implementation(AppDependencies.Compose.lifeCycleRuntime)
     implementation(AppDependencies.Compose.activity)
     implementation(AppDependencies.Compose.navigation)
+    implementation(AppDependencies.Compose.preview)
 
     debugImplementation(AppDependencies.Compose.debugImplementations)
 }

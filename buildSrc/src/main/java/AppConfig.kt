@@ -13,6 +13,12 @@ object AppConfig {
         ),
         BuildConfigField(
             type = "String",
+            name = "FACTS_WEB_SERVICE_BASE_URL",
+            debugValue = "https://randstuff.ru/fact/",
+            releaseValue = "https://randstuff.ru/fact/"
+        ),
+        BuildConfigField(
+            type = "String",
             name = "INSULTS_API_BASE_URL",
             debugValue = "https://evilinsult.com/generate_insult.php",
             releaseValue = "https://evilinsult.com/generate_insult.php"

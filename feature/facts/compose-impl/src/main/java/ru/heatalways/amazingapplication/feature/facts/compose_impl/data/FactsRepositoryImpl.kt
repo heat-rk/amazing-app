@@ -1,5 +1,6 @@
 package ru.heatalways.amazingapplication.feature.facts.compose_impl.data
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import ru.heatalways.amazingapplication.core.data.translator.Translator
@@ -22,7 +23,11 @@ class FactsRepositoryImpl(
         try {
             factsParserService.getRandomFact().fact ?: throw IOException()
         } catch (e: Exception) {
-            factsService.getRandomFact().fact ?: throw IOException()
+            Log.e("FactsRepositoryImpl", e.stackTraceToString())
+
+            factsService.getRandomFact().fact?.let { text ->
+                translator.translate(text)
+            } ?: throw IOException()
         }
     }
 }
