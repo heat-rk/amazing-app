@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
@@ -39,6 +40,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -158,17 +160,9 @@ fun RectangleImageCropper(
         }
     }
 
-    val coroutineScope = rememberCoroutineScope()
-
-    val cropChangingFlow = remember {
-        Channel<Unit>(Channel.BUFFERED)
-    }
-
-    LaunchedEffect(cropChangingFlow, coroutineScope) {
-        cropChangingFlow.receiveAsFlow()
-            .debounce(CROP_CHANGING_FLOW_DEBOUNCE)
-            .filter { painter.intrinsicSize.isSpecified }
-            .onEach {
+    val imageCroppedBoundsFlow = snapshotFlow {
+        when {
+            painter.intrinsicSize.isSpecified -> {
                 val painterSize = painter.intrinsicSize
 
                 val offset = Offset(
@@ -181,23 +175,24 @@ fun RectangleImageCropper(
                     height = croppingBoxSize.height / imageSize.height * painterSize.height,
                 )
 
+                ImageCroppedBounds.Calculated(offset, size)
+            }
+
+            else -> ImageCroppedBounds.NotCalculated
+        }
+    }
+
+    LaunchedEffect(imageCroppedBoundsFlow) {
+        imageCroppedBoundsFlow
+            .debounce(CROP_CHANGING_FLOW_DEBOUNCE)
+            .filterIsInstance<ImageCroppedBounds.Calculated>()
+            .onEach { (offset, size) ->
                 onCropChanged(
                     offset.roundToIntOffset(),
                     size.roundToIntSize(),
                 )
             }
-            .launchIn(coroutineScope)
-    }
-
-    LaunchedEffect(
-        imageSize,
-        croppingBoxTranslation,
-        croppingBoxSize,
-        painter.intrinsicSize,
-        coroutineScope,
-        cropChangingFlow
-    ) {
-        coroutineScope.launch { cropChangingFlow.send(Unit) }
+            .launchIn(this)
     }
 
     Canvas(
@@ -209,6 +204,10 @@ fun RectangleImageCropper(
             }
             .pointerInput(Unit) {
                 detectTransformGestures { _, pan, zoom, _ ->
+                    if (imageSize == Size.Zero) {
+                        return@detectTransformGestures
+                    }
+
                     val oldScale = scale
 
                     scale = (scale * zoom).coerceIn(
