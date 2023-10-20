@@ -58,4 +58,6 @@ dependencies {
 
     // Dependencies
     implementation(AppDependencies.Compose.allImplementations)
+
+    debugImplementation(AppDependencies.Compose.debugImplementations)
 }

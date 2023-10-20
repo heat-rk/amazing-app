@@ -62,4 +62,6 @@ dependencies {
     implementation(AppDependencies.immutableCollections)
 
     api(AppDependencies.Orbit.allImplementations)
+
+    debugImplementation(AppDependencies.Compose.debugImplementations)
 }

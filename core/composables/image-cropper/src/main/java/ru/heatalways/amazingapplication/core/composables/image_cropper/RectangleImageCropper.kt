@@ -160,30 +160,28 @@ fun RectangleImageCropper(
         }
     }
 
-    val imageCroppedBoundsFlow = snapshotFlow {
-        when {
-            painter.intrinsicSize.isSpecified -> {
-                val painterSize = painter.intrinsicSize
+    LaunchedEffect(painter.intrinsicSize) {
+        snapshotFlow {
+            when {
+                painter.intrinsicSize.isSpecified -> {
+                    val painterSize = painter.intrinsicSize
 
-                val offset = Offset(
-                    x = croppingBoxTranslation.x / imageSize.width * painterSize.width,
-                    y = croppingBoxTranslation.y / imageSize.height * painterSize.height,
-                )
+                    val offset = Offset(
+                        x = croppingBoxTranslation.x / imageSize.width * painterSize.width,
+                        y = croppingBoxTranslation.y / imageSize.height * painterSize.height,
+                    )
 
-                val size = Size(
-                    width = croppingBoxSize.width / imageSize.width * painterSize.width,
-                    height = croppingBoxSize.height / imageSize.height * painterSize.height,
-                )
+                    val size = Size(
+                        width = croppingBoxSize.width / imageSize.width * painterSize.width,
+                        height = croppingBoxSize.height / imageSize.height * painterSize.height,
+                    )
 
-                ImageCroppedBounds.Calculated(offset, size)
+                    ImageCroppedBounds.Calculated(offset, size)
+                }
+
+                else -> ImageCroppedBounds.NotCalculated
             }
-
-            else -> ImageCroppedBounds.NotCalculated
         }
-    }
-
-    LaunchedEffect(imageCroppedBoundsFlow) {
-        imageCroppedBoundsFlow
             .debounce(CROP_CHANGING_FLOW_DEBOUNCE)
             .filterIsInstance<ImageCroppedBounds.Calculated>()
             .onEach { (offset, size) ->
